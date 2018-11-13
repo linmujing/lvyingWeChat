@@ -10,11 +10,10 @@
     "onReachBottomDistance": 50
   },
   "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#e64340",
+    "color": "#ccc",
+    "selectedColor": "#00AA88",
     "borderStyle": "white",
     "backgroundColor": "#fff",
-    "box-shadow": "0 0 6px 0",
     "list": [{
       "pagePath": "pages/shopMall/index/index",
       "iconPath": "images/icon/home.png",
