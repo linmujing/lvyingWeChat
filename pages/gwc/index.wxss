@@ -1,0 +1,180 @@
+/* 背景颜色 */
+
+page {
+  background-color: #f5f5f5;
+  font-weight: 200;
+}
+
+/* 字体样式 */
+
+.overflow-h {
+  overflow: hidden;
+  background-color: #fff;
+  padding: 10rpx 35rpx 10rpx 35rpx;
+  color: #333;
+  font-size: 34rpx;
+}
+
+/* padding */
+
+.info-right {
+  float: right;
+}
+
+.info-sty {
+  float: left;
+}
+
+/* 下边框 */
+
+.information-hr {
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+/* 提示盒子样式 */
+
+.info-container {
+  background-color: #fff;
+  padding: 15rpx 0 15rpx 35rpx;
+}
+
+/* 提示样式 */
+
+.info {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.floor {
+  margin-top: 35rpx;
+}
+
+.title {
+  background-color: #fff;
+  font-size: 34rpx;
+  padding: 10rpx 20rpx 10rpx 35rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.content {
+  background-color: #fff;
+  padding: 35rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.content::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.imger {
+  float: left;
+  width: 150rpx;
+  height: 150rpx;
+  border: 1rpx solid #ddd;
+}
+
+.name {
+  font-size: 32rpx;
+}
+
+.details {
+  float: left;
+  padding: 15rpx 0 35rpx 35rpx;
+  width: 70%;
+}
+
+.price {
+  margin-top: 35rpx;
+  font-size: 32rpx;
+}
+
+.num {
+  color: #ddd;
+  float: right;
+}
+/* 删除 */
+.del {
+  float: right;
+  color: #878787;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.right {
+  float: right;
+  font-size: 32rpx;
+  color: #676767;
+}
+
+.left-ti {
+  float: left;
+  color: #676767;
+  font-size: 32rpx;
+}
+
+.reduce {
+  padding: 35rpx 20rpx 35rpx 35rpx;
+  overflow: hidden;
+  background-color: #fff;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.add {
+  text-align: right;
+  background-color: #fff;
+  color: #676767;
+  font-size: 32rpx;
+  padding: 35rpx 20rpx 35rpx 35rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+
+
+.all {
+  text-align: right;
+  padding: 35rpx 20rpx 35rpx 35rpx;
+  background-color: #fff;
+  font-size: 32rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.fix {
+  position: fixed;
+  bottom: 0;
+  padding: 0 0 0 40rpx;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  overflow: hidden;
+}
+/* fixed */
+.chck {
+  float: left;
+  margin-top: 20rpx;
+}
+
+.tp {
+  float: right;
+  text-align: right;
+  width: 57%;
+  padding: 10rpx;
+  font-size: 26rpx;
+}
+
+.tips {
+  margin-top: 10rpx;
+  font-size: 16rpx;
+}
+
+.submit {
+  background-color: #0a8;
+  width: 25%;
+  color: #fff;
+  font-size: 30rpx;
+  padding: 25rpx;
+  float: right;
+  text-align: center;
+}
