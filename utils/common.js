@@ -11,7 +11,8 @@
  */
 function defaultBranch()
 {
-  return 'master'
+  // return 'master' //正式版
+  return 'debug' //测试版
 }
 
 /*

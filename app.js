@@ -5,13 +5,13 @@ App({
   
   config : {
       master: {  /* 正式环境配置 */
-          api:'https://api.e2862.com/',
-          pay:'https://pay.e2862.com',
+          api:'http://www.luyingjiaoyu.com/law-web-api/',
+          pay:'http://www.luyingjiaoyu.com/law-web-api/',
           img_path:'http://e2862-V2.img-cn-hangzhou.aliyuncs.com/'
       },
       debug: {   /* 测试环境配置 */
-          api:'https://i.e2862.com/',
-          pay:'https://p.e2862.com',
+          api:'http://114.115.133.96:8899/law-web-api/',
+          pay:'http://114.115.133.96:8899/law-web-api/',
           img_path:'http://e2862-test.img-cn-hangzhou.aliyuncs.com/'
       }
   },
@@ -31,14 +31,14 @@ App({
     system_info: [],        /* 手机系统信息 */
     windowHeight:0,         /* 当前设备的屏幕高 */
     windowWidth:0,          /* 当前设备的屏幕宽 */
-    recommend_customer_id:0 /*第二次进入的customer_id*/
+    recommend_customer_id: 'C154044832616974' /*用户id*/
 
   },
   
   onLaunch: function (options) {
     console.log(options)
-      let recommend_customer_id=options.query.recommend_customer_id!=undefined?options.query.recommend_customer_id:''
-      this.GO.recommend_customer_id=recommend_customer_id
+      // let recommend_customer_id=options.query.recommend_customer_id!=undefined?options.query.recommend_customer_id:''
+      // this.GO.recommend_customer_id=recommend_customer_id
     /* 根据分支自动识别为正式或者是测试版本 */
     if(common.defaultBranch() == 'master'){
         this.GO.api = this.config.master.api;
@@ -80,7 +80,38 @@ App({
           }
       })
   },
-  
+  /**
+  * methods： 请求方式
+  * url: 请求地址
+  * data： 要传递的参数
+  * callback： 请求成功回调函数
+  * errFun： 请求失败回调函数
+  */
+  appRequest: function(methods, url, params, data, callback, errFun) {
+
+    let str = '?'; 
+    for(let key in params){
+      str += key + '=' + params[key] + '&';
+    }
+    str = str.substring(0, str.length - 1);
+    console.log(str)
+
+    wx.request({
+      url: url + str,
+      method: methods,
+      header: {
+        'content-type': methods == 'GET' ? 'application/json' : 'application/x-www-form-urlencoded'
+      },
+      dataType: 'json',
+      data: data,
+      success: function (res) {
+        callback(res.data);
+      },
+      fail: function (err) {
+        errFun(err);
+      }
+    })
+  },
 
 
 })

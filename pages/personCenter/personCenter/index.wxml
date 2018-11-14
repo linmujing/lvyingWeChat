@@ -1,0 +1,19 @@
+<!--pages/personCenter/personCenter/index.wxml-->
+<!-- 我的 -->
+<view >
+  <!-- 头部 -->
+  <view class='h160 bg_white flex'>
+    <view class="head_img">
+      <image mode='widthFix' src="../../../images/image/my_head.png"></image>
+    </view>
+    <view class="head_text" >微信号 15874025525</view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="list mt20">
+    <view class="item flex flex_jub_wrab" wx:for="{{personNavData}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='jump'>
+      <view class="left"><image mode='widthFix' src="{{items.imgSrc}}"></image><text>{{items.text}}</text></view>
+      <view class="right"><image class="right_icon" mode='widthFix' src="../../../images/icon/right_arrow.png"></image></view>
+    </view>
+  </view>
+</view>

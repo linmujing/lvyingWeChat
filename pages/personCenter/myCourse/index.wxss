@@ -1,0 +1,22 @@
+/* pages/personCenter/myCourse/index.wxss */
+.list{
+  padding: 0 0 4% 4%;
+}
+.list .item{
+  margin-right: 4%;
+  margin-top: 4%;
+  width: 45.5%;
+}
+.list .item .item_img{
+  height: 255rpx; 
+}  
+.btn{
+  display: inline-block;
+  height:40rpx;
+  line-height: 40rpx;
+  padding: 0 10rpx;
+  background: rgb(0, 176, 136);
+  border-radius: 20rpx;
+  color: #fff;
+  font-size: 19rpx;
+}

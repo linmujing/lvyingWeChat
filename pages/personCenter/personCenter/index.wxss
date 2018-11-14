@@ -1,0 +1,34 @@
+/* pages/personCenter/personCenter/index.wxss */
+.head_img{
+  padding-top: 30rpx;
+  padding-left: 20rpx;
+}
+.head_img, .head_img image{
+  height: 100rpx;
+  width: 100rpx;
+}
+.head_text{
+  line-height:160rpx;
+  padding-left:20rpx;
+}
+
+.list{
+  background: #fff;
+}
+.list .item {
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-left:15rpx;
+  border-bottom: 1px solid #e6e6e6;
+}
+.list .item image{
+  width: 30rpx;
+  margin: 0 20rpx;
+  position: relative;
+  top: 5rpx;
+}
+
+.list .item  .right_icon{
+  width: 20rpx;
+  top: 5rpx;
+}

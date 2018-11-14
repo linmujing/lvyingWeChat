@@ -2,6 +2,7 @@
 
 page{
   font-family: "微软雅黑";
+  font-size: 26rpx;
   /*font-family: "aril";*/
 }
 
@@ -52,6 +53,9 @@ page {
 
 .text_line {
   text-decoration: line-through;
+}
+.line_height70{
+  line-height: 70rpx;
 }
 .line_height55{
   line-height: 55rpx;
@@ -1598,6 +1602,21 @@ display:-webkit-box;
 
 .z_index100 {
   z-index: 100;
+}
+
+ /* 图片不变形居中  */
+ .img_box {
+  position: relative;
+  overflow: hidden;
+}
+.img_box image{
+  width: 100%;
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
 }
 
 /**模块通用**/
