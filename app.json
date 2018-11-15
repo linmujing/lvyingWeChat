@@ -1,8 +1,9 @@
 {
   "pages": [
+      "pages/shopMall/index/index",
     "pages/personCenter/myCourse/index",
-    "pages/personCenter/personCenter/index",
-    "pages/shopMall/index/index"
+    "pages/personCenter/personCenter/index"
+
 
   ],
   "window": {
