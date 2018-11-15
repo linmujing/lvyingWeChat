@@ -18,7 +18,7 @@ App({
   
   //全局可用变量
   GO : {
-    app_id: 'wxde3fb1fe5516ffad', 
+    app_id: 'wxb6be4529a4f7a306', 
     mch_id: '',  /* 微信支付商户号 */
     scene: '',             /* 场景值 */
     api:'',                /* 当前使用api接口地址 */
