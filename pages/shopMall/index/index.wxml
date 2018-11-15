@@ -1,1 +1,42 @@
-1
+<!-- 导航 -->
+<view class='juc_around bg_white pb10'>
+  <block wx:for="{{titleData}}" wx:key='index'>
+    <view class="pb10 {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-pageLocat='{{item.pageLocat}}'  bindtap='switchNav'>{{item.title}}</view>
+  </block>
+</view>
+<!-- 内容 -->
+<view class=''>
+  <!-- 轮播 -->
+  <view>
+    <swiper indicator-dots="{{indicatorDots}}"
+    indicator-active-color='{{cindicatorColor}}'
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <view wx:for="{{banner}}" wx:for-index="i"  wx:key="i">
+        <swiper-item>
+        <image class='w_100 h_100' src="{{item.src}}"/>
+        </swiper-item>
+      </view>
+    </swiper>
+  </view>
+  <!-- 搜索 -->
+  <view class='pd20 bg_white jub_jub'>
+    <view class='search_box flex w_80'>
+      <input placeholder="视频/音频/合同" class='pd10 w_80'/>
+      <view class='search_btn w_20'><icon type="search" size="16" color='white'/></view>
+    </view>
+    <view class='w_20 text-right'>
+      <image class="icon70" src="../../../images/icon/sao.png"></image>
+    </view>
+  </view>
+  <!-- 视频课程 -->
+  <view class='mt30 bg_white'>
+    <view class='pd20 jub_jub'>
+      <view class='ft30'>视频课程</view>
+      <view class='color_88'>更多></view>
+    </view>
+    <view wx:for="{{videoArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon120"><image class="w_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60'>1</view>
+    </view>
+  </view>
+</view>

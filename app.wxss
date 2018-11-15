@@ -1527,6 +1527,11 @@ display:-webkit-box;
   justify-content: space-between;
 }
 
+.juc_around{
+  display: flex;
+  justify-content: space-around
+}
+
 .jub_jub_end {
   display: flex;
   justify-content: space-between;
