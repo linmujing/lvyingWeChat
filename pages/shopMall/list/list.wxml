@@ -2,7 +2,7 @@
 <view class='juc_around bg_white'>
   <scroll-view scroll-x="true" class="tab-h padding_bottom_10" scroll-left="{{scrollLeft}}">
     <block wx:for="{{tabTitle}}" wx:key='index'>
-      <view class="pb10 tab-item oneline_nobreak {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-pageLocat='{{item.pageLocat}}'  bindtap='switchNav'>{{item.catName}}</view>
+      <view class="pb10 tab-item oneline_nobreak {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-id='{{item.id}}' data-name='{{item.catName}}'  bindtap='switchNav'>{{item.catName}}</view>
     </block>
   </scroll-view>
 </view>
@@ -10,19 +10,23 @@
 <view class='mt50'>
   <!-- 动态管控 -->
   <view class='mt30 bg_white'>
-    <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
-      <view class='w_60 pl20'>
-        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
-        <view class='mt40 jub_jub flex_align'>
-          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-          <view class='color_88'>{{items.lookCount}}人看过</view>
-        </view>
-        <view class='mt30 jub_jub flex_align'>
-          <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-            <text class="btn_title ml15">立即购买</text>
+    <block wx:if='{{lists.length>0}}'>
+      <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+        <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+        <view class='w_60 pl20'>
+          <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+          <view class='mt40 jub_jub flex_align'>
+            <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+            <view class='color_88'>{{items.lookCount}}人看过</view>
+          </view>
+          <view class='mt30 jub_jub flex_align'>
+            <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+              <text class="btn_title ml15">立即购买</text>
+          </view>
         </view>
       </view>
-    </view>
+      <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
+    </block>
+    <block wx:else><view class='text-center pd20 color_88'>暂无数据~</view></block>
   </view>
 </view>

@@ -54,9 +54,12 @@ Page({
   },
   // 跳转到列表
   toList(e) {
-    var code = e.currentTarget.dataset.code;
+    var id = e.currentTarget.dataset.id;
+    var name = e.currentTarget.dataset.name;
+    console.log(name)
+    var typeId = this.data.currentTab + 1
     wx.navigateTo({
-      url: '../../shopMall/list/list?code=' + code,
+      url: '../shopMall/list/list?id=' + id + '&name=' + name + '&typeId=' + typeId,
     })
   },
   /**

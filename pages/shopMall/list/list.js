@@ -11,8 +11,12 @@ Page({
       { 'catName': '全部', 'id': 1 }
     ],
     lists: [],
+    id: 0,
+    typeId: 0,
     currentTab: 0,
     count: 0,
+    pageSize: 6,
+    more: '点击加载更多~',
   },
   //获取tab
   getTabTitle(id) {
@@ -34,7 +38,7 @@ Page({
         that.getListData(6, id)
       } else {
 
-        wx.showToast({ title: res.message })
+        wx.showToast({ title: res.message, icon: 'none' })
 
       }
     }, (err) => {
@@ -58,7 +62,7 @@ Page({
         })
       } else {
 
-        wx.showToast({ title: res.message })
+        wx.showToast({ title: res.message, icon: 'none'})
 
       }
     }, (err) => {
@@ -69,19 +73,53 @@ Page({
   // 切换tab
   switchNav(e) {
     var that = this;
+    that.setTitle(e.target.dataset.name)
     if (that.data.currentTab === e.target.dataset.current) {
       return false
     } else {
       that.setData({
-        currentTab: e.target.dataset.current
+        currentTab: e.target.dataset.current,
+        id: e.target.dataset.id,
+        pageSize: 6,
+        more: '点击加载更多~'
       })
+      that.getListData(6, e.target.dataset.id)
+    }
+  },
+  // 设置标题
+  setTitle(name){
+    wx.setNavigationBarTitle({
+      title: name
+    })
+  },
+  // 加载更多
+  clickMore() {
+    var that = this
+    var pageSize = this.data.pageSize
+    that.setData({
+      pageSize: pageSize+6
+    })
+    if (pageSize >= this.data.count) {
+      wx.showToast({ title: '没有更多了', icon: 'none' })
+      that.setData({
+        more: '没有更多了~'
+      })
+    } else {
+      that.getListData(this.data.pageSize, this.data.id)
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getTabTitle(1)
+    console.log(options)
+    this.setData({
+      id: options.id,
+      typeId: options.typeId
+    })
+    this.setTitle(options.name)
+    this.getTabTitle(options.id)
+    
   },
 
   /**

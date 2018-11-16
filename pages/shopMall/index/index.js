@@ -36,7 +36,6 @@ Page({
   },
   // 点击导航切换
   switchNav(e) {
-    console.log(e)
     var that = this;
     if (that.data.currentTab === e.target.dataset.current) {
       return false
@@ -46,7 +45,6 @@ Page({
         currentTab: e.target.dataset.current,
         pagelocat: e.target.dataset.pagelocat
       })
-      console.log(e.target.dataset.pagelocat)
     }
   },
   // 获取橱窗对象
@@ -113,7 +111,7 @@ Page({
         }
       } else {
 
-        wx.showToast({ title: res.message })
+        wx.showToast({ title: res.message, icon: 'none'})
 
       }
     }, (err) => {
@@ -161,7 +159,7 @@ Page({
         }
       } else {
 
-        wx.showToast({ title: res.message })
+        wx.showToast({ title: res.message, icon: 'none' })
 
       }
     }, (err) => {
@@ -178,9 +176,54 @@ Page({
   },
   // 跳转到列表
   toList(e) {
-    var code = e.currentTarget.dataset.code;
+    // console.log(this.data.pagelocat)
+    var locat = e.currentTarget.dataset.locat;
+    console.log(locat)
+    var name,typeId
+    switch (this.data.pagelocat){
+      case 1:
+        switch (locat) {
+          case 1:
+            name = '视频课程'
+            typeId = 3
+            break
+          case 2:
+            name = '音频课程'
+            typeId = 4
+            break
+          case 3:
+            name = '行业动态管控'
+            typeId = 1
+            break
+          case 4:
+            name = '法律动态管控'
+            typeId = 2
+            break
+          case 5:
+            name = '律瀛商城'
+            typeId = 5
+            break
+        }
+        break
+      case 2:
+        name = '行业动态管控'
+        typeId = 1
+        break
+      case 3:
+        name = '法律动态管控'
+        typeId = 2
+        break
+      case 4:
+        name = '视频课程'
+        typeId = 3
+        break
+      case 5:
+        name = '音频课程'
+        typeId = 4
+        break
+    }
     wx.navigateTo({
-      url: '../../shopMall/list/list?code=' + code,
+      url: '../list/list?id=' + typeId + '&name=' + name + '&typeId=' + typeId,
     })
   },
   /**
