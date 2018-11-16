@@ -1,5 +1,6 @@
 {
   "pages": [
+
     "pages/personCenter/myCoupon/index",
     "pages/sort/sort",
     "pages/shopMall/index/index",
