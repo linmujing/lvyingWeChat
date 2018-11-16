@@ -1,10 +1,9 @@
 {
   "pages": [
-      "pages/sort/sort",
-      
-      "pages/shopMall/index/index",
-      "pages/shopMall/detail/detail",
       "pages/shopMall/list/list",
+      "pages/shopMall/index/index",
+      "pages/sort/sort",
+      "pages/shopMall/detail/detail",
       "pages/personCenter/myCourse/index",
       "pages/personCenter/personCenter/index"
 
