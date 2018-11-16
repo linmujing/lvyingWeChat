@@ -1,0 +1,31 @@
+<!-- nav -->
+<view class='ft28 flex border_top1_ee'>
+  <view class='w_30'>
+    <block wx:for="{{tabData}}" wx:key='index'>
+      <view class="pd20 text-center border_bottom1_ee {{currentTab==index ? ' bl-title' :'' }} oneline_nobreak" data-current='{{index}}' bindtap='switchNav'>{{item.catName}}</view>
+    </block>
+  </view>
+  <!-- 内容 -->
+  <view class='w_70 bg_white'>
+    <view class=''>
+      <swiper vertical='true' duration='400' current='{{currentTab}}' bindchange='houseChange' class='house-swiper' style="height: {{winHeight+'px'}}">
+        <block wx:for="{{tabData}}" wx:for-item="item" wx:for-index="i"  wx:key="i">
+          <swiper-item>
+            <scroll-view scroll-y="ture" style="height: {{winHeight+'px'}}">
+              <block wx:for="{{item.productCatVoList}}" wx:for-item="items" wx:for-index="j"  wx:key="j">
+                <view class='pd20'>
+                  <view class='ft32'>{{items.catName}}</view>
+                  <view class='flex_wrab mt20'>
+                    <block wx:for="{{items.productCatVoList}}" wx:for-item="itemss" wx:for-index="k"  wx:key="k">
+                      <view class='color_88 oneline_nobreak w150 pl10 pr10'>{{itemss.catName}}</view>
+                    </block>
+                  </view>
+                </view>
+              </block>
+            </scroll-view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</view>

@@ -1,8 +1,12 @@
 {
   "pages": [
+      "pages/sort/sort",
+      
       "pages/shopMall/index/index",
-    "pages/personCenter/myCourse/index",
-    "pages/personCenter/personCenter/index"
+      "pages/shopMall/detail/detail",
+      "pages/shopMall/list/list",
+      "pages/personCenter/myCourse/index",
+      "pages/personCenter/personCenter/index"
 
 
   ],
@@ -26,7 +30,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/shopMall/index/index",
+        "pagePath": "pages/sort/sort",
         "iconPath": "images/icon/sort.png",
         "selectedIconPath": "images/icon/_sort.png",
         "text": "分类"

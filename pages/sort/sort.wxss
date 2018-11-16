@@ -1,0 +1,5 @@
+/* pages/sort/sort.wxss */
+.bl-title{
+  border-left: 5rpx solid #00b088;
+  background: #fff;
+}

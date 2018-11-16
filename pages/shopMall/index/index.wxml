@@ -1,11 +1,13 @@
 <!-- 导航 -->
-<view class='juc_around bg_white pb10'>
-  <block wx:for="{{titleData}}" wx:key='index'>
-    <view class="pb10 {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-pageLocat='{{item.pageLocat}}'  bindtap='switchNav'>{{item.title}}</view>
-  </block>
+<view class='juc_around bg_white'>
+  <scroll-view scroll-x="true" class="tab-h padding_bottom_10" scroll-left="{{scrollLeft}}">
+    <block wx:for="{{titleData}}" wx:key='index'>
+      <view class="pb10 tab-item oneline_nobreak {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-pageLocat='{{item.pageLocat}}'  bindtap='switchNav'>{{item.title}}</view>
+    </block>
+  </scroll-view>
 </view>
 <!-- 内容 -->
-<view class=''>
+<view class='mt40'>
   <!-- 轮播 -->
   <view>
     <swiper indicator-dots="{{indicatorDots}}"
@@ -19,7 +21,7 @@
     </swiper>
   </view>
   <!-- 搜索 -->
-  <view class='pd20 bg_white jub_jub'>
+  <view wx:if='{{pagelocat == 1}}' class='pd20 bg_white jub_jub'>
     <view class='search_box flex w_80'>
       <input placeholder="视频/音频/合同" class='pd10 w_80'/>
       <view class='search_btn w_20'><icon type="search" size="16" color='white'/></view>
@@ -29,13 +31,14 @@
     </view>
   </view>
   <!-- 视频课程 -->
-  <view class='mt30 bg_white'>
+  <view  wx:if='{{pagelocat == 1 || pagelocat == 4 || pagelocat == 5}}' class='mt30 bg_white'>
     <view class='pd20 jub_jub'>
-      <view class='ft30'>视频课程</view>
-      <view class='color_88'>更多></view>
+      <view wx:if='{{pagelocat == 1}}' class='ft30 font_weight'>视频课程</view>
+      <view wx:if='{{pagelocat == 4 || pagelocat == 5}}' class='ft30 font_weight'>热门推荐</view>
+      <view class='color_88' bindtap='toList' data-code='{{items.productCode}}'>更多></view>
     </view>
     <view wx:for="{{videoArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class="icon300"  bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
       <view class='w_60 pl20'>
         <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
@@ -43,13 +46,106 @@
           <view class='color_88'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
-          <view>试看</view>
-          <view>
-            <text class="btn_warning">购物车</text>
+          <view class='flex_align color_88' bindtap='toDetail' data-code='{{items.productCode}}'><image class="icon46" src="../../../images/icon/see.png"></image>试看</view>
+          <view class='flex'>
+            <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
             <text class="btn_title ml15">立即购买</text>
           </view>
         </view>
       </view>
     </view>
   </view>
+  <!-- 音频课程 -->
+  <view wx:if='{{pagelocat == 1 || pagelocat == 4 || pagelocat == 5}}' class='mt30 bg_white'>
+    <view class='pd20 jub_jub'>
+      <view wx:if='{{pagelocat == 1}}' class='ft30 font_weight'>音频课程</view>
+      <view wx:if='{{pagelocat == 4 || pagelocat == 5}}' class='ft30 font_weight'>入职推荐</view>
+      <view class='color_88' bindtap='toList' data-code='{{items.productCode}}'>更多></view>
+    </view>
+    <view wx:for="{{musicArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60 pl20'>
+        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+        <view class='mt40 jub_jub flex_align'>
+          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+          <view class='color_88'>{{items.lookCount}}人看过</view>
+        </view>
+        <view class='mt30 jub_jub flex_align'>
+          <view class='flex_align color_88' bindtap='toDetail' data-code='{{items.productCode}}'><image class="icon46" src="../../../images/icon/see.png"></image>试听</view>
+          <view class='flex'>
+            <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text class="btn_title ml15">立即购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--广告-->
+  <view wx:if='{{pagelocat == 1}}'>
+    <image class="w_100 h200" src="{{bgUrl}}"></image>
+  </view>
+  <!-- 行业动态 -->
+  <view wx:if='{{pagelocat == 1 || pagelocat == 2 || pagelocat == 3}}' class='mt30 bg_white'>
+    <view class='pd20 jub_jub'>
+      <view wx:if='{{pagelocat == 1}}' class='ft30 font_weight'>行业动态管控</view>
+      <view wx:if='{{pagelocat == 2 || pagelocat == 3}}' class='ft30 font_weight'>热门推荐</view>
+      <view class='color_88' bindtap='toList' data-code='{{items.productCode}}'>更多></view>
+    </view>
+    <view wx:for="{{careerArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60 pl20'>
+        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+        <view class='mt40 jub_jub flex_align'>
+          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+          <view class='color_88'>{{items.lookCount}}人看过</view>
+        </view>
+        <view class='mt30 jub_jub flex_align'>
+          <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text class="btn_title ml15">立即购买</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 法律动态管控 -->
+  <view wx:if='{{pagelocat == 1 || pagelocat == 2 || pagelocat == 3}}' class='mt30 bg_white'>
+    <view class='pd20 jub_jub'>
+      <view wx:if='{{pagelocat == 1}}' class='ft30 font_weight'>法律动态管控</view>
+      <view wx:if='{{pagelocat == 2 || pagelocat == 3}}' class='ft30 font_weight'>劳动推荐</view>
+      <view class='color_88' bindtap='toList' data-code='{{items.productCode}}'>更多></view>
+    </view>
+    <view wx:for="{{logicArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60 pl20'>
+        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+        <view class='mt40 jub_jub flex_align'>
+          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+          <view class='color_88'>{{items.lookCount}}人看过</view>
+        </view>
+        <view class='mt30 jub_jub flex_align'>
+          <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text class="btn_title ml15">立即购买</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 律瀛商城 -->
+  <view wx:if='{{pagelocat == 1}}' class='mt30 bg_white'>
+    <view class='pd20 jub_jub'>
+      <view class='ft30 font_weight'>律瀛商城</view>
+      <view class='color_88' bindtap='toList' data-code='{{items.productCode}}'>更多></view>
+    </view>
+    <view class='juc_wrap_around'>
+      <view wx:for="{{lvyingArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+        <view class="icon300 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+        <view class='pl20'>
+          <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+          <view class='mt40 jub_jub flex_align'>
+            <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+            <text class="btn_title ml15">立即购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
 </view>
