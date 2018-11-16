@@ -17,7 +17,7 @@ Page({
       finished: false
     },
     // 视口高度
-    windowHeight: app.GO.windowHeight,
+    windowHeight: '',
   },
   /**
    * 普通事件
@@ -104,8 +104,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.GO)
-    this.getData()
+    // 获取屏幕高度
+    wx.getSystemInfo({
+      success: res => {
+        this.setData({
+          windowHeight: res.screenHeight
+        })
+      }
+    })
+    
+    this.getData();
   },
 
   /**

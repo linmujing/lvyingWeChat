@@ -10,7 +10,7 @@ Page({
       {
         text: '我的课程',
         imgSrc: '../../../images/icon/person_icon_1.png',
-        url: 'myCourse'
+        url: '../myCourse/index'
       }, {
         text: '我的订单',
         imgSrc: '../../../images/icon/person_icon_2.png',
@@ -44,10 +44,9 @@ Page({
 
     let index = e.target.dataset.index;
     console.log(this.data.personNavData[index].url)
-
-    // wx.navigateTo({
-    //   url: ''
-    // })
+    wx.navigateTo({
+      url: this.data.personNavData[index].url
+    })
 
   },
   

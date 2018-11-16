@@ -1,14 +1,13 @@
 {
   "pages": [
-      "pages/sort/sort",
-      
-      "pages/shopMall/index/index",
-      "pages/shopMall/detail/detail",
-      "pages/shopMall/list/list",
-      "pages/personCenter/myCourse/index",
-      "pages/personCenter/personCenter/index"
-
-
+    "pages/personCenter/myCoupon/index",
+    "pages/sort/sort",
+    "pages/shopMall/index/index",
+    "pages/shopMall/detail/detail",
+    "pages/shopMall/list/list",
+    "pages/personCenter/myCourse/index",
+    "pages/personCenter/personCenter/index",
+    "pages/case/scrollList/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

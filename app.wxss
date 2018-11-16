@@ -1754,3 +1754,27 @@ display:-webkit-box;
   color: #fff;
   font-size: 25rpx;
 }
+
+/* 滚动菜单 */
+.scroll_list{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #fff;
+  white-space: nowrap;
+  position: relative;
+}
+.scroll_item{
+  display: inline-block;
+  width: 200rpx;
+  text-align: center;
+}
+.scroll_line{
+  width: 200rpx;
+  height:4rpx;
+  background: #00AA88;
+  position: absolute;
+  top:86rpx;
+  left:0;
+  transition: 0.2s;
+}

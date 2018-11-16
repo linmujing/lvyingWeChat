@@ -31,6 +31,7 @@ App({
     system_info: [],        /* 手机系统信息 */
     windowHeight:0,         /* 当前设备的屏幕高 */
     windowWidth:0,          /* 当前设备的屏幕宽 */
+    rpxValue: '',           /* rpx真实值 */
     recommend_customer_id: 'C154044832616974' /*用户id*/
 
   },
@@ -57,6 +58,7 @@ App({
     var res = wx.getSystemInfoSync()
     this.GO.windowHeight = res.windowHeight;
     this.GO.windowWidth = res.windowWidth; 
+    this.GO.rpxValue = res.windowWidth/750;
     this.GO.scene = options.scene;  //场景值
     this.GO.util = util
     this.getSystemInfo();

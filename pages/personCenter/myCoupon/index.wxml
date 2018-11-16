@@ -1,0 +1,41 @@
+<!--pages/personCenter/myCoupon/index.wxml-->
+<!-- 我的优惠券 -->
+<view class="myCoupon">
+  <!-- 滚动菜单 -->
+  <scroll-view class="scroll_list" scroll-x="true" scroll-left="{{scrollWidth * scrollIndex }}">
+      <view class="scroll_item" style="color: {{scrollIndex == i ? '#00AA88' : ''}}"  
+        wx:for="{{couponData.couponType}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='changeNav' >
+        {{items.text}}
+      </view>
+      <text class="scroll_line" style="left:{{scrollWidth * scrollIndex}}px"></text>
+  </scroll-view>
+
+  <!-- 滚动上拉加载更多 -->
+  <scroll-view class="coupon_list bg_white" scroll-y='true' style="height:{{windowHeight}}px" bindscrolltolower="getData">
+    <!-- 我的优惠券 -->
+    <view class="list flex_wrab ">
+
+      <view class="item" >
+        <view class="coupon_items flex"  v-for="(item, index) in couponData.couponList" :key="index">
+            <view class="bg_00aa88 item_left text_center table_block" :style="{ background: item.color }" >
+                <i class="line"></i>
+                <view class="td_block text_space_1">
+                    <text class="font_40">￥{{item.price}} </text><br/>
+                    <text class="font_28">{{item.content}}</text>
+                </view>
+            </view>
+            <view class="item_right table_block padding_0_20">
+                <view class="td_block">
+                    <view class="line_height_50">有效时间： {{item.time}} </view>
+                    <view class="font_20">                    
+                        <text>使用说明：</text>请在券面所示有效期内使用，逾期失效用券应满足券面所示使用范围、满减金额。
+                    </view>
+                </view>
+                <i class="sign" :style="{ backgroundImage: 'url('+ item.stateImg +')'}" v-if="item.state != 1"></i>
+            </view>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+</view>
