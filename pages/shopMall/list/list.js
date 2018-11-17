@@ -108,6 +108,14 @@ Page({
       that.getListData(that.data.pageSize, that.data.id)
     }
   },
+  // 跳转到详情
+  toDetail(e) {
+    console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
