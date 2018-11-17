@@ -11,20 +11,54 @@
   <!-- 动态管控 -->
   <view class='mt30 bg_white'>
     <block wx:if='{{lists.length>0}}'>
-      <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-        <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
-        <view class='w_60 pl20'>
-          <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
-          <view class='mt40 jub_jub flex_align'>
-            <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-            <view class='color_88'>{{items.lookCount}}人看过</view>
-          </view>
-          <view class='mt30 jub_jub flex_align'>
-            <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-              <text class="btn_title ml15">立即购买</text>
+      <block wx:if='{{typeId==1 || typeId==2}}'>
+        <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+          <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+          <view class='w_60 pl20'>
+            <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+            <view class='mt40 jub_jub flex_align'>
+              <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+              <view class='color_88'>{{items.lookCount}}人看过</view>
+            </view>
+            <view class='mt30 jub_jub flex_align'>
+              <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+                <text class="btn_title ml15">立即购买</text>
+            </view>
           </view>
         </view>
-      </view>
+      </block>
+      <block wx:elif='{{typeId==3 || typeId==4}}'>
+        <view class='flex_jub_wrab'>
+          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+            <view class="icon300 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+            <view class='pl20'>
+              <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+              <view class='mt20 jub_jub flex_align'>
+                <view>{{items.productKeyWord == null ? '' : items.productKeyWord}}</view>
+                <view class='color_88'>{{items.lookCount}}人看过</view>
+              </view>
+              <view class='mt40 jub_jub flex_align'>
+                <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+                <text class="btn_title ml15">立即购买</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='flex_jub_wrab'>
+          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+            <view class="icon300 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+            <view class='pl20'>
+              <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+              <view class='mt40 jub_jub flex_align'>
+                <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+                <text class="btn_title ml15">立即购买</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
       <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
     </block>
     <block wx:else><view class='text-center pd20 color_88'>暂无数据~</view></block>

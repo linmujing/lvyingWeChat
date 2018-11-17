@@ -1,0 +1,30 @@
+<!-- 搜索 -->
+<view class='search-box'>
+  <view class='pd20 bg_white jub_jub'>
+    <view class='search_box flex w_100'>
+      <input value='{{searchval}}' bindinput='updateVal' placeholder="视频/音频/合同" class='pd10 w_80'/>
+      <view bindtap='onSearch' class='search_btn w_20'><icon type="search" size="16" color='white'/></view>
+    </view>
+  </view>
+</view>
+<view class='mt100 bg_white'>
+  <view wx:if='{{lists.length>0}}'>
+    <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60 pl20'>
+        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+        <view class='mt40 jub_jub flex_align'>
+          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+          <view class='color_88'>{{items.lookCount}}人看过</view>
+        </view>
+        <view class='mt30 jub_jub flex_align'>
+          <view class="btn_warning w60 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text class="btn_title ml15">立即购买</text>
+        </view>
+      </view>
+    </view>
+    <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
+  </view>
+  <view wx:else class='text-center color_88 pt20'>暂无数据～</view>
+</view>
+

@@ -25,7 +25,8 @@ Page({
     lvyingArr: [],
     banner: [],
     bgUrl: '',
-    pagelocat:1
+    pagelocat:1,
+    searchval: ''
   },
   houseChange(e) {
     console.log(e)
@@ -223,7 +224,20 @@ Page({
         break
     }
     wx.navigateTo({
-      url: '../list/list?id=' + typeId + '&name=' + name + '&typeId=' + typeId,
+      url: '../list/list?id=' + typeId + '&name=' + name + '&typeId=' + typeId
+    })
+  },
+  // 搜索
+  onSearch() {
+    wx.navigateTo({
+      url: '../searchList/searchList?val=' + this.data.searchval
+    })
+  },
+  // input值改变
+  updateVal(e) {
+    var that = this
+    that.setData({
+      searchval: e.detail.value
     })
   },
   /**

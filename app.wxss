@@ -1778,3 +1778,16 @@ display:-webkit-box;
   left:0;
   transition: 0.2s;
 }
+/* 搜索 */
+.search_box{
+    height: 70rpx;
+    border: 1px solid #D8D8D8;
+    border-radius: 35rpx;
+}
+.search_btn{
+  text-align: center;
+  line-height: 75rpx;
+  background: #00AA88;
+  border-radius: 0 35rpx 35rpx 0;
+  border: 1px solid #00AA88;
+}

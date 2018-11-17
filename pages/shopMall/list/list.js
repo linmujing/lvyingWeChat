@@ -95,24 +95,24 @@ Page({
   // 加载更多
   clickMore() {
     var that = this
-    var pageSize = this.data.pageSize
+    var pageSize = that.data.pageSize
     that.setData({
       pageSize: pageSize+6
     })
-    if (pageSize >= this.data.count) {
+    if (pageSize >= that.data.count) {
       wx.showToast({ title: '没有更多了', icon: 'none' })
       that.setData({
         more: '没有更多了~'
       })
     } else {
-      that.getListData(this.data.pageSize, this.data.id)
+      that.getListData(that.data.pageSize, that.data.id)
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     this.setData({
       id: options.id,
       typeId: options.typeId

@@ -2,17 +2,5 @@
   border-bottom: 2px solid #00AA88;
   color: #00AA88;
 }
-.search_box{
-    height: 70rpx;
-    border: 1px solid #D8D8D8;
-    border-radius: 35rpx;
-}
-.search_btn{
-  text-align: center;
-  line-height: 75rpx;
-  background: #00AA88;
-  border-radius: 0 35rpx 35rpx 0;
-  border: 1px solid #00AA88;
-}
 .tab-h{width: 100%; overflow: hidden;white-space: nowrap;position: fixed;z-index: 10;background: #fff}
 .tab-item{margin:0 22rpx;display: inline-block;font-size: 30rpx}

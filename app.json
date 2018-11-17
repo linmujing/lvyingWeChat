@@ -1,11 +1,12 @@
 {
   "pages": [
-
-    "pages/personCenter/myCoupon/index",
     "pages/sort/sort",
-    "pages/shopMall/index/index",
-    "pages/shopMall/detail/detail",
     "pages/shopMall/list/list",
+    "pages/shopMall/index/index",
+    "pages/shopMall/searchList/searchList",
+    "pages/personCenter/myCoupon/index",
+    
+    "pages/shopMall/detail/detail",
     "pages/personCenter/myCourse/index",
     "pages/personCenter/personCenter/index",
     "pages/case/scrollList/index"
@@ -13,7 +14,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "律瀛教育网站",
     "navigationBarTextStyle": "black",
     "onReachBottomDistance": 50
   },
