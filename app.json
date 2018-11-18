@@ -1,10 +1,10 @@
 {
   "pages": [
+        "pages/personCenter/myCoupon/index",
     "pages/sort/sort",
     "pages/shopMall/list/list",
     "pages/shopMall/index/index",
-    "pages/shopMall/searchList/searchList",
-    "pages/personCenter/myCoupon/index",
+
     
     "pages/shopMall/detail/detail",
     "pages/personCenter/myCourse/index",
