@@ -16,15 +16,16 @@
     <view class="list flex_wrab ">
 
       <view class="item" >
-        <view class="coupon_items flex"  v-for="(item, index) in couponData.couponList" :key="index">
+        <view class="coupon_items flex" 
+         wx:for="{{couponList}}" wx:for-index="i"  wx:key="i" wx:for-item="item" >
             <view class="bg_00aa88 item_left text_center table_block" :style="{ background: item.color }" >
                 <i class="line"></i>
-                <view class="td_block text_space_1">
-                    <text class="font_40">￥{{item.price}} </text><br/>
-                    <text class="font_28">{{item.content}}</text>
+                <view class="td_block text-center">
+                    <view class="ft40">￥{{item.price}} </view><br/>
+                    <text >{{item.content}}</text>
                 </view>
             </view>
-            <view class="item_right table_block padding_0_20">
+            <view class="item_right table_block">
                 <view class="td_block">
                     <view class="line_height_50">有效时间： {{item.time}} </view>
                     <view class="font_20">                    
@@ -36,6 +37,10 @@
         </view>
       </view>
 
+    </view>
+    <view style="padding-top:300rpx; text-align:center; color:#999;" wx-if="couponList.length == 0">
+        <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
+        <view>暂无优惠券</view>
     </view>
   </scroll-view>
 </view>

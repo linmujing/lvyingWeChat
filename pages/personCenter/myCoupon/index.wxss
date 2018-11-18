@@ -17,6 +17,16 @@
     color: #fff;
     background: #00aa88;
 }
+.coupon_items .item_left, .coupon_items .item_right{
+  height: 180rpx;
+}
+.coupon_items .item_right{
+  padding: 0 10rpx;
+  width: 70%;
+}
+.table_block{
+   display: table;
+}
 .table_block .td_block {
     display: table-cell;
     vertical-align: middle;
