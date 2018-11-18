@@ -25,6 +25,9 @@ page {
 .bg_white {
   background-color: #fff;
 }
+.bg_fff {
+  background-color: #fff;
+}
 
 .box_border {
   box-sizing: border-box;
@@ -53,6 +56,12 @@ page {
 
 .text_line {
   text-decoration: line-through;
+}
+.line_height100{
+  line-height: 100rpx;
+}
+.line_height80{
+  line-height: 80rpx;
 }
 .line_height70{
   line-height: 70rpx;
@@ -295,6 +304,12 @@ display:-webkit-box;
 .color_33 {
   color: #333;
 }
+.color_666 {
+  color: #666;
+}
+.color_999 {
+  color: #999;
+}
 
 .color_88 {
   color: #888;
@@ -311,6 +326,12 @@ display:-webkit-box;
 /*
 * border 棰滆壊
 */
+.border_1{
+  border: 1px solid #e0e0e0;
+}
+.border_bottom_1{
+  border-bottom: 1px solid #e0e0e0;
+}
 .border0{
   border: 0rpx;
 }
@@ -1778,6 +1799,28 @@ display:-webkit-box;
   left:0;
   transition: 0.2s;
 }
+/* 表格式布局 */
+.table_block{
+    display: table;
+}
+.table_block .td_block {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 1.5;
+}
+/* 图片居中布局 */
+.img_middle_center{
+  position: relative;
+}
+.img_middle_center image{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 /* 搜索 */
 .search_box{
     height: 70rpx;

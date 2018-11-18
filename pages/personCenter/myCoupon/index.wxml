@@ -4,7 +4,7 @@
   <!-- 滚动菜单 -->
   <scroll-view class="scroll_list" scroll-x="true" scroll-left="{{scrollWidth * scrollIndex }}">
       <view class="scroll_item" style="color: {{scrollIndex == i ? '#00AA88' : ''}}"  
-        wx:for="{{couponData.couponType}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='changeNav' >
+        wx:for="{{couponType}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='changeNav' >
         {{items.text}}
       </view>
       <text class="scroll_line" style="left:{{scrollWidth * scrollIndex}}px"></text>
@@ -38,7 +38,7 @@
       </view>
 
     </view>
-    <view style="padding-top:300rpx; text-align:center; color:#999;" wx-if="couponList.length == 0">
+    <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{couponList.length == 0}}">
         <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
         <view>暂无优惠券</view>
     </view>

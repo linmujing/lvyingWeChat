@@ -9,18 +9,14 @@ Page({
     //  可用屏幕高度
     windowHeight: '',
 
-    /* 优惠券数据对象 */
-    couponData: {
-      // 优惠券类型下标
-      couponTypeIndex: 0,
-      // 优惠券类型
-      couponType: [
-        { text: '全部', value: '' },
-        { text: '可使用', value: '1' },
-        { text: '已使用', value: '2' },
-        { text: '已过期', value: '0' },
-      ],
-    },
+    // 优惠券类型
+    couponType: [
+      { text: '全部', value: '' },
+      { text: '可使用', value: '1' },
+      { text: '已使用', value: '2' },
+      { text: '已过期', value: '0' },
+    ],
+    
     // 优惠券列表
     couponList: [],
     
@@ -68,6 +64,7 @@ Page({
 
     let pageData = this.data.pageData;
     pageData.current = 1;
+    pageData.finished = false;
 
     this.setData({
       pageData: pageData,
@@ -98,7 +95,7 @@ Page({
       pageNo: this.data.pageData.current,
       pageSize: this.data.pageData.pageSize,
       ciCode: app.GO.recommend_customer_id, //获取用户code
-      couponStatus: this.data.couponData.couponType[this.data.scrollIndex].value,
+      couponStatus: this.data.couponType[this.data.scrollIndex].value,
       couponForm: ''
     };
 

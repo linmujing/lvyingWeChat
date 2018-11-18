@@ -4,7 +4,7 @@
   <!-- 我的课程 -->
   <view class="list flex_wrab bg_white">
 
-    <view class="item"  wx:for="{{courseData}}" wx:for-index="i"  wx:key="i" wx:for-item="items"  data-productCode="" bindtap='jump'>
+    <view class="item"  wx:for="{{courseData}}" wx:for-index="i"  wx:key="i" wx:for-item="items"  bindtap='jump'>
       <view class="item_img img_box"><image class="item_img" mode='widthFix' 
         src="{{items.imgSrc}}"></image></view>
       <view class="text_clamp1 line_height50 ft24 pb20">{{items.title}}</view>
@@ -15,5 +15,8 @@
     </view>
 
   </view>
-
+  <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{courseData.length == 0}}">
+      <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
+      <view>暂无课程</view>
+  </view>
 </scroll-view>

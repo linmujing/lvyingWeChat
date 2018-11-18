@@ -1,0 +1,63 @@
+<!--pages/personCenter/myAfterService/index.wxml-->
+<!--pages/personCenter/myCoupon/index.wxml-->
+<!-- 我的退货 -->
+<view class="myCoupon">
+  <!-- 滚动菜单 -->
+  <scroll-view class="scroll_list" scroll-x="true" scroll-left="{{scrollWidth * scrollIndex }}">
+      <view class="scroll_item" style="color: {{scrollIndex == i ? '#00AA88' : ''}}"  
+        wx:for="{{orderType}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='changeNav' >
+        {{items.text}}
+      </view>
+      <text class="scroll_line" style="left:{{scrollWidth * scrollIndex}}px"></text>
+  </scroll-view>
+
+  <!-- 滚动上拉加载更多 -->
+  <scroll-view class="coupon_list" scroll-y='true' style="height:{{windowHeight}}px" bindscrolltolower="getData">
+    <!-- 我的退货 -->
+    <view class="list">
+
+      <view class="bg_fff mb30"  
+        wx:for="{{orderList}}" wx:for-index="i"  wx:key="i" wx:for-item="items">
+          <view class="jub_jub line_height80 pl20 pr20 border_bottom_1">
+              <text>订单号：{{items.orderId}}</text>
+              <text class="color_999 ft20" > {{items.createDate}} </text>
+          </view>
+          <view class="lists">
+              <view class="content jub_jub border_bottom_1 ml20" style="position:relative;">
+                  <view class="item table_block" style="height:220rpx;">
+                      <view class="td_block">
+                          <view class="img_middle_center border_1" style="display:inline-block;width: 160rpx;height: 160rpx;overflow:hidden;">
+                              <image style="display:inline-block;width: 160rpx;height: 160rpx;" mode='widthFix'
+                             src="{{items.productWxProfileUrl}}" alt=""></image>
+                          </view>
+                      </view>
+                      <view class="td_block pl30">
+                          <view  class="" style="word-wrap:break-word;">
+                              <text style="position:relative;top:-0.5rem;"> {{items.productTitle}} </text>   
+                              <!-- <text class="font_20" style="position:absolute;top:1.5rem;left:1.9rem;color:red;">￥  {{items.productOrgPrice}}</text> -->
+                          </view>
+                      </view>
+                  </view>
+                  <view class="item table_block" style="height:220rpx;">
+                      <!-- <view class="color_cart_ccc1 font_20" style="position:absolute;top:1.27rem;right:0.2rem">X 1</view> -->
+                  </view>
+              </view>
+
+          </view>   
+          <view class="items_total jub_jub pl20 pr20 line_height100">
+              <view class="color_666">{{items.isExchange == 1 ? '申请中' : '换货成功'}}</view>
+              <view >
+                  <!-- <van-button size="small"  type="primary" >查看</van-button> -->
+              </view>
+          </view>
+      </view>
+
+    </view>
+
+    <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{couponList.length == 0}}">
+        <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
+        <view>暂无退货</view>
+    </view>
+  </scroll-view>
+</view>
+

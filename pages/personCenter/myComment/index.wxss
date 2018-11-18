@@ -1,0 +1,10 @@
+/* pages/personCenter/myComment/index.wxss */
+
+.head_img {
+    display: inline-block;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    background-size: cover;
+}

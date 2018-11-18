@@ -18,15 +18,15 @@ Page({
       }, {
         text: '我的优惠券',
         imgSrc: '../../../images/icon/person_icon_3.png',
-        url: 'myCoupon'
+        url: '../myCoupon/index'
       }, {
         text: '我的评价',
         imgSrc: '../../../images/icon/person_icon_4.png',
-        url: 'myComment'
+        url: '../myAfterService/index'
       }, {
         text: '我的售后',
         imgSrc: '../../../images/icon/person_icon_5.png',
-        url: 'myAfterService'
+        url: '../myAfterService/index'
       }, {
         text: '我的地址',
         imgSrc: '../../../images/icon/person_icon_5.png',
