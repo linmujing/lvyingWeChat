@@ -319,7 +319,9 @@ display:-webkit-box;
 .color_aa {
   color: #aaa;
 }
-
+.color_coupon {
+  color: #F09105;
+}
 .color_white {
   color: #fff;
 }

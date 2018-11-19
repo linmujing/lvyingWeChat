@@ -1,2 +1,26 @@
-<!--pages/shopMall/detail/detail.wxml-->
-<text>pages/shopMall/detail/detail.wxml</text>
+<view class='bg_white'>
+  <image class="w_100" src="{{detailData.productProfileUrl}}"></image>
+  <view class='pd20 ft32'>{{detailData.productTitle}}</view>
+  <view class='jub_jub_center pd20'>
+    <view class='ft34 default_color_aux'>￥{{detailData.productOrgPrice}}</view>
+    <view class='color_88'>{{detailData.lookCount}}人看过</view>
+  </view>
+</view>
+<!-- 优惠 -->
+<view class='bg_white mt30 pd20 jub_jub_center'>
+  <view class='ft28 color_666'>优惠</view>
+  <view class='color_coupon'>领券 ></view>
+</view>
+<!-- 提供商 -->
+<view class='bg_white mt30 pd20'>
+  <view class='ft30'>提供商</view>
+  <view class='mt10'>
+    1
+  </view>
+</view>
+<!-- 优惠 -->
+<view class='bg_white mt30 juc_around'>
+  <view class='pd20 ft28 active'>简介</view>
+  <view class='pd20 ft28'>全程动态管控</view>
+  <view class='pd20 ft28'>评价</view>
+</view>
