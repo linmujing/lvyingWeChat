@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/personCenter/myAddress/index",
+    "pages/personCenter/personCenter/index",
     "pages/personCenter/myAfterService/index",
     "pages/personCenter/myComment/index",
     "pages/personCenter/myCoupon/index",
@@ -8,7 +10,6 @@
     "pages/shopMall/index/index",
     "pages/shopMall/detail/detail",
     "pages/personCenter/myCourse/index",
-    "pages/personCenter/personCenter/index",
     "pages/case/scrollList/index"
     
   ],

@@ -20,6 +20,21 @@ Page({
     windowHeight: '',
   },
   /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // 获取屏幕高度
+    wx.getSystemInfo({
+      success: res => {
+        this.setData({
+          windowHeight: res.screenHeight
+        })
+      }
+    })
+
+    this.getData();
+  },
+  /**
    * 普通事件
   */
   // 页面跳转
@@ -100,21 +115,7 @@ Page({
     });
 
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    // 获取屏幕高度
-    wx.getSystemInfo({
-      success: res => {
-        this.setData({
-          windowHeight: res.screenHeight
-        })
-      }
-    })
-    
-    this.getData();
-  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

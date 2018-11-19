@@ -4,11 +4,11 @@
 <view class="myCoupon">
   <!-- 滚动菜单 -->
   <scroll-view class="scroll_list" scroll-x="true" scroll-left="{{scrollWidth * scrollIndex }}">
-      <view class="scroll_item" style="color: {{scrollIndex == i ? '#00AA88' : ''}}"  
+      <view class="scroll_item" style="width:50%;color: {{scrollIndex == i ? '#00AA88' : ''}}"  
         wx:for="{{orderType}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='changeNav' >
         {{items.text}}
       </view>
-      <text class="scroll_line" style="left:{{scrollWidth * scrollIndex}}px"></text>
+      <text class="scroll_line" style="width:50%;left:{{scrollWidth * scrollIndex}}px"></text>
   </scroll-view>
 
   <!-- 滚动上拉加载更多 -->

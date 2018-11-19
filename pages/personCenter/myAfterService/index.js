@@ -19,7 +19,7 @@ Page({
     orderList: [],
 
     // 滚动距离
-    scrollWidth: 200 * app.GO.rpxValue,
+    scrollWidth: 1 / 2 * app.GO.windowWidth,
     // 选项下标
     scrollIndex: 0,
 

@@ -1,0 +1,63 @@
+<!--pages/personCenter/myAddress/index.wxml-->
+<!-- 我的地址 -->
+<view class="my_address">
+  <!-- 地址列表 -->
+  <view class="address_list bg_fff"  wx:if="{{pageState}}">
+    <!-- 滚动上拉加载更多 -->
+    <view>
+
+      <!-- 我的地址 -->
+      <view class="items"  wx:for="{{addressList}}" wx:for-index="i"  wx:key="i" wx:for-item="items">
+        <view class="jub_jub pl20 pr20 pt20 color_666 line_height60"> 
+          <text>{{ items.name }}</text>
+          <text>{{ items.phone }}</text>
+        </view>
+        <view class="ml20 pt20 pb20 border_bottom_1 color_999 line_height40 ft22">{{items.province.label + items.city.label + items.county.label + items.addressDetail }}</view>
+        <view  class="flex_right_align pl20 pr20 border_bottom_1 line_height80 ft22">
+          <text class="ml40 color_00aa88" data-index="{{i}}" bindtap='aditAddressItem'>编辑</text>
+          <text class="color_aa" data-index="{{i}}" bindtap='deleteAddress'>删除</text>
+        </view>
+      </view>
+
+      <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{addressList.length == 0}}">
+          <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
+          <view>暂无地址</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 地址编辑 -->
+  <view class="address_adit"  wx:else>
+    <view class="jub_jub input_item ml20 pr20 border_bottom_1">
+      <view style="width:20%;">收件人</view>
+      <view style="width:80%;"> <input placeholder="请输入收件人姓名" value="{{addressModelData.name}}" data-key="name" bindinput='bindInput'/></view>
+    </view>
+    <view class="jub_jub input_item ml20 pr20 border_bottom_1">
+      <view style="width:20%;">电话号码</view>
+      <view style="width:80%;"> <input placeholder="请输入电话号码" value="{{addressModelData.phone}}" data-key="phone" bindinput='bindInput'/></view>
+    </view>
+    <view class="jub_jub input_item ml20 pr20 border_bottom_1">
+      <view style="width:20%;">地址</view>
+      <picker style="position:relative;z-index:2;width:80%;" mode="region" bindchange="bindRegionChange" value="{{region}}">
+        <view class="picker" style="color:#666" wx:if="{{region.length != 0}}">
+          {{region[0]}}，{{region[1]}}，{{region[2]}}
+        </view>
+        <view style="width:80%;color:#788;position:relative;z-index:1" wx:else>请选择地址</view>
+      </picker>
+    </view>
+    <view class="jub_jub input_item ml20 pr20 border_bottom_1">
+      <view style="width:20%;">详细地址</view>
+      <view style="width:80%;"> <input placeholder="请输入详细地址" value="{{addressModelData.addressDetail}}" data-key="addressDetail" bindinput='bindInput'/></view>
+    </view>
+  </view>
+  
+  <!-- 按钮 -->
+  <view class="btn_box">
+    <text class="btn" wx:if="{{pageState}}" bindtap='openAddressModel' >新建收货地址</text>
+    <view wx:else>
+        <text class="btn"  style="width:42%;left:53%;" bindtap='addAddressData' >保存</text>
+        <text class="btn" style="background:#ccc;width:42%;" bindtap='closeAdit' >关闭</text>
+    </view>
+  </view>
+
+</view>

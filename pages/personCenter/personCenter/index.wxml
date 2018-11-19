@@ -13,7 +13,9 @@
   <view class="list mt20">
     <view class="item flex flex_jub_wrab" wx:for="{{personNavData}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='jump'>
       <view class="left"><image mode='widthFix' src="{{items.imgSrc}}"></image><text>{{items.text}}</text></view>
-      <view class="right"><image class="right_icon" mode='widthFix' src="../../../images/icon/right_arrow.png"></image></view>
+      <view class="right" data-index="{{i}}" bindtap='jump'>
+        <image class="right_icon" mode='widthFix' src="../../../images/icon/right_arrow.png" data-index="{{i}}" bindtap='jump'></image>
+      </view>
     </view>
   </view>
 </view>

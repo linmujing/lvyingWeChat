@@ -66,12 +66,17 @@ page {
 .line_height70{
   line-height: 70rpx;
 }
+.line_height60{
+  line-height: 60rpx;
+}
 .line_height55{
   line-height: 55rpx;
 }
-
 .line_height50{
   line-height: 50rpx;
+}
+.line_height40{
+  line-height: 40rpx;
 }
 
 /**white_space**/
@@ -293,12 +298,8 @@ display:-webkit-box;
 * color 棰滆壊
 */
 
-.default_color_main {
-  color: #ef3939;
-}
-
-.default_color_aux {
-  color: #00c099;
+.color_00aa88{
+  color: #00aa88;
 }
 
 .color_33 {
@@ -1763,7 +1764,7 @@ display:-webkit-box;
   background: #00b088;
   border-radius: 25rpx;
   color: #fff;
-  font-size: 25rpx;
+  font-size: 22rpx;
 }
 .btn_warning{
   display: inline-block;
@@ -1773,7 +1774,7 @@ display:-webkit-box;
   background: #F09105;
   border-radius: 25rpx;
   color: #fff;
-  font-size: 25rpx;
+  font-size: 22rpx;
 }
 
 /* 滚动菜单 */

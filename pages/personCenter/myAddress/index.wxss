@@ -1,0 +1,36 @@
+/* pages/personCenter/myAddress/index.wxss */
+page {
+  background-color:#fff;
+}
+
+/* 按钮 */
+.btn_box{
+  position: fixed;
+  bottom: 100rpx;
+  width: 100%;
+}
+.btn_box .btn{
+  position: fixed;
+  bottom: 20px;
+  width: 90%;
+  left: 5%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  text-align: center;
+  color: #fff;
+  background: #00aa88;
+  z-index: 99;
+  border-radius: 4px;
+}
+
+/* 输入框 */
+.input_item{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.input_item input{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 24rpx;
+}

@@ -50,6 +50,17 @@ App({
         this.GO.pay_api = this.config.debug.pay;
         this.GO.img_path = this.config.debug.img_path;
     }
+    // 微信授权登录
+    wx.login({
+      success: function (res) {
+        console.log(res)
+        if (res.code) {
+          //TODO
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    })
     //动态获取ext.json配置信息
     // 获取第三方平台信息
     var ext_data = wx.getExtConfigSync();
