@@ -1,0 +1,8 @@
+/* pages/personCenter/myOrder/index.wxss */
+.order_list{
+  position: fixed;
+  top:91rpx;
+  left:0;
+  width:100%;
+}
+

@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/personCenter/myAddress/index",
     "pages/personCenter/personCenter/index",
+    "pages/personCenter/myAddress/index",
+   
+    "pages/personCenter/myOrder/index",
     "pages/personCenter/myAfterService/index",
     "pages/personCenter/myComment/index",
     "pages/personCenter/myCoupon/index",

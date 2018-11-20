@@ -205,8 +205,11 @@ Page({
           app.appRequest('post', url, param, {}, (res) => {
             console.log(res)
             if (res.code == 200) {
-              // 更新数据
-              that.getData();
+
+              wx.showToast({ title: '删除成功' })
+              // 重置数据
+              setTimeout(() => { that.getData(); }, 1000)
+
             }
             wx.showToast({ title: res.message })
           }, (err) => {

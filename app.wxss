@@ -28,6 +28,9 @@ page {
 .bg_fff {
   background-color: #fff;
 }
+.bg_red {
+  background-color: red;
+}
 
 .box_border {
   box-sizing: border-box;
@@ -300,6 +303,9 @@ display:-webkit-box;
 
 .color_00aa88{
   color: #00aa88;
+}
+.color_red{
+  color: red;
 }
 
 .color_33 {
@@ -1758,21 +1764,35 @@ display:-webkit-box;
     white-space: normal;
 }
 /* 按钮 */
-.btn_title{
+.btn_default{
+  box-sizing: border-box;
   display: inline-block;
-  height:40rpx;
-  line-height: 40rpx;
-  padding: 4rpx 20rpx;
+  height:46rpx;
+  line-height: 46rpx;
+  padding: 0 30rpx;
+  background: #fff;
+  border-radius: 25rpx;
+  color: #00b088;
+  border:1px solid #00b088;
+  font-size: 22rpx;
+}
+.btn_title{
+  box-sizing: border-box;
+  display: inline-block;
+  height: 46rpx;
+  line-height: 46rpx;
+  padding: 0 30rpx;
   background: #00b088;
   border-radius: 25rpx;
   color: #fff;
   font-size: 22rpx;
 }
 .btn_warning{
+  box-sizing: border-box;
   display: inline-block;
-  height:40rpx;
-  line-height: 40rpx;
-  padding: 4rpx 20rpx;
+  height:46rpx;
+  line-height: 46rpx;
+  padding: 4rpx 30rpx;
   background: #F09105;
   border-radius: 25rpx;
   color: #fff;
@@ -1822,6 +1842,15 @@ display:-webkit-box;
     left: 0;
     right: 0;
     margin: auto;
+}
+/* 元素自动居中 需要设置宽高 */
+.block_middle_center{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
 }
 
 /* 搜索 */

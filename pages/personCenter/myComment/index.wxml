@@ -1,7 +1,7 @@
 <!--pages/personCenter/myComment/index.wxml-->
 <!-- 我的评论 上拉加载更多 -->
 <scroll-view scroll-y='true' style="height:{{windowHeight}}px" bindscrolltolower="getData" class="bg_white">
-  <!-- 我的课程 -->
+
   <view class="comment_list">
     <view class="items" wx:for="{{commentData}}" wx:for-index="i"  wx:key="i" wx:for-item="items">
         <view class="flex pr20 pl20 pt20" >

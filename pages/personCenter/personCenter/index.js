@@ -14,7 +14,7 @@ Page({
       }, {
         text: '我的订单',
         imgSrc: '../../../images/icon/person_icon_2.png',
-        url: 'myOrder'
+        url: '../myOrder/index'
       }, {
         text: '我的优惠券',
         imgSrc: '../../../images/icon/person_icon_3.png',
@@ -22,7 +22,7 @@ Page({
       }, {
         text: '我的评价',
         imgSrc: '../../../images/icon/person_icon_4.png',
-        url: '../myAfterService/index'
+        url: '../myComment/index'
       }, {
         text: '我的售后',
         imgSrc: '../../../images/icon/person_icon_5.png',
