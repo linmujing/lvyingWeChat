@@ -145,39 +145,7 @@ function paramsReg(data, t = 'string') {
 
 }
 
-/* 
- *@:title:文件上传
- *@:params: 
- *@:author: 空哥 277409083@qq.com 15307319570
- */
-function fileUpload() {
 
-}
-
-/* 
- *@:title:通常的数据请求 (暂时无效)
- *@:params: 
- *@:author: 空哥 277409083@qq.com 15307319570
- */
-function dataRequest(url, params) {
-  try {
-    wx.request({
-      url: url,
-      data: params,
-      method: 'POST',
-      success: function (res) {
-
-        console.log('11111111111111111111111')
-
-
-        return res
-      }
-    })
-  } catch (e) {
-    logUpload(e.error)
-  }
-
-}
 
 /* 
  *@:title:随机字符串
@@ -233,16 +201,44 @@ function login(thatt, source = 1) {
       console.log(res)
       storage('set', 'login_auth', 1)
       code = res.code
-      requestSignin(thatt, code)
+      getLoginAuthor(thatt, code)
     },
     fail: function (res) {
       console.log(res)
       storage('set', 'login_auth', -1)
       console.log('login失败');
-      requestSignin(thatt, code)
+      getLoginAuthor(thatt, code)
     }
   })
-  // }
+
+}
+/*
+ *@: title: 获取用户微信登录授权
+ *@: params 
+ *@: return void
+ */
+function getLoginAuthor(thatt, code, iv, encryptedData){
+  var that = thatt;
+  var url = that.GO.api + "wechat/login/mp/customer/userInfo"
+  var param = {
+    'code': code,
+  }
+  if (iv != null || encryptedData != null) {
+    param.encrypted_info = {
+      iv: iv,
+      encryptedData: encryptedData
+    }
+  }
+
+  that.appRequest('post', url, param, {}, (res) => {
+    console.log(res)
+    if (res.code == 200) {
+      
+    }
+  }, (err) => {
+    console.log('请求错误信息：  ' + err.errMsg);
+  });
+
 }
 
 /*
@@ -253,7 +249,7 @@ function login(thatt, source = 1) {
 function requestSignin( thatt, code, iv, encryptedData) {
   console.log(code)
   var that = thatt;
-  var url = that.GO.api + "service/passport/signinCustomer"
+  var url = that.GO.api + "wechat/login/mp/customer/userInfo"
   var param = {
     'app_id': that.GO.app_id,
     'client_code': code,
