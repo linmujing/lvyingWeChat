@@ -1,4 +1,5 @@
 // pages/personCenter/personCenter/index.js
+var app = getApp();
 Page({
 
   /**
@@ -37,7 +38,7 @@ Page({
     wxName: '',
   },
   /**
-   * 普通事件
+   * 普通事件""
    */ 
   // 页面跳转
   jump: function (e){
@@ -48,6 +49,35 @@ Page({
       url: this.data.personNavData[index].url
     })
 
+  },
+  // 获取用户信息
+  onGotUserInfo(res){
+    console.log(res)
+    // 订单接口参数
+    let url = app.GO.api + 'wechat/login/mp/customer/userInfo';
+    let param = {
+      encryptedData: res.detail.encryptedData,
+      iv: res.detail.iv
+    };
+
+    //调用登录接口
+    wx.login({
+      success: function (res) {
+        console.log(res)
+        param.code = res.code;
+
+        app.appRequest('post', url, param, {}, (res) => {
+          console.log(res)
+
+        }, (err) => {
+          console.log('请求错误信息：  ' + err.errMsg);
+        });
+
+      },
+      fail: function (res) {
+
+      }
+    })
   },
   
   /**

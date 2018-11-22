@@ -10,8 +10,9 @@ App({
           img_path:'http://e2862-V2.img-cn-hangzhou.aliyuncs.com/'
       },
       debug: {   /* 测试环境配置 */
-          api:'http://114.115.133.96:8899/law-web-api/',
-          pay:'http://114.115.133.96:8899/law-web-api/',
+          // api:'http://114.115.133.96:8899/law-web-api/',
+          // pay:'http://114.115.133.96:8899/law-web-api/',
+          api:'http://flgk.yohez.com/law-web-api/',
           img_path:'http://e2862-test.img-cn-hangzhou.aliyuncs.com/'
       }
   },

@@ -195,19 +195,21 @@ function login(thatt, source = 1) {
   that.GO.user_info = storage('get', 'user_info')  //调整
   var code = ''
   var userInfo = ''
+
   //调用登录接口
   wx.login({
     success: function (res) {
       console.log(res)
       storage('set', 'login_auth', 1)
       code = res.code
-      getLoginAuthor(thatt, code)
+
+      //getLoginAuthor(thatt, code)
     },
     fail: function (res) {
       console.log(res)
       storage('set', 'login_auth', -1)
       console.log('login失败');
-      getLoginAuthor(thatt, code)
+      //getLoginAuthor(thatt, code)
     }
   })
 
