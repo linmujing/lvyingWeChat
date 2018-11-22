@@ -63,6 +63,9 @@ page {
 .line_height100{
   line-height: 100rpx;
 }
+.line_height90{
+  line-height: 90rpx;
+}
 .line_height80{
   line-height: 80rpx;
 }
@@ -297,6 +300,10 @@ display:-webkit-box;
   background: #00c099;
 }
 
+.bg_00aa88{
+  background: #00aa88;
+}
+
 /*
 * color 棰滆壊
 */
@@ -308,7 +315,7 @@ display:-webkit-box;
   color: red;
 }
 
-.color_33 {
+.color_333 {
   color: #333;
 }
 .color_666 {
@@ -318,17 +325,17 @@ display:-webkit-box;
   color: #999;
 }
 
-.color_88 {
+.color_888 {
   color: #888;
 }
 
-.color_aa {
+.color_aaa {
   color: #aaa;
 }
 .color_coupon {
   color: #F09105;
 }
-.color_white {
+.color_fff {
   color: #fff;
 }
 
@@ -1683,7 +1690,7 @@ display:-webkit-box;
   text-align: center;
 }
 
-.position_fixed {
+.fixed_bottom {
   position: fixed;
   bottom: 0;
 }
@@ -1699,7 +1706,7 @@ display:-webkit-box;
 .mlmr20{
   margin:0 20rpx;
 }
-.top{
+.fixed_top{
   position: fixed;
   top: 0;
 }
@@ -1858,6 +1865,24 @@ display:-webkit-box;
   left:0;
   right:0;
   margin:auto;
+}
+/* 1个像素的线条 */
+.border_top_1px,.border_bottom_1px{
+    position: relative;
+}
+.border_top_1px:before,.border_bottom_1px:before{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    -webkit-transform: scaleY(.3);
+    transform: scaleY(.3);
+    background-color: #ddd;
+}
+.border_top_1px:before{
+    top:0;
 }
 
 /* 搜索 */

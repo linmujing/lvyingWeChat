@@ -1,0 +1,30 @@
+<!--pages/shopCart/shoppingCart/index.wxml-->
+<!-- 我的购物车 -->
+<view>
+
+  <!-- 购物车头部 -->
+  <view class="cart_top fixed_top jub_jub line_height100 bg_fff w_100" >
+    <view class="pl20 pr20">共4门课程</view>
+    <view class="color_red pl20 pr20">删除选中</view>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view class="cart_list" >
+
+  </view>
+
+  <!-- 购物车底部 -->
+  <view class="cart_bottom jub_jub line_height90 bg_fff w_100 border_bottom_1px" style="position:fixed;bottom:0;">
+    <view class="pr20 pl20">
+      <van-checkbox value="{{ listState }}" bind:change="setAllCheckboxChange" checked-color="#00aa88" ></van-checkbox>
+    </view>
+    <view class="jub_jub">
+      <view class="text-right pt10 pr20" >
+        <view class="ft30" style="line-height:40rpx;">实付金额： <text class="color_red">￥{{listTotal}}</text> </view>
+        <view class="ft20 color_aaa" style="line-height:30rpx;">若购买享有优惠，相应金额将在订单结算页面扣减</view>
+      </view>
+      <view class="color_fff bg_00aa88 text-center ft30" style="width:180rpx;">去结算</view>
+    </view>
+  </view>
+
+</view>
