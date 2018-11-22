@@ -17,7 +17,7 @@
                   <view bindtap='toList' data-id='{{item.id}}' data-name='{{item.catName}}' class='ft32'>{{items.catName}}</view>
                   <view class='flex_wrab mt20'>
                     <block wx:for="{{items.productCatVoList}}" wx:for-item="itemss" wx:for-index="k"  wx:key="k">
-                      <view bindtap='toList' data-id='{{items.id}}' data-name='{{items.catName}}' class='color_88 oneline_nobreak w150 pl10 pr10'>{{itemss.catName}}</view>
+                      <view bindtap='toList' data-id='{{items.id}}' data-name='{{items.catName}}' class='color_888 oneline_nobreak w150 pl10 pr10'>{{itemss.catName}}</view>
                     </block>
                   </view>
                 </view>

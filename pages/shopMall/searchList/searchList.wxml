@@ -15,7 +15,7 @@
         <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-          <view class='color_88'>{{items.lookCount}}人看过</view>
+          <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
           <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
@@ -23,8 +23,8 @@
         </view>
       </view>
     </view>
-    <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
+    <view bindtap='clickMore' class='text-center pd20 color_888'>{{more}}</view>
   </view>
-  <view wx:else class='text-center color_88 pt20'>暂无数据～</view>
+  <view wx:else class='text-center color_888 pt20'>暂无数据～</view>
 </view>
 

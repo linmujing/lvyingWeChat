@@ -21,12 +21,12 @@
     <view class='w_75'>
       <view class='jub_jub_center'>
         <view class='mt10 ft30'>{{merchantInfo.orgName}}</view>
-        <view class='flex color_88'>
+        <view class='flex color_888'>
           <view class='w150 oneline_nobreak'>客户数：{{merchantInfo.ciCount == null ? 0 : merchantInfo.ciCount}}</view>
           <view class='w150 oneline_nobreak'>用户数：{{merchantInfo.productCount == null ? 0 : merchantInfo.productCount}}</view>
         </view>
       </view>
-      <view class='mt20 color_88 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
+      <view class='mt20 color_888 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
     </view>
   </view>
 </view>
@@ -39,7 +39,7 @@
         <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-          <view class='color_88'>{{items.lookCount}}人看过</view>
+          <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
           <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
@@ -47,7 +47,7 @@
         </view>
       </view>
     </view>
-    <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
+    <view bindtap='clickMore' class='text-center pd20 color_888'>{{more}}</view>
   </view>
-  <view wx:else class='text-center color_88 pt20'>暂无数据～</view>
+  <view wx:else class='text-center color_888 pt20'>暂无数据～</view>
 </view>

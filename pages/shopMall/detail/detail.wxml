@@ -3,7 +3,7 @@
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
     <view class='ft34 color_title'>￥{{detailData.productOrgPrice}}</view>
-    <view class='color_88'>{{detailData.lookCount}}人看过</view>
+    <view class='color_888'>{{detailData.lookCount}}人看过</view>
   </view>
 </view>
 <!-- 优惠 -->
@@ -19,7 +19,7 @@
     <image wx:else class="icon140 border_1" :src="{{merchantInfo.merchantProfileUrl}}"></image>
     <view class='ml20'>
       <view class='mt10 ft30'>{{merchantInfo.orgName}}</view>
-      <view class='mt20 color_88 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
+      <view class='mt20 color_888 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
     </view>
   </view>
 </view>
