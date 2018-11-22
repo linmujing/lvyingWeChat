@@ -69,10 +69,10 @@ Page({
         wx.request({
           url: url,
           method: 'get',
-          // dataType: 'json',
           data: param,
           success: function (res) {
-            callback(res.data);
+            console.log(res.data);
+            
           },
           fail: function (err) {
             errFun(err);

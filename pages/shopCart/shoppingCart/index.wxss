@@ -1,1 +1,7 @@
 /* pages/shopCart/shoppingCart/index.wxss */
+.cart_list{
+  position: fixed;
+  top: 102rpx;
+  width:100%;
+  left:0;
+}
