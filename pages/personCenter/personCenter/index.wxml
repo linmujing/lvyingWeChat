@@ -8,7 +8,7 @@
     </view>
     <view class="head_text" >微信号 15874025525</view>
   </view>
-
+<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
   <!-- 列表 -->
   <view class="list mt20">
     <view class="item flex flex_jub_wrab" wx:for="{{personNavData}}" wx:for-index="i"  wx:key="i" wx:for-item="items" data-index="{{i}}" bindtap='jump'>
