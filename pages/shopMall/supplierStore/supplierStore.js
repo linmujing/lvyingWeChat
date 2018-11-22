@@ -43,6 +43,30 @@ Page({
       }
     })
   },
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code,
+    })
+  },
+  // 加载更多
+  clickMore() {
+    var that = this
+    var pageSize = that.data.pageSize
+    that.setData({
+      pageSize: pageSize + 6
+    })
+    if (pageSize >= that.data.count) {
+      wx.showToast({ title: '没有更多了', icon: 'none' })
+      that.setData({
+        more: '没有更多了~'
+      })
+    } else {
+      that.getListData(that.data.pageSize)
+    }
+  },
   // 获取商户详细信息
   getMerchantInfo(code) {
     wx.showLoading({ title: '加载中' })

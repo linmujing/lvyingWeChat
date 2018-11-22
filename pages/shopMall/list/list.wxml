@@ -15,7 +15,7 @@
         <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
           <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
           <view class='w_60 pl20'>
-            <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+            <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
             <view class='mt40 jub_jub flex_align'>
               <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
               <view class='color_888'>{{items.lookCount}}人看过</view>
