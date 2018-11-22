@@ -66,7 +66,7 @@ Page({
         console.log(res)
         param.code = res.code;
 
-        app.appRequest('post', url, param, {}, (res) => {
+        app.appRequest('get', url, param, {}, (res) => {
           console.log(res)
 
         }, (err) => {

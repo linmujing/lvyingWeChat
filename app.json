@@ -12,7 +12,7 @@
     "pages/shopMall/index/index",
     "pages/shopMall/detail/detail",
     "pages/personCenter/myCourse/index",
-    "pages/case/scrollList/index",
+    "pages/case/scrollList/index"
 
   ],
   "window": {
@@ -22,6 +22,12 @@
     "navigationBarTextStyle": "black",
     "onReachBottomDistance": 50
   },
+
+  "usingComponents": {
+    "van-button": "/components/dist/button/index",
+    "van-checkbox": "/components/dist/checkbox/index"
+  },
+
   "tabBar": {
     "color": "#ccc",
     "selectedColor": "#00AA88",
@@ -41,7 +47,7 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/shopMall/index/index",
+        "pagePath": "pages/shopCart/shoppingCart/index",
         "iconPath": "images/icon/cart.png",
         "selectedIconPath": "images/icon/_cart.png",
         "text": "购物车"
