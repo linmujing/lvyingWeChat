@@ -69,6 +69,11 @@ Page({
               banner: JSON.parse(content[6].caseUrl),
               bgUrl: JSON.parse(content[3].caseUrl)[0].src
             })
+            // 储存轮播数据
+            wx.setStorage({
+              key: "banner",
+              data: JSON.parse(content[6].caseUrl)
+            })
             for (var i = 0; i < content.length; i++) {
               if (content[i].caseName == "视频推荐") {
                 that.getProductShowCase(content[i].productCode, content[i].productSortBy, 1)

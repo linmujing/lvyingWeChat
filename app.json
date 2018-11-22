@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/shopMall/index/index",
+    "pages/shopMall/detail/detail",
     "pages/personCenter/personCenter/index",
     "pages/personCenter/myAddress/index",
    
@@ -9,8 +11,10 @@
     "pages/personCenter/myCoupon/index",
     "pages/sort/sort",
     "pages/shopMall/list/list",
-    "pages/shopMall/index/index",
-    "pages/shopMall/detail/detail",
+    "pages/shopMall/searchList/searchList",
+        
+    "pages/shopMall/supplierStore/supplierStore",
+    
     "pages/personCenter/myCourse/index",
     "pages/case/scrollList/index"
     

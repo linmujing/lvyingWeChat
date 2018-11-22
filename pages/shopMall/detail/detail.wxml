@@ -2,7 +2,7 @@
   <image class="w_100" src="{{detailData.productProfileUrl}}"></image>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
-    <view class='ft34 default_color_aux'>￥{{detailData.productOrgPrice}}</view>
+    <view class='ft34 color_title'>￥{{detailData.productOrgPrice}}</view>
     <view class='color_88'>{{detailData.lookCount}}人看过</view>
   </view>
 </view>
@@ -14,11 +14,16 @@
 <!-- 提供商 -->
 <view class='bg_white mt30 pd20'>
   <view class='ft30'>提供商</view>
-  <view class='mt10'>
-    1
+  <view bindtap='goStore' class='mt10 flex'>
+    <image wx:if='merchantInfo.merchantProfileUrl == ""' class="icon140 border_1" src="../../../images/img/falv.png"></image>
+    <image wx:else class="icon140 border_1" :src="{{merchantInfo.merchantProfileUrl}}"></image>
+    <view class='ml20'>
+      <view class='mt10 ft30'>{{merchantInfo.orgName}}</view>
+      <view class='mt20 color_88 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
+    </view>
   </view>
 </view>
-<!-- 优惠 -->
+<!-- 简介 -->
 <view class='bg_white mt30 juc_around'>
   <view class='pd20 ft28 active'>简介</view>
   <view class='pd20 ft28'>全程动态管控</view>
