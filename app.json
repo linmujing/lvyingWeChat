@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/shopCart/shoppingCart/index",
     "pages/personCenter/personCenter/index",
     "pages/personCenter/myAddress/index",
-   
     "pages/personCenter/myOrder/index",
     "pages/personCenter/myAfterService/index",
     "pages/personCenter/myComment/index",
@@ -12,8 +12,8 @@
     "pages/shopMall/index/index",
     "pages/shopMall/detail/detail",
     "pages/personCenter/myCourse/index",
-    "pages/case/scrollList/index"
-    
+    "pages/case/scrollList/index",
+
   ],
   "window": {
     "backgroundTextStyle": "light",
