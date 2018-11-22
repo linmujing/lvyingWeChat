@@ -66,12 +66,18 @@ Page({
         console.log(res)
         param.code = res.code;
 
-        app.appRequest('post', url, param, {}, (res) => {
-          console.log(res)
-
-        }, (err) => {
-          console.log('请求错误信息：  ' + err.errMsg);
-        });
+        wx.request({
+          url: url,
+          method: 'get',
+          // dataType: 'json',
+          data: param,
+          success: function (res) {
+            callback(res.data);
+          },
+          fail: function (err) {
+            errFun(err);
+          }
+        })
 
       },
       fail: function (res) {
