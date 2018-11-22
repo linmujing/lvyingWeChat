@@ -610,6 +610,10 @@ display:-webkit-box;
   width: 120rpx;
   height: 120rpx;
 }
+.icon140 {
+  width: 140rpx;
+  height: 140rpx;
+}
 .icon1835 {
   width: 18rpx;
   height: 35rpx;
@@ -1740,6 +1744,9 @@ display:-webkit-box;
 }
 .color_r{
   color:#EF3939;
+}
+.color_title, .default_color_aux{
+  color:#00AA88;
 }
 .pb300{
   padding-top:300rpx;

@@ -1,0 +1,53 @@
+ <!-- 轮播 -->
+<view>
+  <swiper indicator-dots="{{indicatorDots}}"
+  indicator-active-color='{{cindicatorColor}}'
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <view wx:for="{{banner}}" wx:for-index="i"  wx:key="i">
+      <swiper-item>
+      <image class='w_100 h_100' src="{{item.src}}"/>
+      </swiper-item>
+    </view>
+  </swiper>
+</view>
+<!-- 提供商 -->
+<view class='bg_white pd20'>
+  <view class='ft30'>提供商</view>
+  <view bindtap='goStore' class='mt10 flex'>
+    <view class='w_25'>
+      <image wx:if='merchantInfo.merchantProfileUrl == ""' class="icon140 border_1" src="../../../images/img/falv.png"></image>
+      <image wx:else class="icon140 border_1" :src="{{merchantInfo.merchantProfileUrl}}"></image>
+    </view>
+    <view class='w_75'>
+      <view class='jub_jub_center'>
+        <view class='mt10 ft30'>{{merchantInfo.orgName}}</view>
+        <view class='flex color_88'>
+          <view class='w150 oneline_nobreak'>客户数：{{merchantInfo.ciCount == null ? 0 : merchantInfo.ciCount}}</view>
+          <view class='w150 oneline_nobreak'>用户数：{{merchantInfo.productCount == null ? 0 : merchantInfo.productCount}}</view>
+        </view>
+      </view>
+      <view class='mt20 color_88 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
+    </view>
+  </view>
+</view>
+<!-- 列表 -->
+<view class='mt40 bg_white'>
+  <view wx:if='{{lists.length>0}}'>
+    <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class='w_60 pl20'>
+        <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
+        <view class='mt40 jub_jub flex_align'>
+          <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+          <view class='color_88'>{{items.lookCount}}人看过</view>
+        </view>
+        <view class='mt30 jub_jub flex_align'>
+          <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text class="btn_title ml15">立即购买</text>
+        </view>
+      </view>
+    </view>
+    <view bindtap='clickMore' class='text-center pd20 color_88'>{{more}}</view>
+  </view>
+  <view wx:else class='text-center color_88 pt20'>暂无数据～</view>
+</view>
