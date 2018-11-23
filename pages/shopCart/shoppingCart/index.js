@@ -51,23 +51,81 @@ Page({
   /**
   * 功能函数 *
   */
-  // 设置checkbox 全选或取消全选
-  setAllCheckboxChange(e){
-    console.log(e)
-    this.setData({
-      listState: e.detail
-    });
+  // 去结算页面
+  goBuy() {
+
+    let cartList = this.data.cartList ;
+
+    let CodeAndCount = '';
+
+    // 限制组合包为单个下单
+    let typeNum = 0, typeNum2 = 0;
+
+    for (let item of cartList) {
+
+      if (item.itemType == '2') {
+
+        if (item.itemState) {
+
+          CodeAndCount += CodeAndCount == '' ? `${item.productCode}-${item.num}` : `,${item.productCode}-${item.num}`;
+          typeNum++;
+
+        }
+
+      } else {
+
+        for (let item2 of item.items) {
+
+          if (item2.state) {
+
+            CodeAndCount += CodeAndCount == '' ? `${item2.productCode}-${item2.num}` : `,${item2.productCode}-${item2.num}`;
+            typeNum2++;
+
+          }
+        }
+
+      }
+
+    }
+
+    if (CodeAndCount == '') { wx.showToast({ title: '请选择商品！', icon: 'none' }); return; }
+
+    if (typeNum > 1) { wx.showToast({ title: '组合包只能单独下单！', icon: 'none' }); return; }
+
+    if (typeNum > 0 && typeNum2 > 0) { wx.showToast({ title: '组合包只能单独下单！', icon: 'none' }); return; }
+
+    // 去结算页面
+    this.$router.push({ path: '/submitOrder', query: { productCode: CodeAndCount, sourceType: 'cart' } })
+
   },
+  // 修改商品数量
+  changeNunmber(e){
+
+    let cartList = this.data.cartList;
+    let index1 = e.target.dataset.index1, index2 = e.target.dataset.index2;
+    cartList[index1].items[index2].num = e.detail ;
+
+    this.setData({
+      cartList: cartList
+    });
+
+    this.calculatePrice();
+  },
+
   /*checkbox监听*/
   //商品选择
   //@param index1 购物车大列表下标
-  checkboxChange(index1, index2) {
+  checkboxChange(e) {
+    console.log(e)
+
+    let index1 = e.target.dataset.index1, index2 = e.target.dataset.index2 ;
 
     let cartList = this.data.cartList ;
 
     if (index2 == undefined) {
 
       // 监听商户下所有商品是否选中
+      cartList[index1].itemState = e.detail ;
       let states = cartList[index1].itemState;
 
       for (let i = 0; i < cartList[index1].items.length; i++) {
@@ -77,6 +135,8 @@ Page({
       }
 
     } else {
+
+      cartList[index1].items[index2].state = e.detail ;
 
       // 只有商户下有一个没有被选中，商户的就不选中
       let states = true;
@@ -96,7 +156,7 @@ Page({
     // 所有选项是否全部选中
     let AllStates = true;
 
-    for (let i = 0; i < All.length; i++) {
+    for (let i = 0; i < cartList.length; i++) {
 
       if (cartList[i].itemType == '1') {
 
@@ -123,7 +183,7 @@ Page({
     }
 
     this.setData({
-      cartDate: cartDate,
+      cartList: cartList,
       listState: AllStates
 
     })
@@ -134,32 +194,40 @@ Page({
   },
 
   // 设置checkbox 全选或取消全选
-  setAllCheckboxChange() {
+  setAllCheckboxChange(e) {
 
-    this.listState = !this.cartDate.listState;
+    this.setData({
+      listState: e.detail
+    });
+
+    let cartList = this.data.cartList ;
 
     // 获取全选大列表状态
-    let isAll = this.cartDate.listState;
+    let isAll = this.data.listState;
 
-    let n = this.cartList.length;
+    let n = this.data.cartList.length;
 
     for (let i = 0; i < n; i++) {
 
-      this.cartList[i].itemState = isAll;
+      cartList[i].itemState = isAll;
 
-      if (this.cartList[i].itemType == '1') {
+      if (cartList[i].itemType == '1') {
 
-        for (let x = 0; x < this.cartList[i].items.length; x++) {
+        for (let x = 0; x < cartList[i].items.length; x++) {
 
-          this.cartList[i].items[x].state = isAll;
+          cartList[i].items[x].state = isAll;
 
         }
 
       }
     }
 
+    this.setData({
+      cartList: cartList
+    })
+
     // 计算小计与合计
-    this.calculatePrice();
+    this.calculatePrice()
 
   },
 
@@ -168,53 +236,54 @@ Page({
   calculatePrice() {
 
     //获取商品个数
-    let m = this.cartList.length;
+    let m = this.data.cartList.length;
+    let cartList = this.data.cartList ;
 
     //计算小计
     for (let x = 0; x < m; x++) {
 
-      let n = this.cartList[x].items.length;
+      let n = cartList[x].items.length;
 
-      if (this.cartList[x].itemType == '1') {
+      if (cartList[x].itemType == '1') {
 
         //重置小计
-        this.cartList[x].itemTotal = 0;
+        cartList[x].itemTotal = 0;
 
         for (let i = 0; i < n; i++) {
 
-          let item = this.cartList[x].items[i];
+          let item = cartList[x].items[i];
 
           //判断是否选中
           if (item.state) {
 
-            this.cartList[x].itemTotal += item.num * (item.price * 10000);
+            cartList[x].itemTotal += item.num * (item.price * 10000);
 
           }
 
         }
 
-        this.cartList[x].itemTotal = (this.cartList[x].itemTotal / 10000).toFixed(2);
+        cartList[x].itemTotal = (cartList[x].itemTotal / 10000).toFixed(2);
 
       } else {
 
         //重置小计
-        this.cartList[x].itemTotal = 0;
+        cartList[x].itemTotal = 0;
 
-        if (this.cartList[x].itemState) {
+        if (cartList[x].itemState) {
 
           for (let i = 0; i < n; i++) {
 
-            let item = this.cartList[x].items[i];
+            let item = cartList[x].items[i];
 
             for (let child of item.items) {
 
-              this.cartList[x].itemTotal += child.num * (child.price * 10000);
+              cartList[x].itemTotal += child.num * (child.price * 10000);
 
             }
 
           }
 
-          this.cartList[x].itemTotal = (this.cartList[x].itemTotal / 10000).toFixed(2);
+          cartList[x].itemTotal = (cartList[x].itemTotal / 10000).toFixed(2);
         }
 
       }
@@ -222,20 +291,92 @@ Page({
     }
 
     //重置合计
-    this.cartDate.listTotal = 0;
+    let listTotal = 0;
 
     //计算合计
     for (let i = 0; i < m; i++) {
 
-      let item = this.cartList[i];
+      let item = cartList[i];
 
       //判断是否选中
-      this.cartDate.listTotal += item.itemTotal * 10000;
+      listTotal += item.itemTotal * 10000;
 
     }
 
-    this.cartDate.listTotal = (this.cartDate.listTotal / 10000).toFixed(2);
+    listTotal = (listTotal / 10000).toFixed(2);
 
+    this.setData({
+      cartList: cartList,
+      listTotal: listTotal
+    })
+  },
+
+  //删除组合包商品
+  deleteGroup(e){
+
+    this.setData({
+      cartId: e.target.dataset.cartId
+    })
+
+    wx.showModal({
+      content: '确定删除该商品吗？',
+      success(res) {
+        if (res.confirm) {
+          this.deleteCartItemData();
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  //删除选中商品
+  deleteChoose() {
+
+    //获取商品个数
+    let cartList = this.data.cartList;
+    //购物车商品编码
+    let cartId = '';
+
+    //判断是否有选中
+    for (let x = 0; x < cartList.length; x++) {
+
+      let n = cartList[x].items.length;
+
+      //判断是否选中
+      if (cartList[x].itemType == '2' && cartList[x].itemState) {
+        cartId == '' ? cartId = cartList[x].cartId : cartId += ',' + cartList[x].cartId;
+      } else {
+        for (let i = 0; i < n; i++) {
+          let item = cartList[x].items[i];
+          //判断是否选中
+          if (item.state) {
+            cartId == '' ? cartId = item.cartId : cartId += ',' + item.cartId;
+          }
+        }
+      }
+
+    }
+
+    if (cartId == '') {
+      wx.showToast({ title: '您还没有选择商品！',icon: 'none' })
+      return;
+    }
+
+    this.setData({
+      cartId: cartId
+    })
+
+    wx.showModal({
+      content: '确定删除选中的商品吗？',
+      success(res) {
+        if (res.confirm) {
+          this.deleteCartItemData();
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
 
   /**
@@ -450,46 +591,28 @@ Page({
     wx.hideLoading();
   },
 
-  // 删除购物车商品
-  //@param cartId string 购物车商品编号
-  deleteCartItemData(cartId) {
+  // 删除订单
+  deleteCartItemData() {
 
-    wx.showLoading({ title: '加载中' })
+    let cartId = this.data.cartId ;
 
-    let param = this.$Qs.stringify({ 'recordId': cartId });
+    let that = this;
+    // 接口参数
+    let url = app.GO.api + 'customer/cart/deleteCart';
+    let param = { 'recordId': cartId }
 
-    this.$api.deleteCart(param)
-
-      .then((res) => {
-
+    app.appRequest('post', url, param, {}, (res) => {
         console.log(res)
+        if (res.code == 200) {
 
-        wx.hideLoading();
-
-        if (res.data.code == 200) {
-
-          wx.showToast(res.data.message);
-
-          // 获取购物车列表
-          this.getCartListData();
-
-          this.setAllCheckboxChange();
-
-        } else {
-
-          wx.showToast(res.data.message);
+          wx.showToast({ title: '删除成功' })
+          // 重置数据
+          setTimeout(() => { that.getCartListData(); }, 1000)
 
         }
-
-      })
-      .catch((error) => {
-
-
-        console.log('发生错误！', error);
-
-      });
-
-    this.modelDate.deleteModelValue = false;
+      }, (err) => {
+        console.log('请求错误信息：  ' + err.errMsg);
+    });
 
   },
 

@@ -5,7 +5,7 @@
   <!-- 购物车头部 -->
   <view class="cart_top fixed_top jub_jub line_height100 bg_fff w_100" >
     <view class="pl20 pr20">共4门课程</view>
-    <view class="color_red pl20 pr20">删除选中</view>
+    <view class="color_red pl20 pr20"  bindtap='deleteChoose'>删除选中</view>
   </view>
 
   <!-- 购物车列表 -->
@@ -18,16 +18,18 @@
       <view  wx:if="{{items.itemType == '1'}}">
         <view class="jub_jub pr20 pl20 border_bottom_1px line_height80">
           <view >
-            <van-checkbox value="{{ listState }}" bind:change="setAllCheckboxChange" >{{items.itemTitle}}</van-checkbox>
+            <van-checkbox value="{{ items.itemState }}" bind:change="checkboxChange" 
+              data-index1="{{index1}}" checked-color="#00aa88" >{{items.itemTitle}}</van-checkbox>
           </view>
-          <view class="color_red">删除</view>
+          <view class="color_red" bindtap='deleteChoose'>删除</view>
         </view>
         <!-- 商品 -->
         <view  class="items_list">
           <view class="child_list jub_jub pr20 ml20 border_bottom_1"
            wx:for="{{items.items}}" wx:for-index="index2"  wx:key="index2" wx:for-item="item">
             <view class="pr10" style="height:220rpx;line-height:220rpx;">
-              <van-checkbox ></van-checkbox>
+              <van-checkbox value="{{ item.state }}" bind:change="checkboxChange" 
+                data-index1="{{index1}}" data-index2="{{index2}}"checked-color="#00aa88" ></van-checkbox>
             </view>
             <view  style="width:160rpx;height:220rpx;position:relative;">
               <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
@@ -40,7 +42,7 @@
                 <text class="color_red" style="line-height:40rpx;">￥  {{ item.price }}</text>
                 <!-- 数量加减 -->
                 <view style="position:relative;top:-10rpx;">
-                  <van-stepper value="{{ item.num }}" bind:change="changeNumber" />
+                  <van-stepper value="{{ item.num }}" bind:change="changeNunmber" data-index1="{{index1}}" data-index2="{{index2}}"/>
                 </view>
                 
               </view>
@@ -57,9 +59,10 @@
       <view wx:else >
         <view class="header jub_jub pr20 pl20 border_bottom_1px line_height80">
           <view>
-            <van-checkbox value="{{ listState }}" bind:change="setAllCheckboxChange"  >组合包 {{items.itemTitle}} </van-checkbox>
+            <van-checkbox value="{{ items.itemState }}" bind:change="checkboxChange"
+              data-index1="{{index1}}" checked-color="#00aa88" >组合包 {{items.itemTitle}} </van-checkbox>
           </view>
-          <view class="color_red" bindtap="deleteItem(items.cartId)">删除</view>
+          <view class="color_red"  bindtap='deleteGroup' data-cartId='{{items.cartId}}' >删除</view>
         </view>
         <!-- 平台遍历 -->
         <view wx:for="{{items.items}}" wx:for-index="index2"  wx:key="index2" wx:for-item="list">
