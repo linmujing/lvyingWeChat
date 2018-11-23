@@ -9,5 +9,9 @@
       </view>
       <text class="scroll_line" style="left:{{scrollWidth * scrollIndex}}px"></text>
   </scroll-view>
-  
+  <view wx:for="{{json}}" wx:for-index="i"  wx:key="i" wx:for-item="items" >
+    <view wx:for="{{items.a}}" wx:for-index="i1"  wx:key="i1" wx:for-item="itema" >
+      <view wx:for="{{itema.b}}" wx:for-index="i2"  wx:key="i2" wx:for-item="itemb" >{{itemb}}</view>
+    </view>
+  </view>
 </view>

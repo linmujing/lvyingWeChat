@@ -53,7 +53,7 @@ Page({
   // 获取用户信息
   onGotUserInfo(res){
     console.log(res)
-    // 订单接口参数
+    // 小程序接口参数
     let url = app.GO.api + 'wechat/login/mp/customer/userInfo';
     let param = {
       encryptedData: res.detail.encryptedData,
