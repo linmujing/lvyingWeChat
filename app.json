@@ -1,6 +1,6 @@
 {
   "pages": [
-        
+    "pages/personCenter/goComment/index",
     "pages/shopCart/shoppingCart/index",
     "pages/shopMall/detail/detail",
     "pages/personCenter/personCenter/index",
@@ -12,13 +12,11 @@
     "pages/sort/sort",
     "pages/shopMall/list/list",
     "pages/shopMall/searchList/searchList",
-    "pages/shopMall/index/index",  
+    "pages/shopMall/index/index",
     "pages/shopMall/supplierStore/supplierStore",
     "pages/personCenter/myCourse/index",
-
     "pages/case/scrollList/index"
-
-
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,13 +25,11 @@
     "navigationBarTextStyle": "black",
     "onReachBottomDistance": 50
   },
-
   "usingComponents": {
     "van-button": "/components/dist/button/index",
     "van-checkbox": "/components/dist/checkbox/index",
     "van-stepper": "/components/dist/stepper/index"
   },
-
   "tabBar": {
     "color": "#ccc",
     "selectedColor": "#00AA88",

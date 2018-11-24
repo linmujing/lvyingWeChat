@@ -1,0 +1,28 @@
+<!--pages/personCenter/goComment/index.wxml-->
+<!-- 去评价 -->
+<view>
+  <!-- 商品展示 -->
+  <view  class="child_list jub_jub pr20 pl20 bg_fff">
+    <view  style="width:160rpx;height:220rpx;position:relative;">
+      <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
+        <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}"></image>
+      </view>
+    </view>
+    <view class="child_content"  style="width:520rpx;">
+      <view class="pt30" style="height:130rpx;"> {{child.name}}</view>
+      <view class="jub_jub">
+        <text class="color_red">￥  {{ child.price }}</text>
+        <text class="color_999">X 1</text>
+      </view>
+    </view>
+  </view>
+  <!-- 评论部分 -->
+  <view class="bg_fff">
+    <view class="pl20 mt30 line_height80 border_bottom_1px">
+      店铺评分
+    </view>
+    <view class="pd20">
+      <textarea class="textarea"  bindblur="bindTextAreaBlur" placeholder="自动变高" />
+    </view>
+  </view>
+</view>

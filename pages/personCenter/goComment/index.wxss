@@ -1,0 +1,6 @@
+/* pages/personCenter/goComment/index.wxss */
+.textarea{
+  height: 300rpx;
+  width: 100%;
+  border:1p solid #ccc;
+}
