@@ -7,9 +7,30 @@
   </view>
 </view>
 <!-- 优惠 -->
-<view class='bg_white mt30 pd20 jub_jub_center'>
+<view wx:if='{{cuponList.length>0}}' bindtap='showCoupon' class='bg_white mt30 pd20 jub_jub_center'>
   <view class='ft28 color_666'>优惠</view>
   <view class='color_coupon'>领券 ></view>
+</view>
+<!-- 优惠券 -->
+<view class='modal-box' hidden='{{couponModel}}' catchtouchmove="ture">
+ <view class="modal-body">
+    <view class='modal-mask' bindtap="hideCoupon"></view>
+    <view class="modal-content">
+      <view class='text-right pt20 pr30 bg_white' bindtap="hideCoupon">
+        <icon type="cancel" size="24" color='#666'/>
+      </view>
+      <view wx:for='{{cuponList}}' wx:for-item="item" wx:for-index="i"  wx:key="i"  class='pl30 pr30'>
+       <view bindtap='selectCoupon' data-code='{{item.couponCode}}' data-form='{{item.couponForm}}' class='mb30 pd20 flex_align' style="background: #FFF3E5;color: #F5320D;">
+        <view class='w_70' style='border-right: 1px dashed #EBDFD1'>
+          <view class='oneline_nobreak font_weight ft32'>{{item.couponTitle}}</view>
+          <view class='oneline_nobreak mt15'>{{item.couponDesc}}</view>
+          <view class='oneline_nobreak mt10'>有效期{{item.couponStartTime}} 至 {{item.couponEndTime}}</view>
+        </view>
+        <view class='w_30 text-center ft36'>立即领取</view>
+       </view>
+      </view>
+    </view>
+  </view>
 </view>
 <!-- 提供商 -->
 <view class='bg_white mt30 pd20'>
@@ -29,3 +50,5 @@
   <view class='pd20 ft28'>全程动态管控</view>
   <view class='pd20 ft28'>评价</view>
 </view>
+
+
