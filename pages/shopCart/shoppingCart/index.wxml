@@ -105,7 +105,7 @@
         <view class="ft30" style="line-height:40rpx;">实付金额： <text class="color_red">￥{{listTotal}}</text> </view>
         <view class="ft20 color_aaa" style="line-height:30rpx;">若购买享有优惠，相应金额将在订单结算页面扣减</view>
       </view>
-      <view class="color_fff bg_00aa88 text-center ft30" style="width:180rpx;">去结算</view>
+      <view class="color_fff bg_00aa88 text-center ft30" style="width:180rpx;" bindtap='goBuy'>去结算</view>
     </view>
   </view>
   

@@ -8,7 +8,7 @@ Page({
   data: {
 
     //  可用屏幕高度
-    windowHeight: app.GO.windowHeight - 200 * app.GO.rpxValue,
+    windowHeight: app.GO.windowHeight - 194 * app.GO.rpxValue,
 
     /*购物车数据*/
     // 全部列表状态
@@ -23,19 +23,10 @@ Page({
     // 购物车删除多个商品存值
     cartId: '',
 
-    // 测试
-    num:100,
-
     /*购物车列表参数*/
     pageNo: 1,
     pageSize: 30,
-    dataSize: 0,
 
-    /*删除提示弹框对象*/
-    // 删除类型  删除单个 = a  删除选中 = b
-    deleteType: 'a',
-    // 下标
-    index1: 0,
     
   },
 
@@ -116,8 +107,7 @@ Page({
   //商品选择
   //@param index1 购物车大列表下标
   checkboxChange(e) {
-    console.log(e)
-
+    // console.log(e)
     let index1 = e.target.dataset.index1, index2 = e.target.dataset.index2 ;
 
     let cartList = this.data.cartList ;
@@ -318,11 +308,12 @@ Page({
       cartId: e.target.dataset.cartId
     })
 
+    let that = this;
     wx.showModal({
       content: '确定删除该商品吗？',
       success(res) {
         if (res.confirm) {
-          this.deleteCartItemData();
+          that.deleteCartItemData();
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -367,11 +358,12 @@ Page({
       cartId: cartId
     })
 
+    let that = this;
     wx.showModal({
       content: '确定删除选中的商品吗？',
       success(res) {
         if (res.confirm) {
-          this.deleteCartItemData();
+          that.deleteCartItemData();
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
