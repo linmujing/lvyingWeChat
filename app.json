@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/case/star/index",
+    
     "pages/personCenter/goComment/index",
     "pages/shopCart/shoppingCart/index",
     "pages/shopMall/detail/detail",

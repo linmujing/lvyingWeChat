@@ -8,7 +8,6 @@ Page({
 
     // 评分
     star1: 0,
-    star2: 0
 
   },
 
@@ -21,13 +20,10 @@ Page({
 
   /**
    * 星星评价
-   */ 
+   */
   // 点击星星
-  starClick1(e){
+  starClick1(e) {
     this.setData({ star1: e.target.dataset.index })
-  },
-  starClick2(e) {
-    this.setData({ star2: e.target.dataset.index })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

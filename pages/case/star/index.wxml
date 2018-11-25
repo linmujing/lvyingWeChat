@@ -1,0 +1,9 @@
+<!--pages/case/star/index.wxml-->
+    <view class="pd20 flex bg_fff">
+      <view>描述相符</view>
+      <view class="star_box star_box{{star1}}" >
+        <text class="star-five"  wx:for="12345" data-index="{{item}}" wx:key="{{item}}" 
+          bindtap='starClick1' data-value="star1"> 
+        </text>
+      </view>
+    </view>

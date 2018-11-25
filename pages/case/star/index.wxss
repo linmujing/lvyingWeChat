@@ -1,10 +1,4 @@
-/* pages/personCenter/goComment/index.wxss */
-.textarea{
-  padding: 20rpx;
-  height: 300rpx;
-  width: 100%;
-  border:1px solid #ccc;
-}
+/* pages/case/star/index.wxss */
 
 /* 评星 */
 .star_box .star-five{

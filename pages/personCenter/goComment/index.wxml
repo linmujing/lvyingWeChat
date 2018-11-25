@@ -22,7 +22,23 @@
       店铺评分
     </view>
     <view class="pd20">
-      <textarea class="textarea"  bindblur="bindTextAreaBlur" placeholder="自动变高" />
+      <textarea class="textarea"  bindblur="bindTextAreaBlur" placeholder="" />
+    </view>
+    <view class="pd20 flex">
+      <view>描述相符</view>
+      <view class="star_box star_box{{star1}}" >
+        <text class="star-five"  wx:for="12345" data-index="{{item}}" wx:key="{{item}}" 
+          bindtap='starClick1' data-value="star1"> 
+        </text>
+      </view>
+    </view>
+    <view class="pd20 flex">
+      <view>帮助程度</view>
+      <view class="star_box star_box{{star2}}" >
+        <text class="star-five"  wx:for="12345" data-index="{{item}}" wx:key="{{item}}" 
+        bindtap='starClick2' data-value="star2"> 
+        </text>
+      </view>
     </view>
   </view>
 </view>
