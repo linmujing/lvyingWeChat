@@ -2,6 +2,11 @@
   border-bottom: 2px solid #00AA88;
   color: #00AA88;
 }
+.jt{
+  width: 40rpx;
+  height: 24rpx;
+}
+.bbf4{border-bottom: 1px solid #F4F4F4}
 /* 弹窗样式 */
 .modal-box{
   position:fixed;
