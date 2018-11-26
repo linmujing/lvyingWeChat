@@ -86,7 +86,9 @@ Page({
     if (typeNum > 0 && typeNum2 > 0) { wx.showToast({ title: '组合包只能单独下单！', icon: 'none' }); return; }
 
     // 去结算页面
-    this.$router.push({ path: '/submitOrder', query: { productCode: CodeAndCount, sourceType: 'cart' } })
+    wx.navigateTo({
+      url: '../submitOrder/index?productCode='+ CodeAndCount + '&sourceType=cart'
+    })
 
   },
   // 修改商品数量

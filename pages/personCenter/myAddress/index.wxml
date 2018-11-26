@@ -12,10 +12,16 @@
           <text>{{ items.name }}</text>
           <text>{{ items.phone }}</text>
         </view>
-        <view class="ml20 pt20 pb20 border_bottom_1 color_999 line_height40 ft22">{{items.province.label + items.city.label + items.county.label + items.addressDetail }}</view>
-        <view  class="flex_right_align pl20 pr20 border_bottom_1 line_height80 ft22">
-          <text class="ml40 color_00aa88" data-index="{{i}}" bindtap='aditAddressItem'>编辑</text>
-          <text class="color_aa" data-index="{{i}}" bindtap='deleteAddress'>删除</text>
+        <view class="ml20 pt20 pb20 border_bottom_1 color_999 line_height40 ft22">
+          {{items.province.label + items.city.label + items.county.label + items.addressDetail }}
+        </view>
+        <view  class="jub_jub pl20 pr20 border_bottom_1 line_height80 ft22">
+          <view> <text class="color_red" data-index="{{i}}" wx:if="{{chooseAddress}}" bindtap="chooseItem" >选择地址</text>  </view>
+          <view>
+            <text class="mr40 color_aaa" data-index="{{i}}" bindtap='deleteAddress'>删除</text>
+            <text class="color_00aa88" data-index="{{i}}" bindtap='aditAddressItem'>编辑</text>
+          </view>
+
         </view>
       </view>
 

@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/case/star/index",
-    
-    "pages/personCenter/goComment/index",
     "pages/shopCart/shoppingCart/index",
+    "pages/shopCart/submitOrder/index",
+    "pages/personCenter/checkLogistics/index",
+    "pages/personCenter/goComment/index",
+    
     "pages/shopMall/detail/detail",
     "pages/personCenter/personCenter/index",
     "pages/personCenter/myAddress/index",
@@ -17,7 +18,8 @@
     "pages/shopMall/index/index",
     "pages/shopMall/supplierStore/supplierStore",
     "pages/personCenter/myCourse/index",
-    "pages/case/scrollList/index"
+    "pages/case/scrollList/index",
+    "pages/case/star/index"
     
   ],
   "window": {

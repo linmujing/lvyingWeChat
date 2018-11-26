@@ -20,6 +20,22 @@ Page({
     userHeadUrl: '' ,
     // 视口高度
     windowHeight: '',
+
+    // 查看图片
+    lookimg: null,
+
+  },
+  // 查看图片
+  clickImg(e){
+    console.log(e)
+    this.setData({
+      lookimg: e.target.dataset.imgurl
+    })
+  },
+  closeImg() {
+    this.setData({
+      lookimg: null
+    })
   },
   /**
      * 数据加载
@@ -64,7 +80,8 @@ Page({
             productWxProfileUrl: item.productInfo.productProfileUrl,
             productCode: item.productInfo.productCode,
             productTitle: item.productInfo.productTitle,
-            productOrgPrice: item.productInfo.productOrgPrice,
+            productOrgPrice: item.productPrice,
+            commentPicUrl: item.commentPicUrl
           })
         }
 

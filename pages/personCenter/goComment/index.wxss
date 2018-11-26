@@ -1,9 +1,65 @@
 /* pages/personCenter/goComment/index.wxss */
+/* 评论框 */
 .textarea{
   padding: 20rpx;
   height: 300rpx;
   width: 100%;
+  box-sizing: border-box;
   border:1px solid #ccc;
+}
+/* 提交 */
+.submit_btn{
+  width:300rpx;
+  height:80rpx;
+  line-height:80rpx;
+  border-radius:40rpx;
+  text-align:center;
+  font-size:28rpx;
+  margin: 60rpx  auto;
+  background: #00aa88;
+  color:#fff;
+}
+
+/* 图片上传 */
+.upload_img>view{
+  width:100rpx;
+  height:100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color:#00aa88;
+  border: 1px solid #ccc;
+  margin: 20rpx 0 20rpx 20rpx ;
+  border-radius: 1px;
+  position: relative;
+  box-sizing: border-box;
+}
+.img_box text{
+  position: absolute;
+  top:0;
+  right:0;
+  width: 30rpx;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  background: red;
+  color:#fff;
+
+}
+.click_img text{
+  background:#ccc;
+  position: absolute;
+}
+.click_img .line1{
+  width:50rpx;
+  height:4rpx;
+  top:48rpx;
+  left:24rpx;
+}
+.click_img .line2{
+  width:4rpx;
+  height:50rpx;
+  top:24rpx;
+  left:48rpx;
 }
 
 /* 评星 */

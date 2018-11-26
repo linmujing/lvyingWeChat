@@ -16,12 +16,20 @@
         <view class="pd20" >
             {{items.commentDesc}}
         </view>
+        <view class="pd20"  wx:if="{{items.commentPicUrl}}">
+          <view class="td_block">
+            <text class="img_middle_center border_1" style="display:inline-block;width: 80rpx;height: 80rpx;" >
+              <image style="width: 80rpx;height: 80rpx;" mode="widthFix" src="{{items.commentPicUrl}}" 
+                data-imgurl="{{items.commentPicUrl}}" bindtap="clickImg"></image>
+            </text>
+          </view>
+        </view>
         <view >
             <view class="content jub_jub pl20" style="position:relative;background:rgb(250,250,250)">
                 <view class="item table_block" style="height:220rpx;">
                     <view class="td_block" style="width:30%;">
                         <view class="border_1 img_middle_center" style="display:inline-block;width: 160rpx;height: 160rpx;overflow:hidden;" >
-                            <image  src="{{items.productWxProfileUrl}}" style="width: 160rpx;"  mode='widthFix' alt=""></image>
+                            <image  src="{{items.productWxProfileUrl}}" style="width: 160rpx;"  mode='widthFix'></image>
                         </view>
                     </view>
                     <view class="td_block pl30">
@@ -39,6 +47,15 @@
   <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{commentData.length == 0}}">
       <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
       <view>暂无评价</view>
+  </view>
+
+  <!-- 查看图片 -->
+  <view class="look_img" wx:if="{{lookimg}}" >
+    <view class="img_middle_center" style="height:100%;">
+      <view class="mask" bindtap='closeImg'></view>
+      <image  src="{{lookimg}}" style="width: 100%;z-index:100;"  mode='widthFix' alt=""></image>
+    </view>
+    
   </view>
 </scroll-view>
 

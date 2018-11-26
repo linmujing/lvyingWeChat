@@ -31,13 +31,24 @@ Page({
     // 列表页面(true) 或 新增页面(false)
     pageState: true,
     // 收货地址新增或者编辑
-    addOrAdit: true
+    addOrAdit: true,
+    
+    // 添加地址选择 （判断页面是否由提交订单页跳转过来的） 初始值为false
+    chooseAddress: false,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+
+    // 获取页面状态
+    if(options.value == 'a'){
+      this.setData({ chooseAddress: true })
+    }
+    
     // 获取屏幕高度
     wx.getSystemInfo({
       success: res => {
@@ -47,12 +58,32 @@ Page({
       }
     })
 
+    // 获取地址列表
     this.getData();
   },
 
   /**
   * 业务逻辑
   */ 
+  // 选择地址到提交订单
+  chooseItem(e){
+
+    // 获取需要传给上一页的地址下标
+    let index = e.target.dataset.index ;
+    let Obj = this.data.addressList[index];
+
+    // 获取路由对象
+    let pages = getCurrentPages();
+    let PreviousPage = pages[pages.length - 2]
+    PreviousPage.setData({
+      addressList: Obj
+    })
+    console.log(PreviousPage.data.addressList)
+
+    wx.navigateBack();
+
+  },
+  
   // 地址选择
   bindRegionChange(e){
     this.setData({
@@ -231,10 +262,9 @@ Page({
     // 获取弹框数据
     let data = this.data.addressModelData;
 
-    if (data.county.label == "") { this.$toast('地址填写不完整！'); return; };
-    if (data.name == "") { this.$toast('收件人名不能为空'); return; }
-    if (data.phone == "") { this.$toast('电话号码不能为空'); return; }
-    if (data.addressDetail == "") { this.$toast('地址详情不能为空！'); return; }
+    if (data.name == "") { wx.showToast({ 'title': '收件人名不能为空', 'icon': 'none' }); return; }
+    if (data.phone == "") { wx.showToast({ 'title': '电话号码不能为空', 'icon': 'none' }); return; }
+    if (data.addressDetail == "") { wx.showToast({ 'title': '地址详情不能为空！', 'icon': 'none' }); return; }
 
     // 地址接口参数
     let url = app.GO.api + 'customer/address/saveAddress';

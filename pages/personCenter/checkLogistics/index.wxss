@@ -1,0 +1,15 @@
+/* pages/personCenter/checkLogistics/index.wxss */
+.logistics_item{
+  line-height: 66rpx;
+  color: rgb(102,102,102);
+}
+.logistics_item span{
+  width: 120rpx;
+  padding-right: 14rpx;
+  padding-left: 20rpx;
+  text-align: justify;
+  
+}
+.logistics_item>div{
+  width: 590rpx;
+}
