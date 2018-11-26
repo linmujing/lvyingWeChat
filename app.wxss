@@ -3,6 +3,7 @@
 page{
   font-family: "微软雅黑";
   font-size: 26rpx;
+  color: #333;
   /*font-family: "aril";*/
 }
 
@@ -30,6 +31,9 @@ page {
 }
 .bg_red {
   background-color: red;
+}
+.bg_f5 {
+  background-color: #f5f5f5;
 }
 
 .box_border {
@@ -325,7 +329,7 @@ display:-webkit-box;
   color: #999;
 }
 
-.color_888 {
+.color_888, .color_88 {
   color: #888;
 }
 
@@ -1794,22 +1798,48 @@ display:-webkit-box;
   box-sizing: border-box;
   display: inline-block;
   height: 46rpx;
-  line-height: 46rpx;
+  line-height: 40rpx;
   padding: 0 30rpx;
   background: #00b088;
   border-radius: 25rpx;
   color: #fff;
+  border:1px solid #00b088;
   font-size: 22rpx;
 }
 .btn_warning{
   box-sizing: border-box;
   display: inline-block;
   height:46rpx;
-  line-height: 46rpx;
+  line-height: 40rpx;
   padding: 4rpx 30rpx;
   background: #F09105;
   border-radius: 25rpx;
   color: #fff;
+  border:1px solid #F09105;
+  font-size: 22rpx;
+}
+.btn_gary{
+  box-sizing: border-box;
+  display: inline-block;
+  height:46rpx;
+  line-height: 40rpx;
+  padding: 4rpx 30rpx;
+  background: #999999;
+  border-radius: 25rpx;
+  color: #fff;
+  border:1px solid #999999;
+  font-size: 22rpx;
+}
+.btn_plain{
+  box-sizing: border-box;
+  display: inline-block;
+  height: 46rpx;
+  line-height: 40rpx;
+  padding: 0 30rpx;
+  background: #fff;
+  border-radius: 25rpx;
+  color: #00b088;
+  border:1px solid #00b088;
   font-size: 22rpx;
 }
 
