@@ -33,7 +33,7 @@
   </view>
 </view>
 <!-- 提供商 -->
-<view class='bg_white mt30 pd20'>
+<view wx:if="{{showCourse}}" class='bg_white mt30 pd20'>
   <view class='ft30'>提供商</view>
   <view bindtap='goStore' class='mt10 flex'>
     <image wx:if='merchantInfo.merchantProfileUrl == ""' class="icon140 border_1" src="../../../images/img/falv.png"></image>
@@ -54,61 +54,63 @@
   </view>
 </view>
 <!-- 课程 -->
-<view wx:if='{{curSubTab == 0 || curSubTab == 1}}' class='bg_white mt30'>
-  <view class='ft30 pd20'>全程动态管控系统</view>
-  <!-- 课程目录 -->
-  <view wx:if='{{showCourse}}'>
-    <view wx:if='{{productSection.length > 0}}'>
-      <view class='pd20'>
-        <view wx:for='{{productSection}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class='bg_f5 pd20 mt20 jub_jub_center'>
-          <view class='oneline_nobreak color_666'>{{item.sectionName}}</view>
-          <!-- 视频 -->
-          <view wx:if="{{typeId == 3}}">
-            <view wx:if="{{item.videoStatus == ''}}"></view>
-            <view wx:elif="{{item.videoStatus == 0}}" class="btn_warning text-center">开始播放</view>
-            <view wx:elif="{{item.videoStatus == 1}}" class="btn_warning text-center">试看</view>
-            <view wx:else class="btn_title text-center">立即购买</view>
-          </view>
-          <!-- 音频 -->
-          <view wx:if="{{typeId == 4}}">
-            <view wx:if="{{item.voiceStatus == ''}}"></view>
-            <view wx:elif="{{item.voiceStatus == 0}}" class="btn_warning text-center">开始播放</view>
-            <view wx:elif="{{item.voiceStatus == 1}}" class="btn_warning text-center">试看</view>
-            <view wx:else class="btn_title text-center">立即购买</view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view wx:else class='pd20 text-center color_88'>暂无数据~</view>
-  </view>
-  <!-- 动态管控 -->
-  <view wx:else>
-    <view class='flex_wrab_center pd20'>
-      <view wx:for='{{sectionNav}}' wx:for-item="item" wx:for-index="i"  wx:key="i">
-        <text bindtap='classBtn' data-index='{{i}}' data-sindex='{{item.sectionIndex}}' class="pl20 pr20 {{classCur==i ? 'color_title' :'' }}">{{item.sectionName}}</text>
-        <image wx:if='{{i != (sectionNav.length-1) }}' class="jt" src='../../../images/icon/jt.png'></image>
-      </view>
-    </view>
-    <view wx:if='{{sectionList.length > 0}}'>
-      <view class='pl10 pr20'>
-        <view wx:for='{{sectionList}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class='pd20 bbf4'>
-          <view class='jub_jub_center'>
-            <view class='oneline_nobreak color_666 pl30'>{{item.sectionName}}</view>
-            <view hidden='{{courseBtn}}'>
-              <view bindtap='courseStates' class="btn_gary text-center mr20">查看详情</view>
-              <view class="btn_title text-center">立即购买</view>
+<view wx:if="{{!typeBook}}">
+  <view wx:if='{{curSubTab == 0 || curSubTab == 1}}' class='bg_white mt30'>
+    <view class='ft30 pd20'>全程动态管控系统</view>
+    <!-- 课程目录 -->
+    <view wx:if='{{showCourse}}'>
+      <view wx:if='{{productSection.length > 0}}'>
+        <view class='pd20'>
+          <view wx:for='{{productSection}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class='bg_f5 pd20 mt20 jub_jub_center'>
+            <view class='oneline_nobreak color_666'>{{item.sectionName}}</view>
+            <!-- 视频 -->
+            <view wx:if="{{typeid == 3}}">
+              <view wx:if="{{item.videoStatus == ''}}"></view>
+              <view wx:elif="{{item.videoStatus == 0}}" class="btn_warning text-center">开始播放</view>
+              <view wx:elif="{{item.videoStatus == 1}}" class="btn_warning text-center">试看</view>
+              <view wx:else class="btn_title text-center">立即购买</view>
+            </view>
+            <!-- 音频 -->
+            <view wx:if="{{typeid == 4}}">
+              <view wx:if="{{item.voiceStatus == ''}}"></view>
+              <view wx:elif="{{item.voiceStatus == 0}}" class="btn_warning text-center">开始播放</view>
+              <view wx:elif="{{item.voiceStatus == 1}}" class="btn_warning text-center">试看</view>
+              <view wx:else class="btn_title text-center">立即购买</view>
             </view>
           </view>
-          <view hidden='{{!courseBtn}}' class='mt20'>
-            <view class="btn_plain text-center mr20">视频</view>
-            <view class="btn_plain text-center mr20">音频</view>
-            <view class="btn_plain text-center mr20">文字预览</view>
-            <view wx:if="{{item.docStatus != ''}}" class="btn_plain text-center mr20">下载</view>
+        </view>
+      </view>
+      <view wx:else class='pd20 text-center color_88'>暂无数据~</view>
+    </view>
+    <!-- 动态管控 -->
+    <view wx:else>
+      <view class='flex_wrab_center pd20'>
+        <view wx:for='{{sectionNav}}' wx:for-item="item" wx:for-index="i"  wx:key="i">
+          <text bindtap='classBtn' data-index='{{i}}' data-sindex='{{item.sectionIndex}}' class="pl20 pr20 {{classCur==i ? 'color_title' :'' }}">{{item.sectionName}}</text>
+          <image wx:if='{{i != (sectionNav.length-1) }}' class="jt" src='../../../images/icon/jt.png'></image>
+        </view>
+      </view>
+      <view wx:if='{{sectionList.length > 0}}'>
+        <view class='pl10 pr20'>
+          <view wx:for='{{sectionList}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class='pd20 bbf4'>
+            <view class='jub_jub_center'>
+              <view class='oneline_nobreak color_666 pl30'>{{item.sectionName}}</view>
+              <view hidden='{{courseBtn}}'>
+                <view bindtap='courseStates' class="btn_gary text-center mr20">查看详情</view>
+                <view class="btn_title text-center">立即购买</view>
+              </view>
+            </view>
+            <view hidden='{{!courseBtn}}' class='mt20'>
+              <view class="btn_plain text-center mr20">视频</view>
+              <view class="btn_plain text-center mr20">音频</view>
+              <view class="btn_plain text-center mr20">文字预览</view>
+              <view wx:if="{{item.docStatus != ''}}" class="btn_plain text-center mr20">下载</view>
+            </view>
           </view>
         </view>
       </view>
+      <view wx:else class='pd20 text-center color_88'>暂无数据~</view>
     </view>
-    <view wx:else class='pd20 text-center color_88'>暂无数据~</view>
   </view>
 </view>
 <!-- 评价 -->
@@ -164,7 +166,7 @@
   <view wx:if="{{typeBook}}">
     <view class='ft30 pd20'>热门书籍</view>
     <view class='flex_jub_wrab'>
-      <view wx:for="{{recommendList}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+      <view wx:for="{{recommendList}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_44'>
         <view class="h330 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
         <view class='pl20'>
           <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>

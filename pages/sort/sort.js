@@ -57,9 +57,9 @@ Page({
     var id = e.currentTarget.dataset.id;
     var name = e.currentTarget.dataset.name;
     console.log(name)
-    var typeId = this.data.currentTab + 1
+    var typeid = this.data.currentTab + 1
     wx.navigateTo({
-      url: '../shopMall/list/list?id=' + id + '&name=' + name + '&typeId=' + typeId,
+      url: '../shopMall/list/list?id=' + id + '&name=' + name + '&typeid=' + typeid,
     })
   },
   /**

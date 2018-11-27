@@ -9,8 +9,10 @@ Page({
     detailData: {},
     subTab: ['简介', '全程动态管控系统', '商品评价'],
     curSubTab: 0,
-    typeId: 0,
+    typeid: 0,
     showCourse: false,
+    // 商品属性
+    productProperty: '',
     // 商户信息对象
     merchantInfo: {},
     merchantCode: '',
@@ -46,10 +48,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.getDetailData(options.code)
     this.setData({
       productCode: options.code,
-      typeId: options.typeId
+      typeid: options.typeid
     })
     // this.getDetailData('P154056503511492')
     // this.setData({
@@ -57,6 +60,7 @@ Page({
     //   typeId: 3
     // })
     this.getEvaluateList()
+    this.judgeProperty()
   },
   // 获取详情
   getDetailData(code) {
@@ -91,6 +95,8 @@ Page({
           sectionList: result.productSectionList,
           // 星星评分
           star: result.productScore,
+          // 商品属性
+          productProperty: result.productProperty
         })
       } else {
 
@@ -330,6 +336,64 @@ Page({
       current: arr[index], // 当前显示图片的http链接
       urls: arr // 需要预览的图片http链接列表
     })
+  },
+  // 判断商品属性
+  judgeProperty() {
+    var that = this
+    //@attr 商品属性1-实物，2-音频 3-视频 4-文档 包含多个使用逗号链接
+    if (that.data.typeid == null || that.data.typeid == undefined) {
+      // 如果没有参数 typeid
+      var attr = that.data.productProperty
+      var arr = attr;
+      if (attr.indexOf(',') != -1) { attr = attr.split(',') }
+      if (arr.length > 1 || arr == '4') {
+        that.setData({
+          typeid: 1,
+          showCourse: false
+        })
+      } else {
+        that.setData({
+          showCourse: true
+        })
+        switch (attr) {
+          case '1':
+            that.setData({
+              typeid: 5,
+              typeBook: true,
+              subTab: ['简介', '', '商品评价']
+            })
+            break
+          case '2':
+            that.setData({
+              typeid: 4
+            })
+            break
+          case '3':
+            that.setData({
+              typeid: 3
+            })
+            break
+        }
+      }
+    } else {
+      // 如果有参数typeId
+      var typeid = parseInt(that.data.typeid)
+      switch (typeid) {
+        case 3:
+        case 4:
+          that.setData({
+            showCourse: true
+          })
+          break
+        case 5:
+          that.setData({
+            showCourse: true,
+            typeBook: true,
+            subTab: ['简介', '', '商品评价']
+          })
+          break
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

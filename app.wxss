@@ -524,6 +524,9 @@ display:-webkit-box;
 .w_40 {
   width: 40%;
 }
+.w_44 {
+  width: 44%;
+}
 .w_45 {
   width: 45%;
 }

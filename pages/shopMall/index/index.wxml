@@ -38,15 +38,15 @@
       <view class='color_888' bindtap='toList' data-locat='{{1}}'>更多></view>
     </view>
     <view wx:for="{{videoArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{3}}"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
       <view class='w_60 pl20'>
-        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{3}}">{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
           <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
-          <view class='flex_align color_888' bindtap='toDetail' data-code='{{items.productCode}}'><image class="icon46" src="../../../images/icon/see.png"></image>试看</view>
+          <view class='flex_align color_888' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{3}}"><image class="icon46" src="../../../images/icon/see.png"></image>试看</view>
           <view class='flex'>
             <view class="btn_warning w90 text-center"  bindtap='addCart' data-productcode='{{items.productCode}}'  >
               <image class="icon36" src="../../../images/icon/addCart.png"></image>
@@ -65,15 +65,15 @@
       <view class='color_888' bindtap='toList' data-locat='{{2}}'>更多></view>
     </view>
     <view wx:for="{{musicArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{4}}"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
       <view class='w_60 pl20'>
-        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{4}}">{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
           <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
-          <view class='flex_align color_888' bindtap='toDetail' data-code='{{items.productCode}}'><image class="icon46" src="../../../images/icon/see.png"></image>试听</view>
+          <view class='flex_align color_888' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{4}}"><image class="icon46" src="../../../images/icon/see.png"></image>试听</view>
           <view class='flex'>
             <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
             <text class="btn_title ml15">立即购买</text>
@@ -94,9 +94,9 @@
       <view class='color_888' bindtap='toList' data-locat='{{3}}'>更多></view>
     </view>
     <view wx:for="{{careerArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{1}}"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
       <view class='w_60 pl20'>
-        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{1}}">{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
           <view class='color_888'>{{items.lookCount}}人看过</view>
@@ -116,9 +116,9 @@
       <view class='color_888' bindtap='toList' data-locat='{{4}}'>更多></view>
     </view>
     <view wx:for="{{logicArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
-      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{2}}"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
       <view class='w_60 pl20'>
-        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+        <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{2}}">{{items.productTitle}}</view>
         <view class='mt40 jub_jub flex_align'>
           <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
           <view class='color_888'>{{items.lookCount}}人看过</view>
@@ -137,10 +137,10 @@
       <view class='color_888' bindtap='toList' data-locat='{{5}}'>更多></view>
     </view>
     <view class='flex_jub_wrab'>
-      <view wx:for="{{lvyingArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
-        <view class="h330 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+      <view wx:for="{{lvyingArr}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_44'>
+        <view class="h330 w_100" bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{5}}"><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
         <view class='pl20'>
-          <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+          <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{5}}">{{items.productTitle}}</view>
           <view class='mt40 jub_jub flex_align'>
             <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
             <text class="btn_title ml15">立即购买</text>

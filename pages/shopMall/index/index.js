@@ -176,8 +176,9 @@ Page({
   toDetail(e){
     // console.log(e)
     var code = e.currentTarget.dataset.code;
+    var typeid = e.currentTarget.dataset.typeid;
     wx.navigateTo({
-      url: '../../shopMall/detail/detail?code=' + code,
+      url: '../../shopMall/detail/detail?code=' + code + '&typeid=' + typeid
     })
   },
   // 跳转到列表
@@ -185,51 +186,51 @@ Page({
     // console.log(this.data.pagelocat)
     var locat = e.currentTarget.dataset.locat;
     // console.log(locat)
-    var name,typeId
+    var name,typeid
     switch (this.data.pagelocat){
       case 1:
         switch (locat) {
           case 1:
             name = '视频课程'
-            typeId = 3
+            typeid = 3
             break
           case 2:
             name = '音频课程'
-            typeId = 4
+            typeid = 4
             break
           case 3:
             name = '行业动态管控'
-            typeId = 1
+            typeid = 1
             break
           case 4:
             name = '法律动态管控'
-            typeId = 2
+            typeid = 2
             break
           case 5:
             name = '律瀛商城'
-            typeId = 5
+            typeid = 5
             break
         }
         break
       case 2:
         name = '行业动态管控'
-        typeId = 1
+        typeid = 1
         break
       case 3:
         name = '法律动态管控'
-        typeId = 2
+        typeid = 2
         break
       case 4:
         name = '视频课程'
-        typeId = 3
+        typeid = 3
         break
       case 5:
         name = '音频课程'
-        typeId = 4
+        typeid = 4
         break
     }
     wx.navigateTo({
-      url: '../list/list?id=' + typeId + '&name=' + name + '&typeId=' + typeId
+      url: '../list/list?id=' + typeid + '&name=' + name + '&typeid=' + typeid
     })
   },
   // 搜索

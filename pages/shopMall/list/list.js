@@ -12,7 +12,7 @@ Page({
     ],
     lists: [],
     id: 0,
-    typeId: 0,
+    typeid: 0,
     currentTab: 0,
     count: 0,
     pageSize: 6,
@@ -113,17 +113,17 @@ Page({
     console.log(e)
     var code = e.currentTarget.dataset.code;
     wx.navigateTo({
-      url: '../../shopMall/detail/detail?code=' + code,
+      url: '../../shopMall/detail/detail?code=' + code + '&typeid=' + this.data.typeid
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
+    console.log(options)
     this.setData({
       id: options.id,
-      typeId: options.typeId
+      typeid: options.typeid
     })
     this.setTitle(options.name)
     this.getTabTitle(options.id)

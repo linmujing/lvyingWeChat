@@ -11,7 +11,7 @@
   <!-- 动态管控 -->
   <view class='mt30 bg_white'>
     <block wx:if='{{lists.length>0}}'>
-      <block wx:if='{{typeId==1 || typeId==2}}'>
+      <block wx:if='{{typeid==1 || typeid==2}}'>
         <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
           <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
           <view class='w_60 pl20'>
@@ -27,9 +27,9 @@
           </view>
         </view>
       </block>
-      <block wx:elif='{{typeId==3 || typeId==4}}'>
+      <block wx:elif='{{typeid==3 || typeid==4}}'>
         <view class='flex_jub_wrab'>
-          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_44'>
             <view class="icon300 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
             <view class='pl20'>
               <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
