@@ -7,6 +7,11 @@
   height: 24rpx;
 }
 .bbf4{border-bottom: 1px solid #F4F4F4}
+.richTxt img{width: 100%}
+.icon50{
+  width: 50rpx;
+  height: 50rpx;
+}
 /* 弹窗样式 */
 .modal-box{
   position:fixed;

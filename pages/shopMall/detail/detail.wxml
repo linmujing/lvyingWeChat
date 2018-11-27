@@ -49,7 +49,7 @@
   <view wx:for='{{subTab}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class="pd20 ft28 ft30 {{curSubTab==i ? 'active' :'' }}" bindtap='clickSubTab' data-index='{{i}}'>{{item}}</view>
 </view>
 <view wx:if='{{curSubTab == 0}}'>
-  <view class='bg_white pd20'>
+  <view class='bg_white pd20 richTxt'>
     <rich-text nodes="{{detailData.productDesc}}"></rich-text>
   </view>
 </view>
@@ -117,10 +117,10 @@
     <view>商品评价</view>
     <view class='ml20'>
       <view class='flex'>
-        <block wx:for="{{star}}"> 
+        <block wx:for="{{star}}" wx:for-item="item" wx:for-index="i"  wx:key="i"> 
           <image src='../../../images/icon/star-on.png' class='ico35'></image> 
         </block> 
-        <block wx:for="{{5 - star}}"> 
+        <block wx:for="{{5 - star}}" wx:for-item="item" wx:for-index="i"  wx:key="i"> 
           <image src='../../../images/icon/star-off.png' class='ico35'></image> 
         </block>
       </view>
@@ -129,11 +129,97 @@
   <view class='pd20'>
     <view wx:if='{{evaluateList.length>0}}'>
       <view wx:for='{{evaluateList}}' wx:for-item="item" wx:for-index="i"  wx:key="i">
-        <view>{{item.customerInfo.ciName}}</view>
+        <view class='bbf4 pt20 pb20'>
+          <view class='jub_jub'>
+            <view class='flex_align'>
+              <image wx:if="{{item.customerInfo.ciProfileUrl == null || item.customerInfo.ciProfileUrl == ''}}" src='../../../images/icon/user.png' class='icon80 border_radius_50'></image> 
+              <image wx:else src='{{item.customerInfo.ciProfileUrl}}' class='icon80 border_radius_50'></image> 
+              <view class='ml20'>
+                <view class='oneline_nobreak'>{{item.customerInfo.ciName}}</view>
+                <view class='mt10'>
+                  <block wx:for="{{item.productScore}}" wx:for-item="item" wx:for-index="i" wx:key="i"> 
+                    <image src='../../../images/icon/star-on.png' class='ico35'></image> 
+                  </block> 
+                </view>
+              </view>
+            </view>
+          <view class='color_88'>{{item.createDate}}</view>
+          </view>
+          <view class='mt20'>{{item.commentDesc}}</view>
+          <view wx:if="{{!item.commentPicUrl == ''}}" class='mt20'>
+            <block wx:for="{{util.sub(item.commentPicUrl)}}" wx:for-item="val" wx:for-index="j" wx:key="j">
+              <image src='{{val}}' class='icon80 mr20' bindtap='clickPic' data-index="{{j}}" data-url="{{item.commentPicUrl}}"></image> 
+            </block>
+          </view>
+        </view>
       </view>
+      <view bindtap='seeMore' class='pd20 text-center color_88'>查看更多~</view>
     </view>
     <view wx:else class='pd20 text-center color_88'>暂无评论~</view>
   </view>
 </view>
+<!-- 热门课程 -->
+<view wx:if='{{recommendList.length>0}}' class='bg_white mt30 mb100'>
+  <!--热门书籍-->
+  <view wx:if="{{typeBook}}">
+    <view class='ft30 pd20'>热门书籍</view>
+    <view class='flex_jub_wrab'>
+      <view wx:for="{{recommendList}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+        <view class="h330 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+        <view class='pl20'>
+          <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+          <view class='mt40 jub_jub flex_align'>
+            <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+            <text class="btn_title ml15">立即购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--课程和推荐-->
+  <view wx:else>
+    <view wx:if="{{showCourse}}" class='ft30 pd20'>热门课程</view>
+    <view wx:else class='ft30 pd20'>热门推荐</view>
+    <view>
+      <view wx:for="{{recommendList}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 jub_jub'>
+        <view class="icon300" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
+        <view class='w_60 pl20'>
+          <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
+          <view class='mt40 jub_jub flex_align'>
+            <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
+            <view class='color_888'>{{items.lookCount}}人看过</view>
+          </view>
+          <view class='mt30 jub_jub flex_align'>
+            <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+              <text class="btn_title ml15">立即购买</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 购物车底部 -->
+<view class='fiexD bg_white w_100 flex'>
+  <view class='w_20 text-center border_right1_ee pt5 pb5'>
+    <image src='../../../images/icon/store.png' class='icon46'></image>
+    <view class='color_666 mt5'>店铺</view>
+  </view>
+  <view class='w_20 text-center pt5 pb5'>
+    <image src='../../../images/icon/carta.png' class='icon50'></image>
+    <view class='color_666'>购物车</view>
+  </view>
+  <view class='w_30 bg_warning color_fff flex_juc ft30'>加入购物车</view>
+  <view class='w_30 bg_title color_fff flex_juc ft30'>立即购买</view>
+</view>
+
+
+<!-- 构建页面结构 -->
+<wxs module="util">
+    var sub = function(val) {
+        return val.split(',')
+    }
+    module.exports.sub = sub;
+</wxs>
 
 

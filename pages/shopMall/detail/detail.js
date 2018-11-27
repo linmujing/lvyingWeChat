@@ -35,21 +35,27 @@ Page({
     evaluateList: [],
     eTotal: 0,
     eSize: 3,
+    // 推荐产品
+    recommendList: [],
+    showCourse: false,
+    // 如果是实物
+    typeBook: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getDetailData(options.code)
-    // this.setData({
-    //   productCode: options.code
-    // })
-    this.getDetailData('P154036432807121')
+    this.getDetailData(options.code)
     this.setData({
-      productCode: 'P154036432807121',
-      typeId: 2
+      productCode: options.code,
+      typeId: options.typeId
     })
+    // this.getDetailData('P154056503511492')
+    // this.setData({
+    //   productCode: 'P154056503511492',
+    //   typeId: 3
+    // })
     this.getEvaluateList()
   },
   // 获取详情
@@ -68,8 +74,11 @@ Page({
         that.getMerchantInfo(result.merchantCode)
         // 获取优惠券
         that.getProductCoupon(code, result.merchantCode)
+        //获取推荐产品
+        if (!result.productRecommendCode == '' || !result.productRecommendCode == null) {
+          this.getProductShowCase(result.productRecommendCode)
+        }
         
-        console.log(JSON.parse(result.productSection))
         that.setData({
           detailData: result,
           merchantCode: result.merchantCode,
@@ -121,7 +130,7 @@ Page({
     let url = app.GO.api + 'coupon/info/getCouponList';
     let param = { pageNo: 1, pageSize: 1000, productCode: pcode, merchantCode: mcode };
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         var list = res.content.list
         for(var i=0;i<list.length;i++){
@@ -170,7 +179,7 @@ Page({
     let url = app.GO.api + 'customer/coupon/addCoupon';
     let param = { ciCode: ciCode, couponCode: code, couponForm: form };
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         wx.showToast({ title: '领取成功', icon: 'success' })
         // 刷新优惠券列表
@@ -209,7 +218,7 @@ Page({
     this.getSectionIndex()
   },
   // 获取动态管控列表
-  getSectionIndex(pcode, mcode) {
+  getSectionIndex() {
     var that = this;
     // 接口参数
     let url = app.GO.api + 'product/info/getProductSectionIndexContent';
@@ -228,13 +237,13 @@ Page({
     });
   },
   // 获取评价列表
-  getEvaluateList(pcode, mcode) {
+  getEvaluateList() {
     var that = this;
     // 接口参数
     let url = app.GO.api + 'order/comment/getProductCommentList';
     let param = { pageNo: 1, pageSize: that.data.eSize, productSectionIndex: that.data.sectionIndex, productCode: that.data.productCode };
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
         that.setData({
           evaluateList: res.content.list,
@@ -249,6 +258,57 @@ Page({
       console.log('请求错误信息：  ' + err.errMsg);
     });
   },
+  // 查看更多评价
+  seeMore() {
+    var that = this
+    var pageSize = that.data.eSize
+    if (pageSize >= that.data.eTotal) {
+      wx.showToast({ title: '已经没有更多了', icon: 'none' })
+      return
+    }
+    pageSize += 3
+    that.setData({
+      eSize: pageSize
+    })
+    that.getEvaluateList()
+  },
+  //获取推荐列表或猜你喜欢
+  getProductShowCase(code) {
+    var that = this;
+    // 接口参数
+    let url = app.GO.api + 'product/info/getShowCaseProduct';
+    let param = { productCode: code };
+    app.appRequest('post', url, param, {}, (res) => {
+      console.log(res)
+      if (res.code == 200) {
+        var result = []
+        if (res.content.length > 2) {
+          for (var i = 0; i < 2; i++) {
+            result.push(res.content[i])
+          }
+        } else {
+          result = res.content
+        }
+        that.setData({
+          recommendList: result
+        })
+      } else {
+
+        wx.showToast({ title: res.message, icon: 'none' })
+
+      }
+    }, (err) => {
+      console.log('请求错误信息：  ' + err.errMsg);
+    });
+  },
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code,
+    })
+  },
   //时间格式化函数，此处仅针对yyyy-MM-dd hh:mm:ss 的格式进行格式化
   dateFormat: function (time) {
     var date = new Date(time);
@@ -260,6 +320,16 @@ Page({
     var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     // 拼接
     return year + "-" + month + "-" + day;
+  },
+  // 图片预览
+  clickPic(e){
+    var url = e.currentTarget.dataset.url;
+    var index = e.currentTarget.dataset.index;
+    var arr = url.split(',')
+    wx.previewImage({
+      current: arr[index], // 当前显示图片的http链接
+      urls: arr // 需要预览的图片http链接列表
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
