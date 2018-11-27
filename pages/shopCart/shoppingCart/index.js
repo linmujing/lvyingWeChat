@@ -36,7 +36,13 @@ Page({
   onLoad: function (options) {
 
      // 获取购物车列表
-    this.getCartListData()
+    this.getCartListData();
+
+    // 设置监听购物车状态
+    this.setData({
+      cartState: wx.getStorageSync('cartState')
+    })
+    
 
   },
   /**
@@ -336,7 +342,7 @@ Page({
 
       let n = cartList[x].items.length;
 
-      //判断是否选中
+      //判断是否选中 先判断组合包是否选中 
       if (cartList[x].itemType == '2' && cartList[x].itemState) {
         cartId == '' ? cartId = cartList[x].cartId : cartId += ',' + cartList[x].cartId;
       } else {
@@ -386,107 +392,105 @@ Page({
     let param = { 'pageNo': this.data.pageNo, 'pageSize': this.data.pageSize, 'ciCode': app.GO.recommend_customer_id };
 
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
 
-        if (res.code == 200) {
+        let data = res.content.list;
+        // 购物车商品商户分类
+        let arr = [], merchantArr = [];
 
-          let data = res.content.list;
-          // 购物车商品商户分类
-          let arr = [], merchantArr = [];
+        for (let i = 0; i < data.length; i++) {
 
-          for (let i = 0; i < data.length; i++) {
+          // productType 为1时，该商品为单个商品  为2时，商品为组合包
+          if (data[i].productInfo.productType == '1') {
 
-            // productType 为1时，该商品为单个商品  为2时，商品为组合包
-            if (data[i].productInfo.productType == '1') {
+            // 单个商品
+            let index = merchantArr.indexOf(data[i].merchantInfo.merchantNm);
 
-              // 单个商品
-              let index = merchantArr.indexOf(data[i].merchantInfo.merchantNm);
+            if (index == -1) {
 
-              if (index == -1) {
+              merchantArr.push(data[i].merchantInfo.merchantNm);
 
-                merchantArr.push(data[i].merchantInfo.merchantNm);
-
-                // 压入商户
-                arr.push({
-                  id: '',
-                  itemType: data[i].productInfo.productType,
-                  itemState: false,
-                  itemTitle: data[i].merchantInfo.merchantNm,
-                  itemTotal: '0.00',
-                  //小列表
-                  items: []
-                });
-
-                index = merchantArr.indexOf(data[i].merchantInfo.merchantNm);
-
-                // 压入商品
-                arr[index].items.push({
-                  cartId: data[i].id,
-                  productCode: data[i].productCode,
-                  state: false,
-                  price: data[i].productInfo.productPrice,
-                  num: 1,//data[i].productInfo.productNum,
-                  productTitle: data[i].productInfo.productTitle,
-                  describe: data[i].productInfo.productDesc,
-                  imgSrc: data[i].productInfo.productProfileUrl
-                })
-
-              } else {
-
-                // 压入商品
-                arr[index].items.push({
-                  cartId: data[i].id,
-                  productCode: data[i].productCode,
-                  state: false,
-                  price: data[i].productInfo.productPrice,
-                  num: 1,//data[i].productCount,
-                  productTitle: data[i].productInfo.productTitle,
-                  describe: data[i].productInfo.productDesc,
-                  imgSrc: data[i].productInfo.productProfileUrl
-                })
-
-              }
-
-            } else {
-
-              // 组合包商品
-              merchantArr.push(data[i].productCode);
-
-              // 压入组合包
+              // 压入商户
               arr.push({
                 id: '',
-                cartId: data[i].id,
                 itemType: data[i].productInfo.productType,
                 itemState: false,
-                itemTitle: data[i].productInfo.productTitle,
-                itemTotal: 0.00,
-                productCode: data[i].productCode,
-                num: 1,
-                productSubCode: data[i].productInfo.productSubCode,
+                itemTitle: data[i].merchantInfo.merchantNm,
+                itemTotal: '0.00',
                 //小列表
                 items: []
               });
 
+              index = merchantArr.indexOf(data[i].merchantInfo.merchantNm);
+
+              // 压入商品
+              arr[index].items.push({
+                cartId: data[i].id,
+                productCode: data[i].productCode,
+                state: false,
+                price: data[i].productInfo.productPrice,
+                num: 1,//data[i].productInfo.productNum,
+                productTitle: data[i].productInfo.productTitle,
+                describe: data[i].productInfo.productDesc,
+                imgSrc: data[i].productInfo.productProfileUrl
+              })
+
+            } else {
+
+              // 压入商品
+              arr[index].items.push({
+                cartId: data[i].id,
+                productCode: data[i].productCode,
+                state: false,
+                price: data[i].productInfo.productPrice,
+                num: 1,//data[i].productCount,
+                productTitle: data[i].productInfo.productTitle,
+                describe: data[i].productInfo.productDesc,
+                imgSrc: data[i].productInfo.productProfileUrl
+              })
+
             }
+
+          } else {
+
+            // 组合包商品
+            merchantArr.push(data[i].productCode);
+
+            // 压入组合包
+            arr.push({
+              id: '',
+              cartId: data[i].id,
+              itemType: data[i].productInfo.productType,
+              itemState: false,
+              itemTitle: data[i].productInfo.productTitle,
+              itemTotal: 0.00,
+              productCode: data[i].productCode,
+              num: 1,
+              productSubCode: data[i].productInfo.productSubCode,
+              //小列表
+              items: []
+            });
 
           }
 
-          // 压入到购物车
-          this.setData({
-            cartList : arr
-          })
-          // 购物车二次加载 获取组合包的值
-          this.getGroupCartItem()
-
-        } else {
-
-          wx.hideLoading();
-          wx.showToast(res.data.message);
-
         }
 
+        // 压入到购物车
+        this.setData({
+          cartList : arr
+        })
+        // 购物车二次加载 获取组合包的值
+        this.getGroupCartItem()
+
+      } else {
+
+        wx.hideLoading();
+        wx.showToast({title: res.data.message, icon: 'none'});
+
       }
+
+
     }, (err) => {
       console.log('请求错误信息：  ' + err.errMsg);
     });
@@ -572,7 +576,7 @@ Page({
 
           } else {
 
-            wx.showToast(res.data.message);
+            wx.showToast({title: res.data.message, icon: 'none'});
 
           }
           
@@ -621,6 +625,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    // 监听购物车数据变化
+    var cartState = wx.getStorageSync('cartState')
+    if (cartState != this.data.cartState){
+      this.setData({
+        cartList: []
+      })
+      // 重新加载页面数据
+      this.getCartListData();
+    }
+    this.setData({
+      cartState: cartState
+    })  
 
   },
 

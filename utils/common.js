@@ -1,9 +1,5 @@
 /* 
- * --湖南大业创展科技有限公司--
- * title:通用配置文件
- * author:空哥 277409083@qq.com 15307319570
- * createDate: 2017/2/28
- * PS: git版本管理需要忽略此文件
+ * title:公共配置文件
  */
 
 /*
@@ -22,7 +18,17 @@ function defaultTemplate(){
 
 } 
 
+/*
+ * @:title:设置购物车初始状态 0
+ * @ 当状态发生改变 刷新购物车
+ */
+function setCartState()
+{
+  wx.setStorageSync('cartState', 0)
+}
+
 
 module.exports = {
-  defaultBranch: defaultBranch
+  defaultBranch: defaultBranch,
+  setCartState: setCartState
 }

@@ -247,7 +247,7 @@ Page({
   },
   // 立即购买  data-productCode="{{商品编码}}"  bindtap="goBuy"
   goBuy(e) {
-    let productCode = e.currentTarget.dataset.productcode || e.target.dataset.productcode;
+    let productCode = e.currentTarget.dataset.productcode ;
     wx.navigateTo({
       url: '../../shopCart/submitOrder/index?productCode=' + productCode 
     })
@@ -260,7 +260,7 @@ Page({
     // 接口参数
     let url = app.GO.api + 'customer/cart/addCart';
     let param = {
-      productCode: e.target.dataset.productCode , // 商品编码 
+      productCode: e.currentTarget.dataset.productcode , // 商品编码 
       productCount: 1, //加入购物车数量
       ciCode: app.GO.recommend_customer_id, //获取用户code
     };
@@ -269,6 +269,10 @@ Page({
       // console.log(res)
       wx.hideLoading()
       wx.showToast({ title: res.message , icon:'none' })
+      // 添加商品成功时, 修改购物车状态
+      let cartState = wx.getStorageSync('cartState');
+      wx.setStorageSync('cartState', parseFloat(cartState) + 1)
+
     }, (err) => {
       console.log('请求错误信息：  ' + err.errMsg);
     })

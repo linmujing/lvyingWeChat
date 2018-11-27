@@ -1,40 +1,8 @@
-<!--pages/shopCart/submitOrder/index.wxml-->
-<!-- 提交订单 -->
+<!--pages/shopCart/confirmOrder/index.wxml-->
+<!-- 提交支付 -->
 <view>
-  <!-- 地址 -->
-  <view class="color_000 bg_fff line_height60 mt30" wx:if="{{hasStore}}">
-    <view wx:if="{{addressList.addressCode != ''}}">
-      <view class="pl20 pt20 pr20 jub_jub">
-        <view><text  class="color_999">收货人：</text>  <text>{{addressList.name}}</text></view>
-        <view><text  class="color_999">电话号码：</text> <text>{{addressList.phone}}</text></view>
-      </view>
-      <view class="pl20 pr20 pb20 jub_jub">
-          <view class="color_999" style="width:160rpx;">收货地址：</view>
-          <view >
-            <input type="text" disabled="false" style="border:0;width:550rpx;line-height:60rpx;height:60rpx;"
-            value="{{addressList.province.label + addressList.city.label + addressList.county.label  + addressList.addressDetail}}" />
-          </view>
-      </view>
-      <view class="pr20 pl20 jub_jub line_height90 border_top_1px" >
-        <view style="width:200rpx;">修改收货地址</view>
-        <view> 
-          <image style="width:30rpx;height:30rpx;position:relative;top:6rpx;" mode='widthFix' src="../../../images/icon/address_add.png" bindtap="goAddress">
-          </image>
-        </view>
-      </view>
-    </view>
 
-    <view wx:else class="pr20 pl20 jub_jub line_height90 border_top_1px" >
-      <view style="width:200rpx;">添加收货地址</view>
-      <view> 
-        <image style="width:30rpx;height:30rpx;position:relative;top:6rpx;" mode='widthFix' src="../../../images/icon/address_add.png" alt="" bindtap="goAddress">
-        </image>
-      </view>
-    </view>
-  </view>
-
-<!-- 购物车列表 -->
-
+<!-- 商品列表 -->
   <view class="cart_list"  style="padding-bottom: 100rpx;">
 
     <view  class="bg_fff"  wx:for="{{cartList}}" wx:for-index="index1"  wx:key="index1" wx:for-item="items"  >
@@ -53,15 +21,12 @@
                 <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{item.imgSrc}}"></image>
               </view>
             </view>
-            <view class="child_content"  style="width:520rpx;">
+            <view class="child_content"  style="width:480rpx;">
               <view class="pt30" style="height:130rpx;"> {{item.productTitle}}</view>
               <view class="jub_jub" >
                 <text class="color_red" style="line-height:40rpx;">￥  {{ item.price }}</text>
-                <!-- 数量加减 -->
-                <view style="position:relative;top:-10rpx;">
-                  <van-stepper value="{{ item.num }}" bind:change="changeNunmber" data-index1="{{index1}}" data-index2="{{index2}}"/>
-                </view>
-                
+                <!-- 数量 -->
+                <view class="color_999" >X {{item.num}} </view>
               </view>
             </view>
           </view>
@@ -118,7 +83,9 @@
       </view>
     </view>
     <view >
-      <view class="submit_btn bg_00aa88" bindtap="submitOrderClick">确认订单</view>
+      <view class="submit_btn bg_00aa88" bindtap="submitOrderClick">去支付</view>
     </view>
   </view>
+
 </view>
+

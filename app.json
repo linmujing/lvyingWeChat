@@ -1,10 +1,11 @@
 {
   "pages": [
+    
     "pages/shopCart/shoppingCart/index",
+    "pages/shopCart/confirmOrder/index",
     "pages/shopCart/submitOrder/index",
     "pages/personCenter/checkLogistics/index",
     "pages/personCenter/goComment/index",
-    
     "pages/shopMall/detail/detail",
     "pages/personCenter/personCenter/index",
     "pages/personCenter/myAddress/index",
@@ -37,7 +38,7 @@
   "tabBar": {
     "color": "#ccc",
     "selectedColor": "#00AA88",
-    "borderStyle": "white",
+    "borderStyle": "#f5f5f5",
     "backgroundColor": "#fff",
     "list": [
       {
