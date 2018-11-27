@@ -37,7 +37,7 @@ Page({
   onLoad: function (options) {
     // 获取用户地址列表
     this.getAddressData();
-
+    console.log(options)
     // 获取页面数据来源
     if (options.productCode.split(',').length == 1) {
 
