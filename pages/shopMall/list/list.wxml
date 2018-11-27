@@ -47,7 +47,7 @@
       </block>
       <block wx:else>
         <view class='flex_jub_wrab'>
-          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_45'>
+          <view wx:for="{{lists}}" wx:for-item="items" wx:for-index="i"  wx:key="i" class='pd20 w_44'>
             <view class="h330 w_100" bindtap='toDetail' data-code='{{items.productCode}}'><image class="w_100 h_100" src="{{items.productProfileUrl}}"></image></view>
             <view class='pl20'>
               <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>

@@ -1,5 +1,5 @@
 <view class='bg_white'>
-  <image class="w_100" src="{{detailData.productProfileUrl}}"></image>
+  <image class="w_100 h280" src="{{detailData.productProfileUrl}}"></image>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
     <view class='ft34 color_title'>￥{{detailData.productOrgPrice}}</view>
@@ -12,7 +12,7 @@
   <view class='color_coupon'>领券 ></view>
 </view>
 <!-- 优惠券 -->
-<view class='modal-box' hidden='{{couponModel}}' catchtouchmove="ture">
+<view class='modal-box z_index100' hidden='{{couponModel}}' catchtouchmove="ture">
  <view class="modal-body">
     <view class='modal-mask' bindtap="hideCoupon"></view>
     <view class="modal-content">
@@ -202,7 +202,7 @@
 </view>
 
 <!-- 购物车底部 -->
-<view class='fiexD bg_white w_100 flex'>
+<view class='fiexD bg_white w_100 flex z_index90'>
   <view class='w_20 text-center border_right1_ee pt5 pb5'>
     <image src='../../../images/icon/store.png' class='icon46'></image>
     <view class='color_666 mt5'>店铺</view>
