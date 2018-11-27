@@ -1,8 +1,6 @@
 /* 
  * --湖南大业创展科技有限公司--
  * title:常用公共函数库
- * author:空哥 277409083@qq.com 15307319570
- * createDate: 2017/2/28
  */
 var md5 = require('md5.js')
 

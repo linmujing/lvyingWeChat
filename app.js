@@ -33,7 +33,7 @@ App({
     windowHeight:0,         /* 当前设备的屏幕高 */
     windowWidth:0,          /* 当前设备的屏幕宽 */
     rpxValue: '',           /* rpx真实值 */
-    recommend_customer_id: 'C154044832616974' /*用户id*/
+    recommend_customer_id: 'C154329572847933' /*用户id*/
 
   },
   
@@ -52,6 +52,8 @@ App({
         this.GO.img_path = this.config.debug.img_path;
     }
 
+    // 首次进入初始化购物车状态
+    common.setCartState();
 
     /*获取系统信息 包括手机型号 像素比*/ 
     var res = wx.getSystemInfoSync()

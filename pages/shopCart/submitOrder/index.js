@@ -27,6 +27,9 @@ Page({
       county: { value: '', label: '' },
       addressDetail: '',
     },
+
+    // 是否存在实物商品
+    hasStore: false ,
     
 
   },
@@ -38,15 +41,18 @@ Page({
     // 获取用户地址列表
     this.getAddressData();
 
+    // 判断是否为从购物车来的商品
+    if (options.sourceType = 'cart'){
+      this.setData({
+        sourceType : 'cart'
+      })
+    }
+  
     // 获取页面数据来源
     if (options.productCode.split(',').length == 1) {
-
       this.getProductDetailData(options.productCode);
-
     } else {
-
       this.getProductCartData(options.productCode);
-
     }
   },
 
@@ -102,6 +108,7 @@ Page({
         listTotal += item.itemTotal * 10000;
 
       }
+      listTotal = (listTotal / 10000).toFixed(2);
 
     } else {
 
@@ -161,7 +168,7 @@ Page({
     };
 
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
 
         let data = res.content.list;
@@ -198,8 +205,8 @@ Page({
   /*订单提交 生成订单*/
   submitOrderClick() {
 
-    if (this.data.addressList.addressCode == '') {
-      wx.showToast({title: "请先填写好订单地址！"});
+    if (this.data.hasStore && this.data.addressList.addressCode == '') {
+      wx.showToast({title: "请先填写好订单地址！", icon: 'none'});
       return;
     }
 
@@ -213,12 +220,17 @@ Page({
     app.appRequest('post', url, param, {}, (res) => {
       console.log(res)
       if (res.code == 200) {
+
+        // 创建订单成功时, 修改购物车状态
+        let cartState = wx.getStorageSync('cartState') ; 
+        wx.setStorageSync('cartState', parseFloat(cartState)+1 )
+
         // 去结算页面
         wx.navigateTo({
-          // url: '../../personCenter/myAddress/index?orderCode=' + res.content 
+          url: '../confirmOrder/index?orderCode=' + res.content 
         })
       } else {
-        wx.showToast({title: res.data.message});
+        wx.showToast({title: res.data.message, icon: 'none'});
       }
       wx.hideLoading()
     }, (err) => {
@@ -230,10 +242,11 @@ Page({
   getOrderParam() {
 
     let productCodeAndCount = '';
+    let cartList = this.data.cartList ;
 
     if (!this.isGroup) {
 
-      for (let lists of this.cartDate.cartList) {
+      for (let lists of cartList) {
 
         for (let items of lists.items) {
 
@@ -244,17 +257,22 @@ Page({
       }
     } else {
 
-      productCodeAndCount = this.cartDate.cartList[0].productCode + '-' + this.cartDate.cartList[0].num;
+      productCodeAndCount = cartList[0].productCode + '-' + cartList[0].num;
 
     }
 
+    // 如果没有实物商品，则不需要写地址
+    let addressCode = this.data.hasStore ? this.data.addressList.addressCode : '';
+
+    // orderForm 下单入口 0-购物车 1-非购物车
+    // orderSource 订单来源 1 - PC商城 2 - 公众号 3 - 小程序
     let param = {
       ciCode: app.GO.recommend_customer_id, //获取用户code,
       ciName: app.GO.customer_name, //获取用户name
-      orderSource: 2,
+      orderSource: 3,
       orderForm: this.data.sourceType != 'cart' ? 1 : 0,
       productCodeAndCount: productCodeAndCount,
-      addressCode: this.data.addressList.addressCode,
+      addressCode: addressCode,
     }
 
     return param;
@@ -289,6 +307,13 @@ Page({
 
         let data = res.content, arr = [];
 
+        // productProperty为1时，商品存在实物，实物才有地址选择
+        if (data.productProperty.indexOf('1') != -1) {
+          this.setData({
+            hasStore: true
+          }) ;
+        }
+
         // 单个商品
         if (data.productType != '2') {
 
@@ -310,8 +335,8 @@ Page({
             productCode: data.productCode,
             state: false,
             price: data.productPrice,
-            num: cartNun,
-            name: data.productName,
+            num: parseFloat(cartNun),
+            productTitle: data.productTitle,
             describe: data.productDesc,
             imgSrc: data.productProfileUrl
           })
@@ -327,7 +352,7 @@ Page({
             itemTitle: data.productTitle,
             itemTotal: 0.00,
             productCode: data.productCode,
-            num: cartNun,
+            num: parseFloat(cartNun),
             productSubCode: data.productSubCode,
             //小列表
             items: []
@@ -354,7 +379,7 @@ Page({
       } else {
 
         wx.hideLoading()
-        wx.showToast({title: res.data.message});
+        wx.showToast({title: res.data.message, icon: 'none'});
 
       }
       console.log(this.data.cartList)
@@ -394,6 +419,13 @@ Page({
         for (let i = 0; i < Data.length; i++) {
 
           let child = Data[i];
+
+          // productProperty为1时，商品存在实物，实物才有地址选择
+          if (child.productProperty.indexOf('1') != -1) {
+            this.setData({
+              hasStore: true
+            })
+          }
 
           let childIndex = merchantArr2.indexOf(child.merchantCode);
 
@@ -445,7 +477,7 @@ Page({
 
       } else {
 
-        wx.showToast({title: res.data.message});
+        wx.showToast({title: res.data.message, icon: 'none'});
 
       }
 
@@ -483,6 +515,13 @@ Page({
             let arr2 = [], merchantArr2 = [];
 
             for (let child of Data) {
+
+              // productProperty为1时，商品存在实物，实物才有地址选择
+              if (child.productProperty.indexOf('1') != -1) {
+                this.setData({
+                  hasStore: true
+                });
+              }
 
               let childIndex = merchantArr2.indexOf(child.merchantCode);
 
@@ -537,7 +576,7 @@ Page({
           } else {
 
             wx.hideLoading()
-            wx.showToast({title: res.data.message});
+            wx.showToast({title: res.data.message, icon: 'none'});
 
           }
 

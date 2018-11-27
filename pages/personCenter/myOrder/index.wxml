@@ -62,13 +62,13 @@
           <!-- 去支付 待支付 -->
           <view wx:if="{{--items.orderStatus == 0}}"> 
             <text class="btn_default mr20" data-orderCode="{{items.orderCode}}" bindtap='cancelOrderItem'>取消支付</text>
-            <text class="btn_title">去支付</text>
+            <text class="btn_title" data-orderCode="{{items.orderCode}}" bindtap='goPay'>去支付</text>
           </view>
 
           <!-- 重新购买 交易取消或交易关闭 -->
           <view wx:if="{{items.orderStatus == 4 || items.orderStatus == 5 }}"> 
             <text class="btn_default mr20" data-orderCode="{{items.orderCode}}" bindtap='deleteOrderItem'>删除订单</text>
-            <text class="btn_title">重新购买</text>
+            <text class="btn_title" data-orderCode="{{items.orderCode}}" bindtap='againBuy'>重新购买</text>
           </view>
 
           <!-- 评价(0)/换货(1)/查看物流(2) -->

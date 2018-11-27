@@ -100,6 +100,44 @@ Page({
   goComment(orderCode, productCode) {
     ({ path: '/myOrder/goComment', query: { orderCode, productCode } })
   },
+  // 去支付
+  goPay(e){
+    wx.navigateTo({
+      url: '../../shopCart/confirmOrder/index?orderCode=' + e.target.dataset.orderCode
+    })
+  },
+  // 重新购买
+  againBuy(e){
+    var codestr = this.returnCode(e.target.dataset.orderCode);
+    wx.navigateTo({
+      url: '../../shopCart/submitOrder/index?orderCode=' + codestr
+    })
+  },
+  // 重新购买 获取返回订单商品编码
+  // @param code string 获取当前点击的订单单号
+  returnCode(code) {
+
+    let codeStr = '';
+    let orderList = this.data.orderList;
+
+    for (let lists of orderList) {
+
+      if (code == lists.orderCode) {
+
+        for (let items of lists.orderItem) {
+
+          for (let childs of items.childItem) {
+
+            codeStr = codeStr == '' ? childs.productCode + '-1' : ',' + childs.productCode + '-1';
+
+          }
+        }
+      }
+    }
+
+    return codeStr;
+  },
+
 
   /**
   * 数据加载
