@@ -385,7 +385,7 @@ Page({
   // 获取购物车列表
   getCartListData() {
 
-    wx.showLoading({ title: '加载中' })
+   wx.showLoading({ title: '加载中', mask: true })
 
     // 购物车接口参数
     let url = app.GO.api + 'customer/cart/getCartList';

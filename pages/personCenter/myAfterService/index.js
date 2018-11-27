@@ -84,7 +84,7 @@ Page({
       return;
     }
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 课程接口参数
     let url = app.GO.api + 'order/product/getOrderProductList';

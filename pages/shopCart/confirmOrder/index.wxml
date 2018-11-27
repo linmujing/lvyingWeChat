@@ -71,9 +71,22 @@
 
         </view>
       </view>
-      
+    </view>
+    <view class="items_total jub_jub pl20 pr20 line_height90 border_top_1px color_999 bg_fff">
+        <view >减免</view>
+        <view >{{discount}}</view>
+    </view>
+    <view class="items_total jub_jub pl20 pr20  line_height90 border_top_1px color_999 bg_fff" style="margin-bottom:30rpx ;">
+        <view >优惠券</view>
+        <view class="color_00aa88"  bindtap='openCoupon'>{{couponName}}</view>
+    </view>
+    <!-- 配送方式 -->
+    <view class="items_total jub_jub pl20 pr20 bg_fff line_height90 color_999 bg_fff" style="margin-bottom:30rpx ;"  wx:if="{{hasStore}}">
+        <view >配送方式</view>
+        <view >快递免邮</view>
     </view>
   </view>
+
 
   <!-- 提交订单 -->
   <view class="submit_cart pl20 jub_jub bg_fff ft30" >
@@ -86,6 +99,29 @@
       <view class="submit_btn bg_00aa88" bindtap="submitOrderClick">去支付</view>
     </view>
   </view>
+
+  <!-- 优惠券弹框 -->
+  <view class="coupon-box {{ showList ? 'coupon-box-active' : '' }}">
+    <!-- 优惠券列表 -->
+    <view class="coupon-list" >
+      <view class="coupon-item jub_jub {{ chosenCoupon == index1 ? 'active' : ''}}"  
+        wx:for="{{coupons}}" wx:for-index="index1"  wx:key="index1"  wx:if="{{coupons.length > 0}}" >
+        <view class="left">
+          <view>￥<text class="ft40" style="color:#FF4444">{{item.value}}</text></view>
+          <view class="color_999 ft20">满{{item.originCondition}}元可用</view>
+        </view>
+        <view class="right">
+          <view class="ft30 mb20">{{item.name}}</view>
+          <view class="color_999 ft20">有效期时间：{{item.startAt}}-{{item.endAt}}</view>
+        </view>
+        <view class="click_bg" data-index="{{index1}}" data-couponcode="{{item.couponCode}}" bindtap="changeCoupon"></view>
+      </view>
+      <view wx:if="{{cartList.length == 0}}" style="padding:100px 0;text-align:center;">暂无可用优惠券</view>
+    </view>
+    <!-- 关闭优惠券弹框 -->
+    <view class="coupon-box-close" bindtap='closeCoupon'>关闭</view>
+  </view>
+
 
 </view>
 

@@ -93,7 +93,7 @@
 
     </view>
 
-    <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{courseData.length == 0}}">
+    <view style="padding-top:300rpx; text-align:center; color:#999;" wx:if="{{orderList.length == 0}}">
         <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
         <view>暂无订单</view>
     </view>

@@ -1,5 +1,5 @@
 /* pages/shopCart/confirmOrder/index.wxss */
-/* 提交购物车 */  
+/* 结算订单 */  
 .submit_cart{
   position: fixed;
   z-index: 999;
@@ -17,4 +17,73 @@
 }
 .submit_cart .submit_total{
   text-align: right;
+}
+
+/* 优惠券列表 */
+.coupon-box{
+  position: fixed;
+  width:100%;
+  height:100%;
+  bottom:-100%;
+  z-index: 1000;
+  background: rgba(0,0,0,0.5);
+  transition: 0.5s;
+}
+.coupon-box-active{
+  bottom: 0%;
+}
+.coupon-box-close{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width:100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #fff;
+  color:red;
+  border: 1px solid #ccc;
+}
+.coupon-list{
+  position: absolute;
+  bottom: 90rpx;
+  height: 80%;
+  overflow: auto;
+  width:100%;
+  background: #f4f4f4;
+}
+.coupon-item{
+  position: relative;
+  box-sizing: border-box;
+  width: 94%;
+  height:180rpx;
+  margin-left:3%;
+  border: 1px solid #ccc;
+  background:#fff;
+  border-radius: 4px;
+  margin-top: 20rpx;
+  display: table;
+}
+.coupon-item.active{
+    border: 1px solid #f44;
+}
+.coupon-item .left,.coupon-item .right{
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+.coupon-item .left,.coupon-item .right{
+  width: 30%;
+  text-align: center;
+}
+.coupon-item .right{
+  width: 65%;
+  text-align: left;
+}
+.click_bg{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:100
 }

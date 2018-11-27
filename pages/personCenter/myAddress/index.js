@@ -166,7 +166,7 @@ Page({
   // 获取我的地址数据 （上拉加载更多）
   getData() {
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 地址接口参数
     let url = app.GO.api + 'customer/address/getAddressList';
@@ -257,7 +257,7 @@ Page({
   },
   // 新增地址
   addAddressData() {
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 获取弹框数据
     let data = this.data.addressModelData;

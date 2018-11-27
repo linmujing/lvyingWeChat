@@ -116,9 +116,9 @@ Page({
     });
   },
 
-  // 新增地址
+  // 新增
   addCommentData() {
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 地址接口参数
     let url = app.GO.api + 'order/comment/addComment';

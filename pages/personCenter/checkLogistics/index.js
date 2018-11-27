@@ -43,6 +43,9 @@ Page({
 
   // 获取商品物流
   checkLogistics() {
+
+    wx.showLoading({ title: '加载中', mask: true })
+
     let that = this;
     // 接口参数
     let url = app.GO.api + 'order/track/getOrderTrack';
@@ -68,6 +71,7 @@ Page({
           logisticsData: logisticsData
         })
       }
+      wx:wx.hideLoading()
     }, (err) => {
       console.log('请求错误信息：  ' + err.errMsg);
     });

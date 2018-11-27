@@ -6,6 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 高度
+    windowHeight: 0,
+
     // 总价格
     listTotal: 0.00,
     // 商品列表
@@ -13,6 +16,8 @@ Page({
     // 总价格
     listTotal: 0.00,
     allTotal: 0.00,
+    // 优惠价格
+    discount:'',
 
     // 订单编号
     orderCode: '',
@@ -30,7 +35,7 @@ Page({
  * 生命周期函数--监听页面加载
  */
   onLoad: function (options) {
-
+    
     this.setData({
       orderCode: options.orderCode
     })
@@ -75,12 +80,47 @@ Page({
     wx.hideLoading()
 
   },  
+  // 优惠计算
+  discountPrice(){
+    let discount = (parseFloat(this.data.allTotal) - parseFloat(this.data.listTotal)).toFixed(2) ;
+    this.setData({
+      discount: discount
+    })
+  },
+
+  /* 优惠券 */
+  // 打开优惠券
+  openCoupon(){
+    // 没有优惠券禁止弹出
+    if ( this.data.coupons.length == 0){
+      return 
+    }
+    this.setData({
+      showList: true
+    })
+  },
+  // 关闭优惠券
+  closeCoupon() {
+    this.setData({
+      showList: false
+    })
+  },
+  // 选择优惠券
+  changeCoupon(e){
+    this.setData({
+      chosenCoupon: e.target.dataset.index,
+      couponCode: e.target.dataset.couponcode
+    })
+    this.closeCoupon();
+    this.getOrderCouponTotal();
+
+  },
 
   /**数据**/
   // 获取订单详情商品数据
   getOrderProduct() {
 
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
 
     // 接口参数
     let url = app.GO.api + 'order/product/getOrderProductList';
@@ -161,7 +201,7 @@ Page({
         this.getOrderCoupon();
 
       } else {
-          wx.showToast({title: res.data.message, icon: 'none'});
+          wx.showToast({title: res.message, icon: 'none'});
       }
 
       wx.hideLoading();
@@ -185,8 +225,10 @@ Page({
           listTotal: (res.content.orderPayAmount).toFixed(2) ,
           allTotal: (res.content.orderPayAmount).toFixed(2)
         })
+        // 计算优惠金额
+        this.discountPrice()
       } else {
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
       }
     }, (err) => {
       console.log('请求错误信息：  ' + err.errMsg);
@@ -206,26 +248,27 @@ Page({
         for (let item of data) {
 
           arr.push({
-            id: item.couponCode,
+            couponCode: item.couponCode,
             available: 1,
             discount: 0,
-            denominations: item.couponInfo.couponValuePrice * 100,
-            originCondition: item.couponInfo.couponDoorPrice * 100,
+            denominations: item.couponInfo.couponValuePrice ,
+            originCondition: item.couponInfo.couponDoorPrice ,
             reason: '',
-            value: item.couponInfo.couponValuePrice * 100,
+            value: item.couponInfo.couponValuePrice ,
             name: item.couponInfo.couponTitle,
-            startAt: new Date(item.couponInfo.couponStartTime).getTime() / 1000,
-            endAt: new Date(item.couponInfo.couponEndTime).getTime() / 1000
+            startAt: item.couponInfo.couponStartTime,
+            endAt: item.couponInfo.couponEndTime
           })
         }
 
         this.setData({
           coupons : arr,
-          couponName: arr.length == 0 ? '没有可用优惠券' : ''
+          couponName: arr.length == 0 ? '没有可用优惠券' : '请选择'
         })
+        console.log(arr)
 
       } else {
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
       }
 
     }, (err) => {
@@ -237,7 +280,7 @@ Page({
   getOrderCouponTotal() {
     // 接口参数
     let url = app.GO.api + 'order/info/getOrderCouponAmount';
-    let param = { 'couponCode': this.data.couponCode, 'orderCode': this.data.orderCode, 'orderAmount': this.data.listTotal}
+    let param = { 'couponCode': this.data.couponCode, 'orderCode': this.data.orderCode, 'orderAmount': this.data.allTotal}
 
     app.appRequest('post', url, param, {}, (res) => {
       console.log(res)
@@ -247,8 +290,12 @@ Page({
           listTotal: (res.content.orderPayAmount).toFixed(2),
           couponName: this.data.coupons[this.data.chosenCoupon].name
         })
+      }else{
+        this.setData({
+          chosenCoupon: -1
+        })
       }
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
     }, (err) => {
       console.log('请求错误信息：  ' + err.errMsg);
     });

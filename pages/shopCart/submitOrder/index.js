@@ -210,7 +210,7 @@ Page({
       return;
     }
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 接口参数
     let url = app.GO.api + 'order/info/addOrderInfo';
@@ -293,7 +293,7 @@ Page({
 
     }
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 接口参数
     let url = app.GO.api + 'product/info/getProductInfo';
@@ -399,7 +399,7 @@ Page({
       codeStr += codeStr == '' ? item.split('-')[0] : ',' + item.split('-')[0];
     }
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 接口参数
     let url = app.GO.api + 'product/info/getShowCaseProduct';

@@ -103,12 +103,12 @@ Page({
   // 去支付
   goPay(e){
     wx.navigateTo({
-      url: '../../shopCart/confirmOrder/index?orderCode=' + e.target.dataset.orderCode
+      url: '../../shopCart/confirmOrder/index?orderCode=' + e.target.dataset.ordercode
     })
   },
   // 重新购买
   againBuy(e){
-    var codestr = this.returnCode(e.target.dataset.orderCode);
+    var codestr = this.returnCode(e.target.dataset.ordercode);
     wx.navigateTo({
       url: '../../shopCart/submitOrder/index?orderCode=' + codestr
     })
@@ -152,7 +152,7 @@ Page({
       return;
     }
 
-    wx.showLoading({ title: '加载中' })
+    wx.showLoading({ title: '加载中', mask: true })
 
     // 订单接口参数
     let url = app.GO.api + 'order/info/getOrderList';
@@ -265,6 +265,9 @@ Page({
         for (let item of this.data.orderList) { orderList.push(item) }
 
         orderList = orderList.concat(arr);
+
+        // 没有任何订单终止执行
+        if (orderList.length == 0){ return }
 
         // 数据全部加载完成
         if (orderList.length >= pageData.total) {
