@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+    "pages/shopMall/index/index",
     "pages/shopCart/shoppingCart/index",
     "pages/shopCart/confirmOrder/index",
     "pages/shopCart/submitOrder/index",
@@ -16,7 +16,8 @@
     "pages/sort/sort",
     "pages/shopMall/list/list",
     "pages/shopMall/searchList/searchList",
-    "pages/shopMall/index/index",
+    "pages/shopMall/viewPlayer/viewPlayer",
+    
     "pages/shopMall/supplierStore/supplierStore",
     "pages/personCenter/myCourse/index",
     "pages/case/scrollList/index",

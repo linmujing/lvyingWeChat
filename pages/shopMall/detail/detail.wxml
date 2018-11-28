@@ -1,5 +1,17 @@
 <view class='bg_white'>
-  <image class="w_100 h280" src="{{detailData.productProfileUrl}}"></image>
+  <!-- 视频 -->
+  <view style='position:relative'>
+    <view wx:if="{{typeid == 3}}">
+      <view wx:if='{{showVideo}}' class='container' style='position:relative'>
+        <view class='video-box'>
+          <video id='myVideo'   src='{{source}}' objectFit='fill' ></video>
+        </view>
+      </view>
+      <view wx:else>
+        <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
+      </view>
+    </view>
+  </view>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
     <view class='ft34 color_title'>￥{{detailData.productOrgPrice}}</view>
@@ -66,8 +78,8 @@
             <!-- 视频 -->
             <view wx:if="{{typeid == 3}}">
               <view wx:if="{{item.videoStatus == ''}}"></view>
-              <view wx:elif="{{item.videoStatus == 0}}" class="btn_warning text-center">开始播放</view>
-              <view wx:elif="{{item.videoStatus == 1}}" class="btn_warning text-center">试看</view>
+              <view wx:elif="{{item.videoStatus == 0}}" bindtap='toView' class="btn_warning text-center">开始播放</view>
+              <view wx:elif="{{item.videoStatus == 1}}" data-index='{{index}}' data-item='{{item}}' bindtap='btn_play' class="btn_warning text-center">试看</view>
               <view wx:else class="btn_title text-center">立即购买</view>
             </view>
             <!-- 音频 -->

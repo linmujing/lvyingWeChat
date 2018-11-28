@@ -42,12 +42,18 @@ Page({
     showCourse: false,
     // 如果是实物
     typeBook: false,
+    // 视频
+    showVideo: false,
+    controls: false,
+    isPlay: true,
+    currentPlay: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.myVideo = wx.createVideoContext('myVideo')
     console.log(options)
     this.getDetailData(options.code)
     this.setData({
@@ -394,6 +400,47 @@ Page({
           break
       }
     }
+  },
+  // 点击开始播放 跳转到查看视频
+  toView(){
+    wx.navigateTo({
+      url: '../../shopMall/viewPlayer/viewPlayer?code=' + this.data.productCode + '&typeid=' + this.data.typeid
+    })
+  },
+  /**
+      * 点击开始播放视频
+      */
+  btn_play: function (e) {
+    var that = this
+    var index = e.currentTarget.dataset.index;
+    var item = e.currentTarget.dataset.item;
+    if (item.videoUrl == '') {
+      wx.showToast({ title: '对不起，课程' + item.sectionName + '暂无数据！', icon: 'none' })
+      return false;
+    }
+    that.setData({
+      source: item.videoUrl,
+      isPlay: true,
+      showVideo: true
+    })
+    setTimeout(() => {
+      if (that.data.isPlay) {
+        that.myVideo.play();
+        that.data.isPlay = false;
+      } else {
+        that.myVideo.pause();
+        that.data.isPlay = true;
+      }
+    }, 300)
+    // 试看时间
+    setTimeout(function () { 
+      that.myVideo.pause()
+      that.myVideo.seek(0)
+      wx.showToast({ title: '请购买后再继续观看~', icon: 'none' })
+      that.setData({
+        showVideo: false
+      })
+    }, 60000);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

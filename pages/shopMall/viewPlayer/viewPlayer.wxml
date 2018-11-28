@@ -1,0 +1,26 @@
+<!--pages/shopMall/viewPlayer/viewPlayer.wxml-->
+<view class='container'>
+      <view class='video-box'>
+            <video id='player'   src='{{source}}' objectFit='fill' ></video>
+      </view>
+      <view> 
+            <view class='sub-title'>
+                   <text class='chapter'>第一章 </text>
+                  <text class='chapter-name'>入职管理</text>
+            </view>
+            <view>
+                 <block  wx:for='{{productSection}}' wx:key='{{index}}'>
+                         <view  class='item'>
+                              <view>
+                                    <text class='number'>{{index+1}}</text>
+                                    <text>{{item.sectionName}}</text>
+                              </view>
+                              <view>
+                                    <!-- <text>{{item.time}}</text> -->
+                                    <button data-index='{{index}}' bindtap='btn_play'>开始播放</button>
+                              </view>
+                         </view>
+                 </block>  
+            </view>
+      </view>
+</view>
