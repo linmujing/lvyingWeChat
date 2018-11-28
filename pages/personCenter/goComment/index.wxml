@@ -9,7 +9,7 @@
       </view>
     </view>
     <view class="child_content"  style="width:520rpx;">
-      <view class="pt30" style="height:130rpx;"> {{productName}}</view>
+      <view class="pt30" style="height:130rpx;"> {{productTitle}}</view>
       <view class="jub_jub">
         <text class="color_red">￥  {{ productPrice }}</text>
         <text class="color_999">X 1</text>

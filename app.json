@@ -1,13 +1,13 @@
 {
   "pages": [
-    
+    "pages/personCenter/personCenter/index",
     "pages/shopCart/shoppingCart/index",
     "pages/shopCart/confirmOrder/index",
     "pages/shopCart/submitOrder/index",
     "pages/personCenter/checkLogistics/index",
     "pages/personCenter/goComment/index",
     "pages/shopMall/detail/detail",
-    "pages/personCenter/personCenter/index",
+    
     "pages/personCenter/myAddress/index",
     "pages/personCenter/myOrder/index",
     "pages/personCenter/myAfterService/index",

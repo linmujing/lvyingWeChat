@@ -11,7 +11,7 @@ Page({
 
     // 商品信息
     productPrice: '',
-    productName: '',
+    productTitle: '',
     productProfileUrl: '',
 
     // 订单参数
@@ -93,7 +93,7 @@ Page({
       if (res.code == 200) {
         that.setData({
           productPrice: data.productPrice,
-          productName: data.productName,
+          productTitle: data.productTitle,
           productProfileUrl: data.productProfileUrl
         })
       }

@@ -35,6 +35,17 @@ Page({
       finished: false
     },
 
+    /*一个订单里可能存在多个商品需要评论，或者存在多个需要物流配送的商品 需要以弹框的形式展示*/
+    // 商品弹框开关
+    showList: false ,
+    // 商品弹框数据
+    productList: [],
+    // 弹框订单状态
+    productOrderState: 0,
+    // 弹框类型
+    productType: 0,
+    
+
   },
 
   /**
@@ -83,23 +94,6 @@ Page({
     this.getData();
 
   },
-  /* 物流 */
-  // 查看物流
-  // @param orderCode string 获取当前点击的订单单号
-  // @param trackNo string 获取当前点击的子订单运单单号
-  // @param productCode string 商品编号
-  // @param orderMerchantCode string 订单子订单号
-  checkLogistics(orderCode, orderMerchantCode, trackNo, productCode) {
-    ({ path: '/myOrder/checkLogistics', query: { orderCode, orderMerchantCode, trackNo, productCode } })
-  },
-
-  /* 评论 */
-  // 去评论
-  // @param orderCode string 获取当前点击的订单子单号
-  // @param productCode string 获取当前点击的商品编号
-  goComment(orderCode, productCode) {
-    ({ path: '/myOrder/goComment', query: { orderCode, productCode } })
-  },
   // 去支付
   goPay(e){
     wx.navigateTo({
@@ -138,6 +132,101 @@ Page({
     return codeStr;
   },
 
+  /* 商品弹框 */
+  // 开关
+  toggleList() {
+    this.setData({
+      showList: !this.data.showList
+    })
+  },
+  //待评价 打开弹框
+  checkOrder(e){
+     
+    let orderList = this.data.orderList;
+    // 订单下标
+    let index = e.target.dataset.index;
+    // 按钮类型 <!-- 评价(a)/换货(b)/查看物流(c) -->
+    let productType = e.target.dataset.producttype;
+    // 当前订单状态
+    let productOrderState = orderList[index].orderStatus2;
+    let productList = [];
+    console.log(productType)
+    switch (productType) {
+      case 'a':
+        // 组合包评论只能针对某一个组合包评论  
+        // isCombination (string, optional): 是否是组合包 0- 不是 1-是 
+        if ( orderList[index].isCombination == 0) {
+          for (let item of  orderList[index].orderItem) {
+            for (let child of item.childItem) {
+              // if( child.commetStatus == '0' ){
+               productList.push(child);
+              // }
+            }
+          }
+        } else {
+          // 组合包评价
+          wx.navigateTo({
+            url: '../../personCenter/goComment/index?orderCode=' + orderList[index].orderCode + '&productCode=' + orderList[index].orderItem[0].childItem[0].productcode
+          })
+          this.goComment(orderCode,  orderList[index].orderItem[0].childItem.productCode)
+        }
+
+        break;
+      case 'b':
+        for (let item of  orderList[index].orderItem) {
+          for (let child of item.childItem) {
+            if (child.productProperty == '1') {
+               productList.push(child);
+            }
+          }
+        }
+        break;
+      case 'c':
+        for (let item of  orderList[index].orderItem) {
+          for (let child of item.childItem) {
+            if (child.productProperty == '1') {
+               productList.push(child);
+            }
+          }
+        }
+        break;
+    }
+
+    this.setData({
+      productList: productList,
+      productType: productType,
+      productOrderState: productOrderState,
+
+    })
+
+    this.toggleList(); 
+
+  },
+  /* 物流 */
+  // 查看物流
+  // @param orderCode string 获取当前点击的订单单号
+  // @param trackNo string 获取当前点击的子订单运单单号
+  // @param productCode string 商品编号
+  // @param orderMerchantCode string 订单子订单号
+  goLogistics(e) {
+    let index = e.target.dataset.index;
+    let productList = this.data.productList;
+    wx.navigateTo({
+      url: '../../personCenter/checkLogistics/index?orderCode=' + productList[index].orderCode + '&productCode=' + productList[index].productCode + '&trackNo=' + productList[index].trackNo + '&orderMerchantCode=' + productList[index].orderMerchantCode
+    })
+  },
+
+  /* 评论 */
+  // 去评论
+  // @param orderCode string 获取当前点击的订单子单号
+  // @param productCode string 获取当前点击的商品编号
+  goComment(e) {
+    let index = e.target.dataset.index;
+    let productList = this.data.productList ;
+    wx.navigateTo({
+      url: '../../personCenter/goComment/index?orderCode=' + productList[index].orderCode + '&productCode=' + productList[index].productCode
+    })
+  },
 
   /**
   * 数据加载
@@ -366,13 +455,14 @@ Page({
   // @param orderCode string 获取当前点击的订单单号
   // @param productCode string 获取当前点击的商品编号
   productChange(e) {
-
+    let index = e.target.dataset.index;
+    let productList = this.data.productList;
     let that = this;
     let url = app.GO.api + 'order/product/orderProductExchange';
     let param = {
       'ciCode': app.GO.recommend_customer_id, //获取用户code
-      'orderCode': e.target.dataset.ordercode,
-      'productCode': e.target.dataset.productCode,
+      'orderCode': productList[index].orderCode,
+      'productCode': productList[index].productCode,
     };
 
     app.appRequest('post', url, param, {}, (res) => {
