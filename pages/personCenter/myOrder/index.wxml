@@ -74,16 +74,17 @@
           <!-- 评价(0)/换货(1)/查看物流(2) -->
           <view wx:if="{{ items.returnLogisticsShow || items.returnCommentShow }}">
 
-              <!-- 换货 只要是实质商品都有换货-->
-              <text class="btn_default mr20" data-orderCode="{{items.orderCode}}" 
-              wx:if="{{ items.returnLogisticsShow }}" bindtap='cancelOrderItem'>查看换货</text>
-
               <!-- 评价 普通商品交易成功，每个都有评价-->
-              <text class="btn_default mr20" data-orderCode="{{items.orderCode}}" 
-              wx:if="{{ items.returnCommentShow }}" bindtap='cancelOrderItem'>待评价</text>
+              <text class="btn_default mr20" data-producttype="a" data-index="{{index}}" 
+              wx:if="{{ items.returnCommentShow }}" bindtap='checkOrder'>待评价</text>
+
+              <!-- 换货 只要是实质商品都有换货-->
+              <text class="btn_default mr20" data-producttype="b" data-index="{{index}}" 
+              wx:if="{{ items.returnLogisticsShow }}" bindtap='checkOrder'>查看换货</text>
 
                <!-- 物流 只要是实质商品都有物流 (orderCode, trackNo, productProfileUrl, productPirce, productNun)-->
-              <text class="btn_default" wx:if="{{ items.returnLogisticsShow }}">查看物流</text>
+              <text class="btn_default" data-producttype="c" data-index="{{index}}" 
+              wx:if="{{ items.returnLogisticsShow }}"   bindtap="checkOrder" >查看物流</text>
 
           </view>
 
@@ -97,6 +98,55 @@
         <image style="width:250rpx;" mode='widthFix' src="../../../images/image/not_have.png" alt=""></image>
         <view>暂无订单</view>
     </view>
+
   </scroll-view>
+
+    <!-- 商品弹框 -->
+  <view class="coupon-box {{ showList ? 'coupon-box-active' : '' }}">
+    <!-- 优惠券列表 -->
+    <view class="coupon-list" >
+      <view class="bg_fff" wx:for="{{ productList }}" wx:for-index="index"  wx:key="index" wx:for-item="child" >
+        <!-- 商品列表 -->
+        <view class="child_list jub_jub pr20 ml20 border_bottom_1" >
+          <view  style="width:160rpx;height:220rpx;position:relative;">
+            <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
+              <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}"></image>
+            </view>
+          </view>
+          <view class="child_content"  style="width:520rpx;">
+            <view class="pt30" style="height:130rpx;"> {{child.name}}</view>
+            <view class="jub_jub">
+              <text class="color_red">￥  {{ child.price }}</text>
+              <text class="color_999">X {{child.num}}</text>
+            </view>
+          </view>
+        </view>
+        <!-- 订单操作 -->
+        <view class="jub_jub line_height80 pr20 pl20">
+          <view class="color_666"> {{ orderType[ productOrderState ].text }} </view>
+          <!-- 评价(a)/换货(b)/查看物流(c) -->
+          <view wx:if="{{ productType != 0}}">
+
+              <!-- 评价 普通商品交易成功，每个都有评价-->
+              <text class="btn_default mr20" data-index="{{index}}" 
+              wx:if="{{ productType == 'a' }}" bindtap='goComment'>去评价</text>
+
+              <!-- 换货 只要是实质商品都有换货-->
+              <text class="btn_default mr20" data-index="{{index}}" 
+              wx:if="{{  productType == 'b' && child.isExchange == 0 }}" bindtap='productChange'>换货</text>
+              <text class="btn_default mr20" data-index="{{index}}" 
+              wx:if="{{  productType == 'b' && child.isExchange != 0 }}"  >{{child.isExchange == 1 ? '换货申请中' : '换货已同意'}}</text>
+
+              <!-- 物流 只要是实质商品都有物流 (orderCode, trackNo, productProfileUrl, productPirce, productNun)-->
+              <text class="btn_default" data-index="{{index}}" 
+              wx:if="{{  productType == 'c' }}"   bindtap="goLogistics" >查看物流</text>
+
+            </view>
+          </view>
+        </view>
+      </view>
+    <!-- 关闭优惠券弹框 -->
+    <view class="coupon-box-close" bindtap='toggleList'>关闭</view>
+  </view>
 </view>
 
