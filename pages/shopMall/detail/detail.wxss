@@ -1,3 +1,4 @@
+img{width: 100%}
 .active{
   border-bottom: 2px solid #00AA88;
   color: #00AA88;

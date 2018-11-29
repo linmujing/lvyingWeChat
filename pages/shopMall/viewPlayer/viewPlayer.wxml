@@ -1,5 +1,5 @@
 <!--pages/shopMall/viewPlayer/viewPlayer.wxml-->
-<view class='container'>
+<view wx:if='{{typeid==3}}' class='container'>
       <view class='video-box'>
             <video id='player'   src='{{source}}' objectFit='fill' ></video>
       </view>
@@ -22,7 +22,7 @@
                                         <text style="width: 4rpx;height: 20rpx;background: #fff;display: inline-block;" class='mr5'></text>
                                         <text style="width: 4rpx;height: 30rpx;background: #fff;display: inline-block;"></text>
                                       </view>
-                                      <button wx:else data-index='{{index}}' bindtap='btn_play'>开始播放</button>
+                                      <button wx:else data-index='{{index}}' bindtap='btn_playVideo'>开始播放</button>
                                     </view>
                                     <view wx:else></view>
                               </view>
@@ -30,4 +30,67 @@
                  </block>  
             </view>
       </view>
+</view>
+<view wx:elif='{{typeid==4}}'>
+  <view class='container'>
+      <view class='audio'>
+            <image class='bg' src='{{detailData.productProfileUrl}}' />
+            <!-- <image  clsss='poster' src='' /> -->
+            <view class='control-process flex_align'>
+              <view class=''>
+                <image mode="widthFix" src="{{ is_play ? '../../../images/icon/pause.png' : '../../../images/icon/play.png'}}" class="icon-list" bindtap="audio_play"></image>
+              </view>
+              <view class='w_85 flex_align'>
+                    <slider class="slider" 
+                          bindchange="hanle_slider_change" 
+                          bindtouchstart="handle_slider_move_start" 
+                          bindtouchend="handle_slider_move_end" 
+                          min="0" 
+                          block-size="16" 
+                          max="{{slider_max}}" 
+                          activeColor="#fff" 
+                          backgroundColor="rgba(255,255,255,.3)" 
+                          value="{{slider_value}}"
+                    />
+                    <view class='color_fff'>{{current_process}}/{{total_process}}</view>
+            </view>
+            <!-- <view class='audio_name'>
+                    <text>{{audioName}}</text>
+            </view> -->
+              <!-- <view class="icon-list"> -->
+                    <!-- <image bindtap="prev" mode="widthFix" src="{{'../../../images/icon/prev.png'}}" class="audio-icon"></image> -->
+                    <!-- <image mode="widthFix" src="{{ is_play ? '../../../images/icon/pause.jpg' : '../../../images/icon/play.png'}}" class="audio-icon audio-play" bindtap="audio_play"></image> -->
+                    <!-- <image bindtap="next" mode="widthFix" src="{{ '../../../images/icon/next.png'}}" class="audio-icon"></image> -->
+                    <!-- <image  mode="widthFix" class="" src="{{is_loop ? '../../../images/icon/cycle.png':  '/images/6.jpg'}}" bindtap="play_loop"></image> -->
+              <!-- </view> -->
+            </view>
+      </view>
+      <view> 
+            <!-- <view class='sub-title'>
+                   <text class='chapter'>第一章 </text>
+                  <text class='chapter-name'>入职管理</text>
+            </view> -->
+            <view>
+                 <block  wx:for='{{productSection}}' wx:key='{{index}}'>
+                         <view  class='item'>
+                              <view>
+                                    <text class='number'>{{index+1}}</text>
+                                    <text>{{item.sectionName}}</text>
+                              </view>
+                              <view>
+                                    <view wx:if="{{item.voiceStatus == '0'}}">
+                                      <view wx:if='{{currentPlay == index}}' class='btn_warning mr30'>
+                                        <text style="width: 4rpx;height: 10rpx;background: #fff;display: inline-block;" class='mr5'></text>
+                                        <text style="width: 4rpx;height: 20rpx;background: #fff;display: inline-block;" class='mr5'></text>
+                                        <text style="width: 4rpx;height: 30rpx;background: #fff;display: inline-block;"></text>
+                                      </view>
+                                      <button wx:else data-index='{{index}}' bindtap='btn_playAudio'>开始播放</button>
+                                    </view>
+                                    <view wx:else></view>
+                              </view>
+                         </view>
+                 </block>  
+            </view>
+      </view>
+</view>
 </view>

@@ -60,10 +60,10 @@ Page({
       productCode: options.code,
       typeid: options.typeid
     })
-    // this.getDetailData('P154056503511492')
+    // this.getDetailData('P154063897036570')
     // this.setData({
-    //   productCode: 'P154056503511492',
-    //   typeId: 3
+    //   productCode: 'P154063897036570',
+    //   typeid: 4
     // })
     this.getEvaluateList()
     this.judgeProperty()
