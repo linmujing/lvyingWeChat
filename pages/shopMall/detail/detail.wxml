@@ -78,7 +78,7 @@
             <!-- 视频 -->
             <view wx:if="{{typeid == 3}}">
               <view wx:if="{{item.videoStatus == ''}}"></view>
-              <view wx:elif="{{item.videoStatus == 0}}" bindtap='toView' class="btn_warning text-center">开始播放</view>
+              <view wx:elif="{{item.videoStatus == 0}}" bindtap='toView' data-index='{{i}}' class="btn_warning text-center">开始播放</view>
               <view wx:elif="{{item.videoStatus == 1}}" data-index='{{index}}' data-item='{{item}}' bindtap='btn_play' class="btn_warning text-center">试看</view>
               <view wx:else class="btn_title text-center">立即购买</view>
             </view>

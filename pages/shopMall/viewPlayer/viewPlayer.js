@@ -19,12 +19,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.palyer = wx.createVideoContext('player')
-    // this.setData({
-    //   source: this.data.dataList[this.data.currentPlay].src
-    // })
-
+    this.setData({
+      // source: this.data.productSection[options.index].videoUrl
+      code: options.code,
+      typeid: options.typeid,
+      currentPlay: options.index
+    })
     this.getDetailData(this.data.code)
+    
   },
   // 获取详情
   getDetailData(code) {
@@ -41,11 +45,14 @@ Page({
         that.setData({
           // 课程目录
           productSection: JSON.parse(result.productSection),
+          source: JSON.parse(result.productSection)[that.data.currentPlay].videoUrl,
+          isPlay: false
           // 动态管控列表
           // sectionNav: result.productSectionIndexList,
           // sectionIndex: result.productSectionIndexList.length > 0 ? result.productSectionIndexList[0].sectionIndex : 0,
           // sectionList: result.productSectionList
         })
+        that.palyer.play()
       } else {
 
         wx.showToast({ title: res.message, icon: 'none' })
@@ -69,15 +76,20 @@ Page({
     }
     that.setData({
       source: that.data.productSection[index].videoUrl,
-      isPlay: true
+      isPlay: true,
+      currentPlay: index
     })
     setTimeout(() => {
       if (that.data.isPlay) {
         that.palyer.play();
-        that.data.isPlay = false;
+        that.setData({
+          isPlay: false
+        })
       } else {
         that.palyer.pause();
-        that.data.isPlay = true;
+        that.setData({
+          isPlay: true
+        })
       }
     }, 300)
   },

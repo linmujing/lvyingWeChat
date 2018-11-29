@@ -42,14 +42,14 @@ video{
 .item text{
       font-size:  28rpx;
 }
-.item button{
+.item button, startp{
       padding:0 20rpx 0 20rpx;
       margin: 0 30rpx  0  60rpx;
       display: inline-block;
       height:48rpx;
       line-height:48rpx;
       color: #fff;
-      background: orange;
+      background: #F09105;
       font-size: 28rpx;
       border-radius:60rpx;
       vertical-align: middle;

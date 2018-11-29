@@ -234,14 +234,16 @@ Page({
     var that = this;
     // 接口参数
     let url = app.GO.api + 'product/info/getProductSectionIndexContent';
-    let param = { pageNo: 1, pageSize: that.data.sectionSize, productSectionIndex: that.data.sectionIndex, productSection: that.data.proSection };
+    let param = { productSectionIndex: that.data.sectionIndex, productSection: that.data.proSection };
     app.appRequest('post', url, param, {}, (res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
-        
+        this.setData({
+          // sectionList: res
+        })
       } else {
 
-        wx.showToast({ title: 111, icon: 'none' })
+        // wx.showToast({ title: res.message, icon: 'none' })
 
       }
     }, (err) => {
@@ -402,9 +404,10 @@ Page({
     }
   },
   // 点击开始播放 跳转到查看视频
-  toView(){
+  toView(e){
+    var index = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '../../shopMall/viewPlayer/viewPlayer?code=' + this.data.productCode + '&typeid=' + this.data.typeid
+      url: '../../shopMall/viewPlayer/viewPlayer?code=' + this.data.productCode + '&typeid=' + this.data.typeid + '&index=' + index
     })
   },
   /**
