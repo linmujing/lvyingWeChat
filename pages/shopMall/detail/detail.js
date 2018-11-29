@@ -233,22 +233,42 @@ Page({
   getSectionIndex() {
     var that = this;
     // 接口参数
-    let url = app.GO.api + 'product/info/getProductSectionIndexContent';
-    let param = { productSectionIndex: that.data.sectionIndex, productSection: that.data.proSection };
-    app.appRequest('post', url, param, {}, (res) => {
-      // console.log(res)
-      if (res.code == 200) {
-        this.setData({
-          // sectionList: res
-        })
-      } else {
-
-        // wx.showToast({ title: res.message, icon: 'none' })
-
+    let url = app.GO.api + 'product/info/getProductSectionIndexContent_wechat';
+    let params = { productSectionIndex: that.data.sectionIndex, productSection: that.data.proSection };
+    let str = '?';
+    for (let key in params) {
+      str += key + '=' + params[key] + '&';
+    }
+    str = str.substring(0, str.length - 1);
+    wx.request({
+      url: url + str,
+      method: 'post',
+      header: {
+        'content-type': 'application/json'
+      },
+      dataType: 'json',
+      data: {},
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function (err) {
+        errFun(err);
       }
-    }, (err) => {
-      console.log('请求错误信息：  ' + err.errMsg);
-    });
+    })
+    // app.appRequest('post', url, param, {}, (res) => {
+    //   // console.log(res)
+    //   if (res.code == 200) {
+    //     this.setData({
+    //       // sectionList: res
+    //     })
+    //   } else {
+
+    //     // wx.showToast({ title: res.message, icon: 'none' })
+
+    //   }
+    // }, (err) => {
+    //   console.log('请求错误信息：  ' + err.errMsg);
+    // });
   },
   // 获取评价列表
   getEvaluateList() {
