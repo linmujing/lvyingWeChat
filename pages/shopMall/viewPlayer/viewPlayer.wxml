@@ -4,10 +4,6 @@
             <video id='player'   src='{{source}}' objectFit='fill' ></video>
       </view>
       <view> 
-            <!-- <view class='sub-title'>
-                   <text class='chapter'>第一章 </text>
-                  <text class='chapter-name'>入职管理</text>
-            </view> -->
             <view>
                  <block  wx:for='{{productSection}}' wx:for-item="item"  wx:key='{{index}}'>
                          <view  class='item'>
@@ -66,10 +62,6 @@
             </view>
       </view>
       <view> 
-            <!-- <view class='sub-title'>
-                   <text class='chapter'>第一章 </text>
-                  <text class='chapter-name'>入职管理</text>
-            </view> -->
             <view>
                  <block  wx:for='{{productSection}}' wx:key='{{index}}'>
                          <view  class='item'>
@@ -92,5 +84,5 @@
                  </block>  
             </view>
       </view>
-</view>
+  </view>
 </view>

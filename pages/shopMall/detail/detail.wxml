@@ -1,19 +1,42 @@
 <view class='bg_white'>
   <!-- 视频 -->
   <view style='position:relative'>
-    <view wx:if="{{typeid == 3}}">
+    <!-- <view wx:if="{{typeid == 3}}"> -->
+      <!-- 视频 -->
       <view wx:if='{{showVideo}}' class='container' style='position:relative'>
         <view class='video-box'>
           <video id='myVideo'   src='{{source}}' objectFit='fill' ></video>
         </view>
       </view>
+       <!-- 音频 -->
+      <view wx:elif='{{showAudio}}' class='container'>
+        <view class='audio'>
+              <image class="w_100 h400" src='{{detailData.productProfileUrl}}' />
+              <view class='control-process flex_align'>
+                <view class=''>
+                  <image mode="widthFix" src="{{ is_play ? '../../../images/icon/pause.png' : '../../../images/icon/play.png'}}" class="icon-list" bindtap="audio_play"></image>
+                </view>
+                <view class='w_85 flex_align'>
+                      <slider class="slider" 
+                            bindchange="hanle_slider_change" 
+                            bindtouchstart="handle_slider_move_start" 
+                            bindtouchend="handle_slider_move_end" 
+                            min="0" 
+                            block-size="16" 
+                            max="{{slider_max}}" 
+                            activeColor="#fff" 
+                            backgroundColor="rgba(255,255,255,.3)" 
+                            value="{{slider_value}}"
+                      />
+                      <view class='color_fff'>{{current_process}}/{{total_process}}</view>
+                </view>
+              </view>
+        </view>
+      </view>
       <view wx:else>
         <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
       </view>
-    </view>
-    <view wx:else>
-        <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
-      </view>
+    <!-- </view> -->
   </view>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
@@ -83,14 +106,14 @@
               <view wx:if="{{item.videoStatus == ''}}"></view>
               <view wx:elif="{{item.videoStatus == 0}}" bindtap='toView' data-index='{{i}}' class="btn_warning text-center">开始播放</view>
               <view wx:elif="{{item.videoStatus == 1}}" data-index='{{index}}' data-item='{{item}}' bindtap='btn_play' class="btn_warning text-center">试看</view>
-              <view wx:else class="btn_title text-center">立即购买</view>
+              <view wx:else bindtap='goBuy' data-productcode='{{item.productCode}}' class="btn_title text-center">立即购买</view>
             </view>
             <!-- 音频 -->
             <view wx:if="{{typeid == 4}}">
               <view wx:if="{{item.voiceStatus == ''}}"></view>
               <view wx:elif="{{item.voiceStatus == 0}}" bindtap='toView' data-index='{{i}}' class="btn_warning text-center">开始播放</view>
-              <view wx:elif="{{item.voiceStatus == 1}}" class="btn_warning text-center">试看</view>
-              <view wx:else class="btn_title text-center">立即购买</view>
+              <view wx:elif="{{item.voiceStatus == 1}}" data-index='{{i}}' data-item='{{item}}' bindtap='btn_playAudio' class="btn_warning text-center">试看</view>
+              <view wx:else bindtap='goBuy' data-productcode='{{item.productCode}}' class="btn_title text-center">立即购买</view>
             </view>
           </view>
         </view>
@@ -112,13 +135,13 @@
               <view class='oneline_nobreak color_666 pl30'>{{i+1}} {{item.sectionName}}</view>
               <view hidden='{{courseBtn}}'>
                 <view bindtap='courseStates' class="btn_gary text-center mr20">查看详情</view>
-                <view class="btn_title text-center">立即购买</view>
+                <view bindtap='goBuy' data-productcode='{{item.productCode}}' class="btn_title text-center">立即购买</view>
               </view>
             </view>
             <view hidden='{{!courseBtn}}' class='mt20'>
-              <view class="btn_plain text-center mr20">视频</view>
-              <view class="btn_plain text-center mr20">音频</view>
-              <view class="btn_plain text-center mr20">文字预览</view>
+              <view data-index='{{index}}' data-item='{{item}}' bindtap='btn_play' class="btn_plain text-center mr20">视频</view>
+              <view data-index='{{index}}' data-item='{{item}}' bindtap='btn_playAudio' class="btn_plain text-center mr20">音频</view>
+              <view  data-item='{{item}}' bindtap='openText' class="btn_plain text-center mr20">文字预览</view>
               <view wx:if="{{item.docStatus != ''}}" class="btn_plain text-center mr20">下载</view>
             </view>
           </view>
@@ -187,7 +210,7 @@
           <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}'>{{items.productTitle}}</view>
           <view class='mt40 jub_jub flex_align'>
             <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-            <text class="btn_title ml15">立即购买</text>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
           </view>
         </view>
       </view>
@@ -207,8 +230,8 @@
             <view class='color_888'>{{items.lookCount}}人看过</view>
           </view>
           <view class='mt30 jub_jub flex_align'>
-            <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-              <text class="btn_title ml15">立即购买</text>
+            <view bindtap='addCart' data-productcode='{{items.productCode}}' class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
           </view>
         </view>
       </view>
@@ -218,16 +241,16 @@
 
 <!-- 购物车底部 -->
 <view class='fiexD bg_white w_100 flex z_index90'>
-  <view class='w_20 text-center border_right1_ee pt5 pb5'>
+  <view bindtap='goStore' class='w_20 text-center border_right1_ee pt5 pb5'>
     <image src='../../../images/icon/store.png' class='icon46'></image>
     <view class='color_666 mt5'>店铺</view>
   </view>
-  <view class='w_20 text-center pt5 pb5'>
+  <view bindtap='goAddcart' class='w_20 text-center pt5 pb5'>
     <image src='../../../images/icon/carta.png' class='icon50'></image>
     <view class='color_666'>购物车</view>
   </view>
-  <view class='w_30 bg_warning color_fff flex_juc ft30'>加入购物车</view>
-  <view class='w_30 bg_title color_fff flex_juc ft30'>立即购买</view>
+  <view bindtap='addCart' data-productcode='{{detailData.productCode}}' class='w_30 bg_warning color_fff flex_juc ft30'>加入购物车</view>
+  <view bindtap='goBuy' data-productcode='{{detailData.productCode}}' class='w_30 bg_title color_fff flex_juc ft30'>立即购买</view>
 </view>
 
 

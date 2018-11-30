@@ -75,8 +75,8 @@
         <view class='mt30 jub_jub flex_align'>
           <view class='flex_align color_888' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{4}}"><image class="icon46" src="../../../images/icon/see.png"></image>试听</view>
           <view class='flex'>
-            <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-            <text class="btn_title ml15">立即购买</text>
+            <view bindtap='addCart' data-productcode='{{items.productCode}}' class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
           </view>
         </view>
       </view>
@@ -102,8 +102,8 @@
           <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
-          <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-            <text class="btn_title ml15">立即购买</text>
+          <view bindtap='addCart' data-productcode='{{items.productCode}}' class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
         </view>
       </view>
     </view>
@@ -124,8 +124,8 @@
           <view class='color_888'>{{items.lookCount}}人看过</view>
         </view>
         <view class='mt30 jub_jub flex_align'>
-          <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-            <text class="btn_title ml15">立即购买</text>
+          <view bindtap='addCart' data-productcode='{{items.productCode}}' class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
         </view>
       </view>
     </view>
@@ -143,7 +143,7 @@
           <view class='ft30 mt20 oneline_nobreak' bindtap='toDetail' data-code='{{items.productCode}}' data-typeid="{{5}}">{{items.productTitle}}</view>
           <view class='mt40 jub_jub flex_align'>
             <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-            <text class="btn_title ml15">立即购买</text>
+            <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
           </view>
         </view>
       </view>
