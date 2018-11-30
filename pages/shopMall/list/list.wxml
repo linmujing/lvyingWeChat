@@ -21,8 +21,8 @@
               <view class='color_888'>{{items.lookCount}}人看过</view>
             </view>
             <view class='mt30 jub_jub flex_align'>
-              <view class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
-                <text class="btn_title ml15">立即购买</text>
+              <view bindtap='addCart' data-productcode='{{items.productCode}}' class="btn_warning w90 text-center"><image class="icon36" src="../../../images/icon/addCart.png"></image></view>
+                <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
             </view>
           </view>
         </view>
@@ -39,7 +39,7 @@
               </view>
               <view class='mt40 jub_jub flex_align'>
                 <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-                <text class="btn_title ml15">立即购买</text>
+                <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
               </view>
             </view>
           </view>
@@ -53,7 +53,7 @@
               <view class='ft30 mt20 oneline_nobreak'>{{items.productTitle}}</view>
               <view class='mt40 jub_jub flex_align'>
                 <view class='default_color_aux ft30'>￥{{items.productPrice}}</view>
-                <text class="btn_title ml15">立即购买</text>
+                <text bindtap='goBuy' data-productcode='{{items.productCode}}' class="btn_title ml15">立即购买</text>
               </view>
             </view>
           </view>

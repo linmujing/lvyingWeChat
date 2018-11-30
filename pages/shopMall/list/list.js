@@ -116,6 +116,38 @@ Page({
       url: '../../shopMall/detail/detail?code=' + code + '&typeid=' + this.data.typeid
     })
   },
+  // 立即购买  data-productCode="{{商品编码}}"  bindtap="goBuy"
+  goBuy(e) {
+    let productCode = e.currentTarget.dataset.productcode;
+    wx.navigateTo({
+      url: '../../shopCart/submitOrder/index?productCode=' + productCode
+    })
+  },
+  // 添加到购物车 data-productCode="{{商品编码}}" data-productCount="{{商品数量}}"  bindtap="addCart"
+  addCart(e) {
+
+    wx.showLoading({ title: '加载中' })
+
+    // 接口参数
+    let url = app.GO.api + 'customer/cart/addCart';
+    let param = {
+      productCode: e.currentTarget.dataset.productcode, // 商品编码 
+      productCount: 1, //加入购物车数量
+      ciCode: app.GO.recommend_customer_id, //获取用户code
+    };
+
+    app.appRequest('post', url, param, {}, (res) => {
+      // console.log(res)
+      wx.hideLoading()
+      wx.showToast({ title: res.message, icon: 'none' })
+      // 添加商品成功时, 修改购物车状态
+      let cartState = wx.getStorageSync('cartState');
+      wx.setStorageSync('cartState', parseFloat(cartState) + 1)
+
+    }, (err) => {
+      console.log('请求错误信息：  ' + err.errMsg);
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
