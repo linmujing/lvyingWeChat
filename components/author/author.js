@@ -5,7 +5,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+ 
   },
 
   /**
@@ -16,15 +16,13 @@ Component({
     authorShow: true
   },
   ready(){
-    console.log('ready')
-    console.log(app.GO)
+
   },
   /**
  * 生命周期函数--监听页面显示
  */
   show: function () {
-    console.log('show')
-    console.log(app.GO)
+
 
   },
 
