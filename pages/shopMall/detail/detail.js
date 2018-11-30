@@ -1,5 +1,6 @@
 // pages/shopMall/detail/detail.js
 var app = getApp();
+const AUDIOMANAGER = wx.getBackgroundAudioManager();
 Page({
 
   /**
@@ -46,7 +47,13 @@ Page({
     showVideo: false,
     controls: false,
     isPlay: true,
-    currentPlay: 0
+    currentPlay: 0,
+    // 音频
+    showAudio: false,
+    current_process: '00:00',
+    total_process: '00:00',
+    slider_max: 0,
+    slider_value: 0,
   },
 
   /**
@@ -235,40 +242,30 @@ Page({
     // 接口参数
     let url = app.GO.api + 'product/info/getProductSectionIndexContent_wechat';
     let params = { productSectionIndex: that.data.sectionIndex, productSection: that.data.proSection };
-    let str = '?';
-    for (let key in params) {
-      str += key + '=' + params[key] + '&';
-    }
-    str = str.substring(0, str.length - 1);
     wx.request({
-      url: url + str,
+      url: url,
       method: 'post',
       header: {
         'content-type': 'application/json'
       },
       dataType: 'json',
-      data: {},
+      data: params,
       success: function (res) {
-        console.log(res)
+        var result = res.data
+        if (result.code == 200) {
+          that.setData({
+            sectionList: result.content
+          })
+        } else {
+
+          wx.showToast({ title: result.message, icon: 'none' })
+
+        }
       },
       fail: function (err) {
-        errFun(err);
+        console.log(err)
       }
     })
-    // app.appRequest('post', url, param, {}, (res) => {
-    //   // console.log(res)
-    //   if (res.code == 200) {
-    //     this.setData({
-    //       // sectionList: res
-    //     })
-    //   } else {
-
-    //     // wx.showToast({ title: res.message, icon: 'none' })
-
-    //   }
-    // }, (err) => {
-    //   console.log('请求错误信息：  ' + err.errMsg);
-    // });
   },
   // 获取评价列表
   getEvaluateList() {
@@ -444,7 +441,8 @@ Page({
     that.setData({
       source: item.videoUrl,
       isPlay: true,
-      showVideo: true
+      showVideo: true,
+      showAudio: false
     })
     setTimeout(() => {
       if (that.data.isPlay) {
@@ -464,6 +462,117 @@ Page({
         showVideo: false
       })
     }, 60000);
+  },
+  /**
+    * 点击开始播放音频
+    */
+  btn_playAudio: function (e) {
+    var that = this
+    var index = e.currentTarget.dataset.index;
+    debugger
+    that.setData({
+      currentPlay: index,
+      is_play: true,
+      showVideo: false,
+      showAudio: true
+    })
+    that.setAudioSrc(that.data.productSection[index])
+  },
+  /**
+            * 点击开始播放按钮
+            */
+  audio_play: function (e) {
+    var that = this
+    console.log(that.data.is_play);
+    var process = that.data.current_process
+    if (that.data.is_play) {
+      // wx.pauseBackgroundAudio()
+      AUDIOMANAGER.pause();
+      that.setData({
+        is_play: false
+      })
+    } else {
+      AUDIOMANAGER.play();
+      that.setData({
+        current_process: process,
+        is_play: true
+      })
+      // autoPlay(that.data.audioList[that.data.current]);
+    }
+  },
+  // 设置音频资源
+  setAudioSrc(data) {
+    var that = this
+    AUDIOMANAGER.src = data.voiceUrl
+    AUDIOMANAGER.title = data.sectionName
+    that.setData({
+      total_process: that.changeTimeBox(AUDIOMANAGER.duration)
+    })
+    //背景音频播放进度更新事件
+    AUDIOMANAGER.onTimeUpdate(() => {
+      var timer = parseFloat(data.voiceTime) * 60; // 试看时间，以秒为单位
+      if (AUDIOMANAGER.currentTime > timer){
+        AUDIOMANAGER.stop()
+        wx.showToast({ title: '请购买后再继续收听~', icon: 'none' })
+      }
+      that.setData({
+        current_process: that.changeTimeBox(AUDIOMANAGER.currentTime),
+        slider_value: Math.floor(AUDIOMANAGER.currentTime),
+        total_process: that.changeTimeBox(AUDIOMANAGER.duration),
+        slider_max: Math.floor(AUDIOMANAGER.duration)
+      })
+    })
+  },
+  // 拖动进度条，到指定位置
+  hanle_slider_change(e) {
+    const position = e.detail.value
+    this.seekCurrentAudio(position)
+  },
+  // 拖动进度条控件
+  seekCurrentAudio(position) {
+    // 更新进度条
+    let that = this
+
+    wx.seekBackgroundAudio({
+      position: Math.floor(position),
+      success: function () {
+        AUDIOMANAGER.currentTime = position
+        that.setData({
+          is_play: true,
+          current_process: that.changeTimeBox(position),
+          slider_value: Math.floor(position)
+        })
+      }
+    })
+  },
+
+  // 进度条滑动
+  handle_slider_move_start() {
+    this.setData({
+      is_moving_slider: true
+    });
+  },
+  handle_slider_move_end() {
+    this.setData({
+      is_moving_slider: false
+    });
+  },
+  // 时间格式化
+  changeTimeBox(timer) {
+
+    function p(s) { return s < 10 ? '0' + s : s };
+    function ps(s) { return s == 0 ? '' : s + ':' };
+
+    var h = timer > 3600 ? parseInt(timer / 3600) : 0;
+
+    var m = (timer - h * 3600) > 60 ? parseInt((timer - h * 3600) / 60) : 0;
+
+    var s = parseInt(timer - h * 3600 - m * 60);
+
+    var now = ps(h) + p(m) + ":" + p(s);
+
+    return now;
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

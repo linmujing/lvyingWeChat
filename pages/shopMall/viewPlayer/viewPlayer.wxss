@@ -111,7 +111,3 @@ video{
     font-size: 24rpx;
     color: #fff;
 }
-.audio_name{
-    position:relative;
-    bottom:100rpx;
-}

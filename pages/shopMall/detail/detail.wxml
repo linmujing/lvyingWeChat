@@ -1,19 +1,42 @@
 <view class='bg_white'>
   <!-- 视频 -->
   <view style='position:relative'>
-    <view wx:if="{{typeid == 3}}">
+    <!-- <view wx:if="{{typeid == 3}}"> -->
+      <!-- 视频 -->
       <view wx:if='{{showVideo}}' class='container' style='position:relative'>
         <view class='video-box'>
           <video id='myVideo'   src='{{source}}' objectFit='fill' ></video>
         </view>
       </view>
+       <!-- 音频 -->
+      <view wx:elif='{{showAudio}}' class='container'>
+        <view class='audio'>
+              <image class="w_100 h400" src='{{detailData.productProfileUrl}}' />
+              <view class='control-process flex_align'>
+                <view class=''>
+                  <image mode="widthFix" src="{{ is_play ? '../../../images/icon/pause.png' : '../../../images/icon/play.png'}}" class="icon-list" bindtap="audio_play"></image>
+                </view>
+                <view class='w_85 flex_align'>
+                      <slider class="slider" 
+                            bindchange="hanle_slider_change" 
+                            bindtouchstart="handle_slider_move_start" 
+                            bindtouchend="handle_slider_move_end" 
+                            min="0" 
+                            block-size="16" 
+                            max="{{slider_max}}" 
+                            activeColor="#fff" 
+                            backgroundColor="rgba(255,255,255,.3)" 
+                            value="{{slider_value}}"
+                      />
+                      <view class='color_fff'>{{current_process}}/{{total_process}}</view>
+                </view>
+              </view>
+        </view>
+      </view>
       <view wx:else>
         <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
       </view>
-    </view>
-    <view wx:else>
-        <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
-      </view>
+    <!-- </view> -->
   </view>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
@@ -88,8 +111,8 @@
             <!-- 音频 -->
             <view wx:if="{{typeid == 4}}">
               <view wx:if="{{item.voiceStatus == ''}}"></view>
-              <view wx:elif="{{item.voiceStatus == 0}}" bindtap='toView' data-index='{{i}}' class="btn_warning text-center">开始播放</view>
-              <view wx:elif="{{item.voiceStatus == 1}}" class="btn_warning text-center">试看</view>
+              <view wx:elif="{{item.voiceStatus == 1}}" bindtap='toView' data-index='{{i}}' class="btn_warning text-center">开始播放</view>
+              <view wx:elif="{{item.voiceStatus == 0}}" data-index='{{i}}' bindtap='btn_playAudio' class="btn_warning text-center">试看</view>
               <view wx:else class="btn_title text-center">立即购买</view>
             </view>
           </view>

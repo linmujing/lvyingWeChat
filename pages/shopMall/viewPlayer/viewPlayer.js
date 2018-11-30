@@ -8,18 +8,15 @@ Page({
    */
   data: {
     detailData: {},
-    controls: false,
     isPlay: false,
     currentPlay: 0,
     productSection: [],
-    controls: 'true',
     current_process: '00:00',
     total_process: '00:00',
     slider_max: 0,
     slider_value: 0,
-    // current: 0,
-    code: 'P154036292431224',
-    typeid: 3
+    code: '',
+    typeid: 0
   },
 
   
