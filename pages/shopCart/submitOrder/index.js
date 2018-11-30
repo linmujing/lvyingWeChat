@@ -268,7 +268,7 @@ Page({
     // orderSource 订单来源 1 - PC商城 2 - 公众号 3 - 小程序
     let param = {
       ciCode: app.GO.recommend_customer_id, //获取用户code,
-      ciName: app.GO.customer_name, //获取用户name
+      ciName: app.GO.customer_customer_name, //获取用户name
       orderSource: 3,
       orderForm: this.data.sourceType != 'cart' ? 1 : 0,
       productCodeAndCount: productCodeAndCount,

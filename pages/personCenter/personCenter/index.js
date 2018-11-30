@@ -50,41 +50,7 @@ Page({
     })
 
   },
-  // 获取用户信息
-  onGotUserInfo(res){
-    console.log(res)
-    // 小程序接口参数
-    let url = app.GO.api + 'wechat/login/mp/customer/userInfo';
-    let param = {
-      encryptedData: res.detail.encryptedData,
-      iv: res.detail.iv
-    };
-
-    //调用登录接口
-    wx.login({
-      success: function (res) {
-        console.log(res)
-        param.code = res.code;
-
-        wx.request({
-          url: url,
-          method: 'get',
-          data: param,
-          success: function (res) {
-            console.log(res.data);
-            
-          },
-          fail: function (err) {
-            errFun(err);
-          }
-        })
-
-      },
-      fail: function (res) {
-
-      }
-    })
-  },
+  
   
   /**
    * 生命周期函数--监听页面加载

@@ -1,5 +1,6 @@
 <!-- nav -->
 <view class='ft28 flex border_top1_ee'>
+  <my-author></my-author>
   <view class='w_30'>
     <block wx:for="{{tabData}}" wx:key='index'>
       <view class="pd20 text-center border_bottom1_ee {{currentTab==index ? ' bl-title' :'' }} oneline_nobreak" data-current='{{index}}' bindtap='switchNav'>{{item.catName}}</view>

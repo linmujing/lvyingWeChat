@@ -392,7 +392,7 @@ Page({
     let param = { 'pageNo': this.data.pageNo, 'pageSize': this.data.pageSize, 'ciCode': app.GO.recommend_customer_id };
 
     app.appRequest('post', url, param, {}, (res) => {
-      // console.log(res)
+       console.log(res)
       if (res.code == 200) {
 
         let data = res.content.list;
@@ -400,7 +400,7 @@ Page({
         let arr = [], merchantArr = [];
 
         for (let i = 0; i < data.length; i++) {
-
+          console.log(data[i].productInfo.productType)
           // productType 为1时，该商品为单个商品  为2时，商品为组合包
           if (data[i].productInfo.productType == '1') {
 

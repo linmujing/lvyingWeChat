@@ -1,0 +1,17 @@
+<!--components/mydist/author.wxml-->
+<!-- 授权组件 -->
+<view wx:if="{{authorShow}}">
+
+  <!-- 确认授权 -->
+  <view class="mask">
+    <view class="model">
+      <view class="model_title">
+        <view>该应用需要获取您的授权</view>
+        <view>1、同意当前小程序获取我的微信头像；</view>
+        <view>2、同意当前小程序获取我的微信昵称等其他信息；</view>
+      </view>
+      <button style="color:#00aa88;" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确认授权</button>
+    </view>
+  </view>
+
+</view>
