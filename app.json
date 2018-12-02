@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/personCenter/personCenter/index",
     "pages/shopMall/index/index",
     "pages/shopCart/shoppingCart/index",
@@ -9,7 +8,6 @@
     "pages/personCenter/checkLogistics/index",
     "pages/personCenter/goComment/index",
     "pages/shopMall/detail/detail",
-    
     "pages/personCenter/myAddress/index",
     "pages/personCenter/myOrder/index",
     "pages/personCenter/myAfterService/index",
@@ -19,12 +17,11 @@
     "pages/shopMall/list/list",
     "pages/shopMall/searchList/searchList",
     "pages/shopMall/viewPlayer/viewPlayer",
-    
     "pages/shopMall/supplierStore/supplierStore",
     "pages/personCenter/myCourse/index",
     "pages/case/scrollList/index",
-    "pages/case/star/index"
-    
+    "pages/case/star/index",
+    "pages/author/author"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -301,7 +301,48 @@ Page({
     });
 
   },
-
+  // 支付结算
+  goPay() {
+    // 接口参数
+    let url = app.GO.api + '/trade/weixinPay/appPerPay';
+    let param = { 
+      'orderCode': this.data.orderCode, 
+      'ciCode': app.GO.recommend_customer_id, 
+      'truePayMoney':  0.01, //this.data.listTotal,
+      'payCommet':''
+      }
+    wx.showLoading({ title: '加载中', mask: true });
+    app.appRequest('post', url, param, {}, (res) => {
+      console.log(res)
+      if (res.code == 1) {
+        wx.requestPayment({
+          timeStamp: res.content.timestamp,
+          nonceStr: res.content.noncestr,
+          package: res.content.package,
+          signType: 'MD5',
+          paySign: res.content.sign,
+          success(res) { 
+            console.log(res)
+            wx.showToast({ title: '支付成功！' });
+            setTimeout(()=>{
+              wx.navigateTo({
+                url: '../../personCenter/myOrder/index?type=4'
+              })
+            },1000)
+          },
+          fail(res) { 
+            wx.showToast({ title: '支付失败！', icon: 'none' });
+          }
+        })
+      } else {
+        
+      }
+      wx.showToast({ title: res.message, icon: 'none' });
+    }, (err) => {
+      wx:wx.hideLoading();
+      console.log('请求错误信息：  ' + err.errMsg);
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

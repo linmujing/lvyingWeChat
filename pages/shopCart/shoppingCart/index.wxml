@@ -1,7 +1,6 @@
 <!--pages/shopCart/shoppingCart/index.wxml-->
 <!-- 我的购物车 -->
 <view style="height:100%;">
-  <my-author></my-author>
 
   <view wx:if="{{cartList.length}}">
     <!-- 购物车头部 -->

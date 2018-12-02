@@ -26,16 +26,15 @@ App({
     pay_api:'',            /* 当前支付api接口地址 */
     img_path:'',           /* 当前使用图片地址 */
     util:'',               /* 通用工具类库 */
-    user_info:[],           /* 鉴权成功返回的数据 */
     system_info: [],        /* 手机系统信息 */
     windowHeight:0,         /* 当前设备的屏幕高 */
     windowWidth:0,          /* 当前设备的屏幕宽 */
     rpxValue: '',           /* rpx真实值 */
-    recommend_customer_id: 'C154329572847933', /*用户id*/
+    recommend_customer_id: '', /*用户id*/
     recommend_customer_name: '', /*用户名*/
     recommend_customer_img: '', /*用户头像*/
     unionLongId: '', /*用户唯一标识*/
-    isLogin: false, // 是否已登录登录
+    isLogin: false, /*登录状态*/ 
   },
   
   onLaunch: function (options) {
@@ -64,12 +63,9 @@ App({
     this.GO.scene = options.scene;  //场景值
     this.GO.util = util
     this.getSystemInfo();
+
     //鉴权
-    if(util.storage('get','login_auth') == 1){
-      this.GO.util.login(this)
-    }else{
-      this.GO.util.login(this,2)  
-    }
+    this.GO.util.getStorageData(this);
   },
 
   /*

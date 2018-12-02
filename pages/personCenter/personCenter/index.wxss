@@ -6,6 +6,7 @@
 .head_img, .head_img image{
   height: 100rpx;
   width: 100rpx;
+  border-radius: 50%;
 }
 .head_text{
   line-height:160rpx;

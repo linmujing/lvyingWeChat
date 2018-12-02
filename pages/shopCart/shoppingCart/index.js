@@ -13,8 +13,6 @@ Page({
     /*购物车数据*/
     // 全部列表状态
     listState: false,
-    // 全部删除状态
-    listDeleteState: false,
     // 总价格
     listTotal: '0.00',
 
@@ -379,6 +377,14 @@ Page({
     })
   },
 
+  //清除购物车全选
+  clearCart(){
+    this.setData({
+      listState: false,
+      listTotal: '0.00',
+    })
+  },
+
   /**
   * 获取数据 *
   */
@@ -489,6 +495,8 @@ Page({
         wx.showToast({title: res.data.message, icon: 'none'});
 
       }
+
+      this.clearCart();
 
 
     }, (err) => {
@@ -629,15 +637,21 @@ Page({
     // 监听购物车数据变化
     var cartState = wx.getStorageSync('cartState')
     if (cartState != this.data.cartState){
-      this.setData({
-        cartList: []
-      })
       // 重新加载页面数据
       this.getCartListData();
     }
     this.setData({
       cartState: cartState
     })  
+
+
+    // 登录判断
+    if (!app.GO.isLogin) {
+      wx.navigateTo({
+        url: '../../author/author'
+      })
+    }
+
 
   },
 

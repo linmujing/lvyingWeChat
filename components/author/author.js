@@ -18,13 +18,6 @@ Component({
   ready(){
 
   },
-  /**
- * 生命周期函数--监听页面显示
- */
-  show: function () {
-
-
-  },
 
   /**
    * 组件的方法列表
@@ -56,17 +49,25 @@ Component({
             method: 'get',
             data: param,
             success: function (res) {
-              console.log(res.data);
               wx.hideLoading()
-              wx.showToast({ title: '获取授权成功！' })
-              that.setData({
-                authorShow: false
-              })
-              // 登录设置用户参数
-              app.GO.recommend_customer_id = res.data.ciCode;
-              app.GO.recommend_customer_name = res.data.ciName;
-              app.GO.recommend_customer_img = res.data.ciProfileUrl; 
-              app.GO.unionLongId = res.data.unionLongId;
+              console.log(res.data)
+              let data = res.data;
+              if(data.code == 200){
+
+                wx.setStorageSync('recommend_customer_id', data.content.ciCode);
+                wx.setStorageSync('recommend_customer_name', data.content.ciName);
+                wx.setStorageSync('recommend_customer_img', data.content.ciProfileUrl);
+                wx.setStorageSync('unionLongId', data.content.unionLongId);
+                
+                //鉴权
+                app.GO.util.getStorageData(app);
+                wx.showToast({ title: '获取授权成功！' })
+                setTimeout(() => { wx.navigateBack() },500);
+              }else{
+                wx.showToast({ title: '获取授权失败！' , 'icon':'none'})
+              }
+              
+              
             },
             fail: function (err) {
               errFun(err);

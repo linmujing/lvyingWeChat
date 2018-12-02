@@ -31,9 +31,10 @@ Page({
       }, {
         text: '我的地址',
         imgSrc: '../../../images/icon/person_icon_5.png',
-        url: 'myAddress'
+        url: '../myAddress/index'
       },
     ],
+    defaultUrl:'../../../images/image/my_head.png',
     imgHeadUrl: '',
     wxName: '',
   },
@@ -70,7 +71,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
+    if(!app.GO.isLogin){
+      wx.navigateTo({
+        url: '../../author/author'
+      })
+    }
+
+    this.setData({
+      imgHeadUrl: app.GO.recommend_customer_img,
+      wxName: app.GO.recommend_customer_name,
+    })
   },
 
   /**

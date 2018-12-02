@@ -96,7 +96,7 @@
       </view>
     </view>
     <view >
-      <view class="submit_btn bg_00aa88" bindtap="submitOrderClick">去支付</view>
+      <view class="submit_btn bg_00aa88" bindtap="goPay">去支付</view>
     </view>
   </view>
 

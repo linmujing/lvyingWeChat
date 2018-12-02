@@ -4,9 +4,9 @@
   <!-- 头部 -->
   <view class='h160 bg_white flex'>
     <view class="head_img">
-      <image mode='widthFix' src="../../../images/image/my_head.png"></image>
+      <image mode='widthFix' src="{{imgHeadUrl == '' ? defaultUrl : imgHeadUrl }}"></image>
     </view>
-    <view class="head_text" >微信号 15874025525</view>
+    <view class="head_text" >微信号 {{wxName}}</view>
   </view>
 
   <!-- 列表 -->
@@ -18,5 +18,4 @@
       </view>
     </view>
   </view>
-  <my-author></my-author>
 </view>

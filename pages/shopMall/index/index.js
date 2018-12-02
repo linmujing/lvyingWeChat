@@ -284,5 +284,15 @@ Page({
   onLoad: function (options) {
     this.getCasePro(1)
   },
+  /**
+    * 生命周期函数--监听页面显示
+    */
+  onShow: function () {
 
+    if (!app.GO.isLogin) {
+      wx.navigateTo({
+        url: '../../author/author'
+      })
+    }
+  },
 })

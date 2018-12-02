@@ -50,18 +50,11 @@ function storage(action, key, data, sync = true) {
   var error = ''
   //缓存注册列表
   var storeageList = [
-    'login_auth',               /* 认证状态 */
-    'user_info',                /* 用户信息 */
-    'store_info',               /* 店铺信息 */
-    'store_id',                 /* 当前访问店铺 */
-    'shopping_cart',            /* 购物车缓存 */
-    'foot_print',               /* 我逛过的店铺 */
-    'default_user_address',     /* 默认地址对象 */
-    'store_config',             /* 商铺配置 */
-    'tmp_address',              /* 用户在收货地址列表中选择的收货地址信息 */
-    'pay_info',                 /* 当前店铺商户支付信息 */
-    'card_info',                /*会员卡信息*/
-    'recommend_customer_id'              /*第二次进入*/
+    'recommend_customer_id', /*用户id*/
+    'recommend_customer_name', /*用户名*/
+    'recommend_customer_img', /*用户头像*/
+    'unionLongId', /*用户唯一标识*/
+    'isLogin', /*登录状态*/ 
   ]
   for (var k in storeageList) {
     if (storeageList[k] == key) {
@@ -101,11 +94,35 @@ function storage(action, key, data, sync = true) {
 }
 
 /* 
+ *@:title:存储登录用户的参数
+ *@:params: that 
+ */
+function getStorageData(that) {
+
+  wx.checkSession({
+    success(res) {
+      console.log(res)
+      //session_key 未过期，并且在本生命周期一直有效
+      that.GO.recommend_customer_id = wx.getStorageSync('recommend_customer_id');
+      that.GO.recommend_customer_name = wx.getStorageSync('recommend_customer_name');
+      that.GO.recommend_customer_img = wx.getStorageSync('recommend_customer_img');
+      that.GO.unionLongId = wx.getStorageSync('unionLongId');
+      that.GO.isLogin = true;
+    },
+    fail() {
+      // session_key 已经失效，需要重新执行登录流程
+      
+    }
+  })
+
+
+}
+
+/* 
  *@:title:log统一上传 (包括抛出异常)
  *@:params: 
  *@:author: 空哥 277409083@qq.com 15307319570
  */
-
 function logUpload(data) {
 
   wx.request({
@@ -148,7 +165,6 @@ function paramsReg(data, t = 'string') {
 /* 
  *@:title:随机字符串
  *@:params: len 长度
- *@:author: 空哥 277409083@qq.com 15307319570
  */
 function randomString(len = 32) {
   var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
@@ -182,123 +198,7 @@ function getPaySign(signData) {
 
   return sign
 }
-/*
- *@: title: 用户登录Login
- *@: params 
- *@: return void
- */
-function login(thatt, source = 1) {
 
-  var that = thatt
-  that.GO.user_info = storage('get', 'user_info')  //调整
-  var code = ''
-  var userInfo = ''
-
-  //调用登录接口
-  wx.login({
-    success: function (res) {
-      console.log(res)
-      storage('set', 'login_auth', 1)
-      code = res.code
-
-      //getLoginAuthor(thatt, code)
-    },
-    fail: function (res) {
-      console.log(res)
-      storage('set', 'login_auth', -1)
-      console.log('login失败');
-      //getLoginAuthor(thatt, code)
-    }
-  })
-
-}
-/*
- *@: title: 获取用户微信登录授权
- *@: params 
- *@: return void
- */
-function getLoginAuthor(thatt, code, iv, encryptedData){
-  var that = thatt;
-  var url = that.GO.api + "wechat/login/mp/customer/userInfo"
-  var param = {
-    'code': code,
-  }
-  if (iv != null || encryptedData != null) {
-    param.encrypted_info = {
-      iv: iv,
-      encryptedData: encryptedData
-    }
-  }
-
-  that.appRequest('post', url, param, {}, (res) => {
-    console.log(res)
-    if (res.code == 200) {
-      
-    }
-  }, (err) => {
-    console.log('请求错误信息：  ' + err.errMsg);
-  });
-
-}
-
-/*
- *@: title: 鉴权API访问
- *@: params 
- *@: return void
- */
-function requestSignin( thatt, code, iv, encryptedData) {
-  console.log(code)
-  var that = thatt;
-  var url = that.GO.api + "wechat/login/mp/customer/userInfo"
-  var param = {
-    'app_id': that.GO.app_id,
-    'client_code': code,
-    'scene': that.GO.scene,
-    'recommend_customer_id': that.GO.recommend_customer_id
-  }
-  if (iv != null || encryptedData != null) {
-    param.encrypted_info = {
-      cert: iv,
-      data: encryptedData
-    }
-  }
-  var data = {
-    app_id: param.app_id,
-    client_code: param.client_code,
-    scene: param.scene,
-    encrypted_info: param.encrypted_info,
-    recommend_customer_id:param.recommend_customer_id
-  }
-  console.log(data);
-  wx.request({
-    url: url,
-    data: data,
-    method: 'POST',
-    success: function (res) {
-      if (res.data.status == 'success') {
-        that.GO.user_info = res.data.data
-        that.GO.store_id = res.data.data.store_id
-        that.GO.mch_id = res.data.data.mch_id               //支付商户号
-        console.log("鉴权成功!店铺ID: " + res.data.data.store_id);
-        var pay_info = {
-          'mch_id': res.data.data.mch_id,
-          'pay_key': res.data.data.pay_key
-        }
-        storage('set', 'pay_info', pay_info)                //当前店铺支付信息
-        storage('set', 'store_id', res.data.data.store_id)  //识别当前店铺
-        storage('set', 'user_info', res.data.data)          //存储用户信息
-      } else {
-        console.log("鉴权返回失败!");
-        console.log(res.data);
-      }
-    },
-    fail: function (res) {
-      console.log('鉴权API访问失败!')
-      console.log(res);
-      storage('set', 'login_auth', -1)
-    }
-  })
-}
 
 /*
 * @:title:统一调用wx.showToast() 
@@ -725,7 +625,6 @@ module.exports = {
   randomString: randomString,
   timeStamp: timeStamp,
   getPaySign: getPaySign,
-  login: login,
   showToast: showToast,
   systemAlert: systemAlert,
   showModal: showModal,
@@ -733,7 +632,7 @@ module.exports = {
   navigateBack: navigateBack,
   isLogin: isLogin,
   httpRequest: httpRequest,
-  //dataRequest:dataRequest
+  getStorageData: getStorageData,
   loading: loading,
   chooseImage: chooseImage,
   httpUpload: httpUpload,
