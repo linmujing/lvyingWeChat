@@ -333,12 +333,12 @@ Page({
         wx.requestPayment({
           timeStamp: res.content.timestamp,
           nonceStr: res.content.nonce_str,
-          package: res.content.prepay_id ,
+          package: 'prepay_id='+ res.content.prepay_id ,
           signType: 'MD5',
           paySign: res.content.sign,
           success(res) { 
             console.log(res)
-            wx.showToast({ title: '支付成功！' });
+            wx.showLoading({ title: '支付成功跳转中', mask: true });
             setTimeout(()=>{
               wx.navigateTo({
                 url: '../../personCenter/myOrder/index?type=4'

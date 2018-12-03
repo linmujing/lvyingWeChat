@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/personCenter/personCenter/index",
+
     "pages/shopMall/index/index",
+    "pages/personCenter/personCenter/index",
     "pages/shopCart/shoppingCart/index",
     "pages/shopCart/confirmOrder/index",
     "pages/shopCart/submitOrder/index",
