@@ -66,7 +66,7 @@ App({
     this.getSystemInfo();
 
     // 鉴权
-    common.getStorageData(this);
+    this.GO.util.getStorageData(this);
   },
 
   /*

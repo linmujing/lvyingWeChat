@@ -301,15 +301,30 @@ Page({
     });
 
   },
+  // 获取登录凭证进行支付
+  wxLogin(){
+    let that = this;
+    wx.login({
+      success(res) {
+        if (res.code) {
+          //发起网络请求
+          that.goPay(res.code)
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  },
   // 支付结算
-  goPay() {
+  // @params wxcode string 微信登录凭证
+  goPay(wxcode) {
     // 接口参数
-    let url = app.GO.api + '/trade/weixinPay/appPerPay';
+    let url = app.GO.api + '/trade/weixinPay/smallprogram/JSAPIPay';
     let param = { 
       'orderCode': this.data.orderCode, 
       'ciCode': app.GO.recommend_customer_id, 
       'truePayMoney':  0.01, //this.data.listTotal,
-      'payCommet':''
+      'code': wxcode
       }
     wx.showLoading({ title: '加载中', mask: true });
     app.appRequest('post', url, param, {}, (res) => {
