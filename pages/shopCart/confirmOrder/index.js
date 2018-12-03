@@ -329,11 +329,11 @@ Page({
     wx.showLoading({ title: '加载中', mask: true });
     app.appRequest('post', url, param, {}, (res) => {
       console.log(res)
-      if (res.code == 1) {
+      if (res.code == 200) {
         wx.requestPayment({
           timeStamp: res.content.timestamp,
-          nonceStr: res.content.noncestr,
-          package: res.content.package,
+          nonceStr: res.content.nonce_str,
+          package: res.content.prepay_id ,
           signType: 'MD5',
           paySign: res.content.sign,
           success(res) { 
@@ -346,6 +346,7 @@ Page({
             },1000)
           },
           fail(res) { 
+            console.log(res)
             wx.showToast({ title: '支付失败！', icon: 'none' });
           }
         })
