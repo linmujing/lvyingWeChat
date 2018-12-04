@@ -153,8 +153,8 @@ Page({
       if (res.code == 200) {
         var list = res.content.list
         for(var i=0;i<list.length;i++){
-          list[i].couponEndTime = that.dateFormat(list[i].couponEndTime)
-          list[i].couponStartTime = that.dateFormat(list[i].couponStartTime)
+          list[i].couponStartTime = list[i].couponStartTime.substring(0, 10)
+          list[i].couponEndTime = list[i].couponStartTime.substring(0, 10)
         }
         that.setData({
           cuponList: list
@@ -345,11 +345,6 @@ Page({
     wx.navigateTo({
       url: '../../shopMall/detail/detail?code=' + code,
     })
-  },
-  //时间格式化函数，此处仅针对yyyy-MM-dd hh:mm:ss 的格式进行格式化
-  dateFormat: function (time) {
-    var date = new Date(time);
-    return date.toLocaleDateString();
   },
   // 图片预览
   clickPic(e){

@@ -62,7 +62,7 @@
         <view class='w_70' style='border-right: 1px dashed #EBDFD1'>
           <view class='oneline_nobreak font_weight ft32'>{{item.couponTitle}}</view>
           <view class='oneline_nobreak mt15'>{{item.couponDesc}}</view>
-          <view class='oneline_nobreak mt10'>有效期{{item.couponStartTime}} 至 {{item.couponEndTime}}</view>
+          <view class='oneline_nobreak mt10 ft12'>有效期{{item.couponStartTime}} 至 {{item.couponEndTime}}</view>
         </view>
         <view class='w_30 text-center ft36'>立即领取</view>
        </view>
