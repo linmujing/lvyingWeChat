@@ -356,7 +356,7 @@ Page({
     var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     // 拼接
-    return year + "-" + month + "-" + day;
+    return year.toString() + "-" + month.toString() + "-" + day.toString();
   },
   // 图片预览
   clickPic(e){
