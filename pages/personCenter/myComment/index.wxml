@@ -6,10 +6,10 @@
     <view class="items" wx:for="{{commentData}}" wx:for-index="i"  wx:key="i" wx:for-item="items">
         <view class="flex pr20 pl20 pt20" >
             <view class="pr20">
-                <text class="head_img" style="background-image: url({{userHeadUrl}})"></text>
+                <text class="head_img" style="background-image: url({{wxHeadUrl}})"></text>
             </view>
             <view class="pt20">
-                <view class="color_666">{{ userName }}</view>
+                <view class="color_666">{{ wxName }}</view>
                 <text class="color_999 ft20">{{ items.createDate }}</text>
             </view>
         </view>

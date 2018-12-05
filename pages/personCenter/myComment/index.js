@@ -16,8 +16,8 @@ Page({
       loading: false,
       finished: false
     },
-    userName: '',
-    userHeadUrl: '' ,
+    wxName: '',
+    wxHeadUrl: '' ,
     // 视口高度
     windowHeight: '',
 
@@ -120,6 +120,11 @@ Page({
           windowHeight: res.screenHeight
         })
       }
+    })
+
+    this.setData({
+      wxHeadUrl: app.GO.recommend_customer_img,
+      wxName: app.GO.recommend_customer_name,
     })
 
     this.getData();
