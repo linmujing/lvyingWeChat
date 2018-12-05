@@ -288,11 +288,12 @@ Page({
     * 生命周期函数--监听页面显示
     */
   onShow: function () {
-    app.GO.util.getStorageData(app)
-    if (!app.GO.isLogin) {
-      wx.navigateTo({
-        url: '../../author/author'
-      })
+    if(app.GO.util.getStorageData(app)){
+      if (!app.GO.isLogin) {
+        wx.navigateTo({
+          url: '../../author/author'
+        })
+      }
     }
   },
 })
