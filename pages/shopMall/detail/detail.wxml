@@ -76,7 +76,7 @@
   <view bindtap='goStore' class='mt10 flex'>
     <image wx:if='merchantInfo.merchantProfileUrl == ""' class="icon140 border_1" src="../../../images/img/falv.png"></image>
     <image wx:else class="icon140 border_1" :src="{{merchantInfo.merchantProfileUrl}}"></image>
-    <view class='ml20'>
+    <view class='ml20 w_70'>
       <view class='mt10 ft30'>{{merchantInfo.orgName}}</view>
       <view class='mt20 color_888 twoline_nobreak'>{{merchantInfo.personIntroduce}}</view>
     </view>
@@ -89,7 +89,7 @@
   </view>
   <view wx:if='{{curSubTab == 0}}'>
     <view class='bg_white pd20 richTxt'>
-      <rich-text nodes="{{detailData.productDesc}}"></rich-text>
+      <rich-text class='w_100' nodes="{{detailData.productDesc}}"></rich-text>
     </view>
   </view>
   <!-- 课程 -->

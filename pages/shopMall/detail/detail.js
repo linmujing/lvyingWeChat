@@ -86,6 +86,7 @@ Page({
       wx.hideLoading()
       // console.log(res)
       if (res.code == 200) {
+        res.content.productDesc = res.content.productDesc.replace(/\<img/gi, '<img style="width:100%;height:auto" ')
         var result = res.content
         // 获取商户信息
         that.getMerchantInfo(result.merchantCode)
