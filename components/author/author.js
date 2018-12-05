@@ -56,7 +56,8 @@ Component({
 
                 wx.setStorageSync('recommend_customer_id', data.content.ciCode);
                 wx.setStorageSync('recommend_customer_name', data.content.ciName);
-                wx.setStorageSync('recommend_customer_img', data.content.ciProfileUrl);
+                wx.setStorageSync('recommend_customer_phone', data.content.ciPhone);
+                wx.setStorageSync('recommend_customer_img', data.content.ciProfileUrl); 
                 wx.setStorageSync('unionLongId', data.content.unionLongId);
                 
                 //鉴权

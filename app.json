@@ -1,6 +1,6 @@
 {
   "pages": [
-
+    
     "pages/shopMall/index/index",
     "pages/personCenter/personCenter/index",
     "pages/shopCart/shoppingCart/index",

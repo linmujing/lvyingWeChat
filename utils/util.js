@@ -53,6 +53,7 @@ function storage(action, key, data, sync = true) {
     'recommend_customer_id', /*用户id*/
     'recommend_customer_name', /*用户名*/
     'recommend_customer_img', /*用户头像*/
+    'recommend_customer_phone',
     'unionLongId', /*用户唯一标识*/
     'isLogin', /*登录状态*/ 
   ]
@@ -102,14 +103,21 @@ function getStorageData(that) {
   wx.checkSession({
     success(res) {
       console.log(res)
-      //session_key 未过期，并且在本生命周期一直有效
-      that.GO.recommend_customer_id = wx.getStorageSync('recommend_customer_id');
-      that.GO.recommend_customer_name = wx.getStorageSync('recommend_customer_name');
-      that.GO.recommend_customer_img = wx.getStorageSync('recommend_customer_img');
-      that.GO.unionLongId = wx.getStorageSync('unionLongId');
-      that.GO.isLogin = true;
+      if (wx.getStorageSync('recommend_customer_id') != ""){
+        //session_key 未过期，并且在本生命周期一直有效
+        that.GO.recommend_customer_id = wx.getStorageSync('recommend_customer_id');
+        that.GO.recommend_customer_name = wx.getStorageSync('recommend_customer_name');
+        that.GO.recommend_customer_img = wx.getStorageSync('recommend_customer_img');
+        that.GO.recommend_customer_phone = wx.getStorageSync('recommend_customer_phone');
+        that.GO.unionLongId = wx.getStorageSync('unionLongId');
+        that.GO.isLogin = true;
+      }else{
+        that.GO.isLogin = false;
+      }
+
     },
     fail() {
+      that.GO.isLogin = false;
       // session_key 已经失效，需要重新执行登录流程
       
     }

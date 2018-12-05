@@ -1921,6 +1921,7 @@ display:-webkit-box;
   right:0;
   margin:auto;
 }
+
 /* 1个像素的线条 */
 .border_top_1px,.border_bottom_1px{
     position: relative;

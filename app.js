@@ -31,9 +31,10 @@ App({
     windowHeight:0,         /* 当前设备的屏幕高 */
     windowWidth:0,          /* 当前设备的屏幕宽 */
     rpxValue: '',           /* rpx真实值 */
-    recommend_customer_id: 'C154329572847933', /*用户id*/
+    recommend_customer_id: '', /*用户id*/
     recommend_customer_name: '', /*用户名*/
     recommend_customer_img: '', /*用户头像*/
+    recommend_customer_phone: '', /*用户手机号*/
     unionLongId: '', /*用户唯一标识*/
     isLogin: false, // 是否已登录登录
   },
