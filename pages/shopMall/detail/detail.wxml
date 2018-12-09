@@ -40,7 +40,7 @@
   </view>
   <view class='pd20 ft32'>{{detailData.productTitle}}</view>
   <view class='jub_jub_center pd20'>
-    <view class='ft34 color_title'>￥{{detailData.productOrgPrice}}</view>
+    <view class='ft34 color_title'>￥{{detailData.productPrice}}</view>
     <view class='color_888'>{{detailData.lookCount}}人看过</view>
   </view>
 </view>
@@ -50,7 +50,7 @@
   <view class='color_coupon'>领券 ></view>
 </view>
 <!-- 优惠券 -->
-<view class='modal-box z_index100' hidden='{{couponModel}}' catchtouchmove="ture">
+<view class='modal-box z_index100' hidden='{{couponModel}}' catchtouchmove="{{ture}}">
  <view class="modal-body">
     <view class='modal-mask' bindtap="hideCoupon"></view>
     <view class="modal-content">
@@ -82,7 +82,7 @@
     </view>
   </view>
 </view>
-<view class='mb100'>
+<view style='padding-bottom: 100rpx;'>
   <!-- 简介 -->
   <view class='bg_white mt30 juc_around'>
     <view wx:for='{{subTab}}' wx:for-item="item" wx:for-index="i"  wx:key="i" class="pd20 ft28 ft30 {{curSubTab==i ? 'active' :'' }}" bindtap='clickSubTab' data-index='{{i}}'>{{item}}</view>

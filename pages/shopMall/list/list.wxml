@@ -1,11 +1,9 @@
 <!-- 导航 -->
-<view class='juc_around bg_white'>
   <scroll-view scroll-x="true" class="tab-h padding_bottom_10" scroll-left="{{scrollLeft}}">
     <block wx:for="{{tabTitle}}" wx:key='index'>
       <view class="pb10 tab-item oneline_nobreak {{currentTab==index ? 'active' :'' }}" data-current='{{index}}' data-id='{{item.id}}' data-name='{{item.catName}}'  bindtap='switchNav'>{{item.catName}}</view>
     </block>
   </scroll-view>
-</view>
 <!-- 内容 -->
 <view class='mt50'>
   <!-- 动态管控 -->
