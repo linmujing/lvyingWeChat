@@ -26,7 +26,9 @@ Page({
     banner: [],
     bgUrl: '',
     pagelocat:1,
-    searchval: ''
+    searchval: '',
+    // 绑定手机号弹框控制
+    bindShow: false, 
   },
   houseChange(e) {
     console.log(e)
@@ -288,12 +290,23 @@ Page({
     * 生命周期函数--监听页面显示
     */
   onShow: function () {
-    if(app.GO.util.getStorageData(app)){
+    
+    wx.showLoading({ title: '加载中' })
+    setTimeout(()=>{
+      wx.hideLoading()
+      // 登录时且未绑定手机号才显示
+      if (app.GO.isLogin && app.GO.recommend_customer_phone == ""){
+        this.setData({
+          bindShow: true
+        })
+      }
+
       if (!app.GO.isLogin) {
         wx.navigateTo({
           url: '../../author/author'
         })
       }
-    }
+    },500)
+
   },
 })
