@@ -41,6 +41,11 @@ Component({
       //调用登录接口
       wx.login({
         success: function (res) {
+          wx.showModal({
+            title: '1',
+            content: JSON.stringify(res),
+          })
+
           console.log(res)
           param.code = res.code;
 
@@ -49,6 +54,10 @@ Component({
             method: 'get',
             data: param,
             success: function (res) {
+              wx.showModal({
+                title: '2',
+                content: JSON.stringify(res),
+              })
               wx.hideLoading()
               console.log(res.data)
               let data = res.data;
@@ -71,13 +80,22 @@ Component({
               
             },
             fail: function (err) {
-              errFun(err);
+              wx.showModal({
+                title: '3',
+                content: JSON.stringify(err),
+              })
+
+              wx.hideLoading()
               wx.showToast({ title: '获取授权失败，请重新检查网络是否正常！', icon: 'none' })
             }
           })
 
         },
         fail: function (res) {
+          wx.showModal({
+            title: '4',
+            content: JSON.stringify(res),
+          })
           wx.hideLoading()
           wx.showToast({ title: '获取授权失败，请重新检查网络是否正常！', icon: 'none' })
         }

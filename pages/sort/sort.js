@@ -83,7 +83,7 @@ Page({
 
     if (!app.GO.isLogin) {
       wx.navigateTo({
-        url: '../../author/author'
+        url: '../author/author'
       })
     }
   },
