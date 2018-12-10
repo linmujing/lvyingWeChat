@@ -34,7 +34,7 @@
         </view>
       </view>
       <view wx:else>
-        <image class="w_100 h400" src="{{detailData.productProfileUrl}}"></image>
+        <image class="w_100" mode="widthFix" src="{{detailData.productProfileUrl}}"></image>
       </view>
     <!-- </view> -->
   </view>
