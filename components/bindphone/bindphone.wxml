@@ -6,7 +6,7 @@
   <view class="mask" style="top: {{bindStateModel ? '0' : '-100%'}}">
     <view class="model" style="height: {{passwordShow ? '700rpx' : '420rpx'}}">
       <view class="title border_bottom_1px">
-        绑定手机号
+        请先绑定手机号
       </view>
       <view class="input_box flex border_bottom_1px ml20">
         <view class="left">手机号码</view>
@@ -31,7 +31,7 @@
         <text class="btn_title" style="position: relative;top:50rpx;left:40%;"  bindtap="bingPhone">确定</text>
       </view>
     </view>
-    <span class="close" bindtap="closeBind">×</span>
+    <!-- <span class="close" bindtap="closeBind">×</span> -->
   </view>
 
 </view>

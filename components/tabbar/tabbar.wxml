@@ -1,0 +1,8 @@
+<!--components/tabbar.wxml-->
+<!-- 底部导航栏 -->
+<view class="tabbar_box">
+  <view class="tabbar_item" wx:for="{{list}}" wx:key='index' data-index="{{index}}" bindtap='jump'>
+    <view><image mode='widthFix' style="width:40rpx;" src="{{current == index ? item.selectedIconPath : item.iconPath }}"></image></view>
+    <text style="color: {{current == index ? '#00aa88' : '#ccc'}}">{{item.text}}</text>
+  </view>
+</view>

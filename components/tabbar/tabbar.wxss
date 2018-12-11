@@ -1,0 +1,19 @@
+/* components/tabbar.wxss */
+.tabbar_box{
+  position: fixed;
+  bottom:0;
+  height: 90rpx;
+  width:100%;
+  border-top: 1rpx solid #f5f5f5;
+  background: #fff;
+  z-index: 999;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 4%;
+  box-sizing: border-box;
+}
+.tabbar_item{
+  text-align: center;
+  font-size: 20rpx;
+  padding-top: 10rpx;
+}

@@ -18,5 +18,5 @@
       </view>
     </view>
   </view>
-
+  <my-tabbar current="3"></my-tabbar>
 </view>

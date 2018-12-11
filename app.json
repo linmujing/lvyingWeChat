@@ -36,38 +36,8 @@
     "van-checkbox": "/components/dist/checkbox/index",
     "van-stepper": "/components/dist/stepper/index",
     "my-author": "/components/author/author",
-    "my-bindphone": "/components/bindphone/bindphone"
-  },
-  "tabBar": {
-    "color": "#ccc",
-    "selectedColor": "#00AA88",
-    "borderStyle": "#f5f5f5",
-    "backgroundColor": "#fff",
-    "list": [
-      {
-        "pagePath": "pages/shopMall/index/index",
-        "iconPath": "images/icon/home.png",
-        "selectedIconPath": "images/icon/_home.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/sort/sort",
-        "iconPath": "images/icon/sort.png",
-        "selectedIconPath": "images/icon/_sort.png",
-        "text": "分类"
-      },
-      {
-        "pagePath": "pages/shopCart/shoppingCart/index",
-        "iconPath": "images/icon/cart.png",
-        "selectedIconPath": "images/icon/_cart.png",
-        "text": "购物车"
-      },
-      {
-        "pagePath": "pages/personCenter/personCenter/index",
-        "iconPath": "images/icon/user.png",
-        "selectedIconPath": "images/icon/_user.png",
-        "text": "我的"
-      }
-    ]
+    "my-bindphone": "/components/bindphone/bindphone",
+    "my-tabbar": "/components/tabbar/tabbar"
   }
+  
 }

@@ -2,6 +2,7 @@
 <view class='juc_around bg_white fixed_top z_index10 w_100'>
 
   <my-bindphone wx:if="{{bindShow}}"></my-bindphone>
+  <my-tabbar current="0"></my-tabbar>
 
 
   <scroll-view scroll-x="true" class="tab-h padding_bottom_10" scroll-left="{{scrollLeft}}">
