@@ -32,3 +32,13 @@
     vertical-align: middle;
     line-height: 1.5;
 }
+.sign{
+    position: absolute;
+    right:0;
+    top:0;
+    width:78rpx;
+    height: 78rpx;
+    border-radius: 50%;
+    background-size: cover;
+    z-index: 99; 
+}

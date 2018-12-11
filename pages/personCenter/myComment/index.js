@@ -89,7 +89,10 @@ Page({
         if (commentData.length >= pageData.total) {
 
           pageData.finished = true;
-          wx.showToast({ title: '没有更多了！', icon: 'none' })
+          
+          if (this.data.pageData.current != 2) {
+            wx.showToast({ title: '没有更多了！', icon: 'none' })
+          } 
 
         }
 

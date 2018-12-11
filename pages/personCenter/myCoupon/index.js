@@ -134,13 +134,15 @@ Page({
               break;
           }
 
+          let price = item.couponInfo.couponType != '3' ? item.couponInfo.couponValuePrice : item.couponInfo.couponValueDiscount;
           couponList.push({
-            price: item.couponInfo.couponValuePrice,
+            price: price ,
             content: item.couponInfo.couponTitle,
-            time: this.dateFormat(item.couponInfo.couponStartTime) + '-' + this.dateFormat(item.couponInfo.couponEndTime),
+            time: item.couponInfo.couponStartTime.split("T")[0] + '~' + item.couponInfo.couponEndTime.split("T")[0],
             stateImg: stateImg,
             color: color,
-            platform: ''
+            platform: '',
+            couponType: item.couponInfo.couponType
           })
         }
 
@@ -148,7 +150,10 @@ Page({
         if (couponList.length >= pageData.total) {
 
           pageData.finished = true;
-          wx.showToast({ title: '没有更多了！', icon: 'none' })
+
+          if(this.data.pageData.current != 2){
+            wx.showToast({ title: '没有更多了！', icon: 'none' })
+          } 
 
         }
 
