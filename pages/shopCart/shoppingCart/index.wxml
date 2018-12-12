@@ -111,7 +111,7 @@
     
   </view>
   <!-- 没有商品 -->
-  <view class="img_middle_center bg_fff"  style="height:100%;width:100%;" wx:if="{{!cartList.length}}">
+  <view class="img_middle_center bg_fff"  style="position:fixed;top:0;left:0;height:100%;width:100%;" wx:if="{{!cartList.length}}">
     <image  style="height:auto;width:50%;" mode="widthFix" src="../../../images/image/not_goods.png" alt=""></image>
   </view>
 </view>

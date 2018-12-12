@@ -71,14 +71,14 @@ Component({
       // 正则验证手机号
       if (!reg1.test(this.data.group.userPhone)) {
 
-        wx.showToast({ title:'请填写正确的手机号', icon: 'none'});
+        wx.showToast({ title:'请填写正确的手机号！', icon: 'none'});
         return;
 
       }
 
       if (this.data.group.sms == '') {
 
-        wx.showToast({ title: '请输入验证码', icon: 'none'});
+        wx.showToast({ title: '请输入验证码！', icon: 'none'});
         return;
 
       }
@@ -94,14 +94,14 @@ Component({
 
         if (this.data.group.password != this.data.group.password2) {
 
-          wx.showToast({ title: '请输入正确的密码', icon: 'none'});
+          wx.showToast({ title: '请输入正确的密码！', icon: 'none'});
           return;
 
         }
 
         if (this.data.group.password == '') {
 
-          wx.showToast({ title: '请输入密码', icon: 'none'});
+          wx.showToast({ title: '请输入密码！', icon: 'none'});
           return;
 
         }
@@ -112,25 +112,21 @@ Component({
       // 绑定手机号
       app.appRequest('post', url, param, {}, (res) => {
         console.log(res)
+        wx.hideLoading();
+
         if (res.code == 200) {
 
-          //console.log(res)
-          wx.hideLoading();
+          wx.showToast({ title:'绑定成功！', icon: 'none'});
 
-          if (res.code == 200) {
+          app.GO.recommend_customer_phone = this.data.group.userPhone;
+          this.setData({
+            bindStateModel: false
+          })
 
-            wx.showToast({ title:'绑定成功', icon: 'none'});
-
-            app.GO.recommend_customer_phone = 1;
-            this.setData({
-              bindStateModel: false
-            })
-
-            return;
-
-          }
-
+        }else{
+          wx.showToast({ title: '绑定失败！', icon: 'none' });
         }
+
       }, (err) => {
         console.log('请求错误信息：  ' + err.errMsg);
       });
