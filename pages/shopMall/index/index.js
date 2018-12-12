@@ -67,15 +67,6 @@ Page({
         var content = res.content;
         switch (pagelocat){
           case 1:
-            that.setData({
-              banner: JSON.parse(content[6].caseUrl),
-              bgUrl: JSON.parse(content[3].caseUrl)[0].src
-            })
-            // 储存轮播数据
-            wx.setStorage({
-              key: "banner",
-              data: JSON.parse(content[6].caseUrl)
-            })
             for (var i = 0; i < content.length; i++) {
               if (content[i].caseName == "视频推荐") {
                 that.getProductShowCase(content[i].productCode, content[i].productSortBy, 1)
@@ -87,20 +78,34 @@ Page({
                 that.getProductShowCase(content[i].productCode, content[i].productSortBy, 4)
               } else if (content[i].caseName == "律赢商城" || content[i].caseName == "律瀛商城") {
                 that.getProductShowCase(content[i].productCode, content[i].productSortBy, 5)
+              } else if (content[i].caseName == "轮播图banner") {
+                that.setData({
+                  banner: JSON.parse(content[i].caseUrl)
+                })
+                // 储存轮播数据
+                wx.setStorage({
+                  key: "banner",
+                  data: JSON.parse(content[i].caseUrl)
+                })
+              } else if (content[i].caseName == "banner") {
+                that.setData({
+                  bgUrl: JSON.parse(content[i].caseUrl)[0].src
+                })
               }
             }
             break
           case 2:
           case 3:
-            that.setData({
-              banner: JSON.parse(content[2].caseUrl)
-            })
             for (var i = 0; i < content.length; i++) {
               if (content[i].caseName == "劳动推荐") {
                 this.getProductShowCase(content[i].productCode, content[i].productSortBy, 4)
               } else if (content[i].caseName == "热门推荐") {
                 this.getProductShowCase(content[i].productCode, content[i].productSortBy, 3)
-              }
+              } else if (content[i].caseName == "轮播图banner") {
+                that.setData({
+                  banner: JSON.parse(content[i].caseUrl)
+                })
+              } 
             }
             break
           case 4:
@@ -113,7 +118,11 @@ Page({
                 this.getProductShowCase(content[i].productCode, content[i].productSortBy, 2)
               } else if (content[i].caseName == "热门推荐") {
                 this.getProductShowCase(content[i].productCode, content[i].productSortBy, 1)
-              }
+              } else if (content[i].caseName == "轮播图banner") {
+                that.setData({
+                  banner: JSON.parse(content[i].caseUrl)
+                })
+              } 
             }
             break
         }
