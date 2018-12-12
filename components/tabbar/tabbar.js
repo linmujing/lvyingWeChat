@@ -48,13 +48,14 @@ Component({
     // 跳转页面
     jump(e){
       console.log(e)
+      console.log(this.data.current)
       let index = e.currentTarget.dataset.index;
       if (index == this.data.current){
         return;
       }
       
       let str = this.data.current == 1 ? '../' : '../../' ;
-      wx.navigateTo({
+      wx.redirectTo({
         url:  str + this.data.list[index].pagePath
       })
     }
