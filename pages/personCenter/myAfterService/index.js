@@ -92,7 +92,7 @@ Page({
       pageNo: this.data.pageData.current,
       pageSize: this.data.pageData.pageSize,
       ciCode: app.GO.recommend_customer_id, //获取用户code
-      isExchang: this.scrollIndex + 1
+      isExchang: parseFloat(this.data.scrollIndex) + 1
     };
 
     app.appRequest('post', url, param, {}, (res) => {

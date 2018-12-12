@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "去评价",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "white",
+  "navigationBarTextStyle": "black"
+}
