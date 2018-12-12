@@ -289,6 +289,42 @@ Page({
       console.log('请求错误信息：  ' + err.errMsg);
     })
   },
+  // 获取用户信息
+  getCustomerInfo() {
+
+    // 判断是否已经登录
+    if (app.GO.recommend_customer_phone == ""){
+      this.setData({
+        bindShow: true
+      })
+      return;
+    }
+
+    // 判断手机号是否已被注册
+    // 接口参数
+    let url = app.GO.api + 'customer/info/getCustomerInfo';
+    let param = {
+      ciCode: app.GO.recommend_customer_id, //获取用户code
+    };
+
+    app.appRequest('post', url, param, {}, (res) => {
+        console.log(res)
+        if (res.code == 200) {
+
+          // 判断是否有电话号码
+          if (res.content.ciPhone != "" && res.content.ciPhone != null) {
+            app.GO.recommend_customer_phone = res.content.ciPhone ;
+            wx.setStorageSync("recommend_customer_phone", res.content.ciPhone);
+            this.setData({
+              bindShow: false
+            })
+          }
+
+        }
+
+      })
+
+  },
   /**
 * 生命周期函数--监听页面加载
 */
@@ -299,17 +335,13 @@ Page({
     * 生命周期函数--监听页面显示
     */
   onShow: function () {
-
+    
+    
     wx.showLoading({ title: '加载中' })
     setTimeout(()=>{
-      wx.hideLoading()
-      // 登录时且未绑定手机号才显示
-      if (app.GO.recommend_customer_phone == "" || app.GO.recommend_customer_phone == null || app.GO.recommend_customer_phone == 'null' ){
-        this.setData({
-          bindShow: true
-        })
-      }
-
+      wx.hideLoading();
+      this.getCustomerInfo();   
+      // 判断是否登录
       if (!app.GO.isLogin) {
         wx.navigateTo({
           url: '../../author/author'

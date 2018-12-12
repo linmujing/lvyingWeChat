@@ -31,17 +31,7 @@ Component({
   },
   // 页面渲染
   ready() {
-    console.log(1)
-    console.log(wx.getStorageSync("recommend_customer_phone"))
-    // 判断是否有电话号码
-    if (wx.getStorageSync("recommend_customer_phone") != null &&
-        wx.getStorageSync("recommend_customer_phone") != 'null' &&
-        wx.getStorageSync("recommend_customer_phone") != '') {
-      app.GO.recommend_customer_phone = wx.getStorageSync("recommend_customer_phone") ;
-      this.setData({
-        bindStateModel: false
-      })
-    }
+
   },
   /**
    * 组件的方法列表
@@ -62,7 +52,6 @@ Component({
       })
 
     },
-
     // 发送短信
     bingPhone() {
 
@@ -189,6 +178,7 @@ Component({
     },
     // 发送短信计时器
     sendTimeOut() {
+      console.log(1)
 
       let timer = 60;
 

@@ -2,7 +2,7 @@
 .tabbar_box{
   position: fixed;
   bottom:0;
-  height: 90rpx;
+  height: 100rpx;
   width:100%;
   border-top: 1rpx solid #f5f5f5;
   background: #fff;

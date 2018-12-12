@@ -2,7 +2,7 @@
 <!-- 底部导航栏 -->
 <view class="tabbar_box">
   <view class="tabbar_item" wx:for="{{list}}" wx:for-index="i"  wx:key='i' data-index="{{i}}" bindtap='jump'>
-    <view><image mode='widthFix' style="width:40rpx;" src="{{current == i ? item.selectedIconPath : item.iconPath }}"></image></view>
+    <view><image style="width:50rpx;height:50rpx;" src="{{current == i ? item.selectedIconPath : item.iconPath }}"></image></view>
     <text style="color: {{current == i ? '#00aa88' : '#ccc'}}">{{item.text}}</text>
   </view>
 </view>
