@@ -62,6 +62,6 @@ Component({
   },
 
   ready(){
-    console.log(this.data.current)
+    // console.log(this.data.current)
   }
 })

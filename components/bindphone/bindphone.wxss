@@ -44,7 +44,7 @@
 }
 .model{
   position: absolute;
-  width: 500rpx;
+  width: 550rpx;
   height:600rpx;
   top:0;
   bottom:0;
@@ -75,7 +75,7 @@
   width:120rpx;
 }
 .input_box input{
-  width:200rpx;
+  width:250rpx;
   height:60rpx;
   padding-top: 15rpx;
 }

@@ -31,6 +31,7 @@ Component({
   },
   // 页面渲染
   ready() {
+    console.log(1)
     console.log(wx.getStorageSync("recommend_customer_phone"))
     // 判断是否有电话号码
     if (wx.getStorageSync("recommend_customer_phone") != null &&

@@ -299,12 +299,12 @@ Page({
     * 生命周期函数--监听页面显示
     */
   onShow: function () {
-    
+
     wx.showLoading({ title: '加载中' })
     setTimeout(()=>{
       wx.hideLoading()
       // 登录时且未绑定手机号才显示
-      if (app.GO.isLogin && app.GO.recommend_customer_phone == ""){
+      if (app.GO.recommend_customer_phone == "" || app.GO.recommend_customer_phone == null || app.GO.recommend_customer_phone == 'null' ){
         this.setData({
           bindShow: true
         })
