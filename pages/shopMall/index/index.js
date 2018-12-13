@@ -320,6 +320,11 @@ Page({
             })
           }
 
+        }else{
+          //用户失效时，需要进入授权
+          wx.navigateTo({
+            url: '../../author/author'
+          })
         }
 
       })
