@@ -31,8 +31,7 @@ Component({
   },
   // 页面渲染
   ready() {
-    console.log(1)
-    console.log(wx.getStorageSync("recommend_customer_phone"))
+
     // 判断是否有电话号码
     if (wx.getStorageSync("recommend_customer_phone") != null &&
         wx.getStorageSync("recommend_customer_phone") != 'null' &&
@@ -63,7 +62,7 @@ Component({
 
     },
 
-    // 发送短信
+    // 绑定手机号
     bingPhone() {
 
       let reg1 = new RegExp(/^1(3|4|5|7|8)\d{9}$/);
@@ -220,6 +219,30 @@ Component({
 
       }, 1000)
 
+    },
+    
+    // 验证手机号是否已经注册 *暂时不用*
+    isRegister(){
+      // 判断手机号是否已被注册
+      app.appRequest('post', url, param, {}, (res) => {
+
+        console.log(res)
+
+        if (res.code == 500) {
+
+          this.setData({
+            passwordShow: true
+          })
+
+        } else if (res.code == 200) {
+
+          this.setData({
+            passwordShow: false
+          })
+
+        }
+
+      })
     },
 
     // 关闭绑定框

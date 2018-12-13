@@ -75,7 +75,8 @@
   width:120rpx;
 }
 .input_box input{
-  width:250rpx;
+  width:230rpx;
   height:60rpx;
   padding-top: 15rpx;
+  padding-left: 20rpx;
 }
