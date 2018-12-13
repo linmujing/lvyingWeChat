@@ -12,9 +12,9 @@ Page({
     // 优惠券类型
     couponType: [
       { text: '全部', value: '' },
-      { text: '可使用', value: '1' },
-      { text: '已使用', value: '2' },
-      { text: '已过期', value: '0' },
+      { text: '未使用', value: '0' },
+      { text: '已使用', value: '1' },
+      { text: '已过期', value: '2' },
     ],
     
     // 优惠券列表
@@ -94,9 +94,10 @@ Page({
       pageNo: this.data.pageData.current,
       pageSize: this.data.pageData.pageSize,
       ciCode: app.GO.recommend_customer_id, //获取用户code
-      couponStatus: this.data.couponType[this.data.scrollIndex].value,
-      couponForm: ''
     };
+    if(this.data.couponType[this.data.scrollIndex].value != "" ){
+      param.couponStatus = this.data.couponType[this.data.scrollIndex].value 
+    } 
 
     app.appRequest('post', url, param, {}, (res) => {
       wx.hideLoading()
@@ -138,8 +139,9 @@ Page({
           couponList.push({
             price: price ,
             content: item.couponInfo.couponTitle,
-            time: item.couponInfo.couponStartTime.split("T")[0] + '~' + item.couponInfo.couponEndTime.split("T")[0],
+            time: item.couponInfo.couponStartTime.split(" ")[0] + '~' + item.couponInfo.couponEndTime.split(" ")[0],
             stateImg: stateImg,
+            couponDesc: item.couponInfo.couponDesc,
             color: color,
             platform: '',
             couponType: item.couponInfo.couponType

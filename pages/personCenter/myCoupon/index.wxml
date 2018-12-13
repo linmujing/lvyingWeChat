@@ -13,7 +13,7 @@
   <!-- 滚动上拉加载更多 -->
   <scroll-view class="coupon_list bg_white" scroll-y='true' style="height:{{windowHeight}}px" bindscrolltolower="getData">
     <!-- 我的优惠券 -->
-    <view class="list flex_wrab ">
+    <view class="list">
 
       <view class="item" >
         <view class="coupon_items flex" 
@@ -21,16 +21,16 @@
             <view class="bg_00aa88 item_left text_center table_block" style="background: {{item.color }}" >
                 <i class="line"></i>
                 <view class="td_block text-center" style="border-right: 2px dotted #ccc;">
-                    <view class="ft40" wx:if="{{item.couponType == '3'}}">￥{{item.price}} </view><br/>
-                    <view class="ft40" wx:if="{{item.couponType != '3'}}" >{{item.price}} 折 </view><br/>
+                    <view class="ft40" wx:if="{{item.couponType != '3'}}">￥{{item.price}} </view><br/>
+                    <view class="ft40" wx:if="{{item.couponType == '3'}}" >{{item.price}} 折 </view><br/>
                     <text >{{item.content}}</text>
                 </view>
             </view>
             <view class="item_right table_block" style="position:relative;">
                 <view class="td_block pl20 pr20">
-                    <view class="line_height_50"><text class="color_999">有效时间： </text> {{item.time}} </view>
-                    <view class="font_20">                    
-                        <text class="color_999">使用说明： </text>请在券面所示有效期内使用，逾期失效;用券应满足券面所示使用范围、满减金额。
+                    <view class="line_height50 ft22 pb20"><text class="color_999">有效时间： </text> {{item.time}} </view>
+                    <view class="ft22">                    
+                        <text class="color_999">使用说明： </text>{{ item.couponDesc }}
                     </view>
                 </view>
                 <i class="sign" style="background-image:url( {{item.stateImg}} )" wx:if="{{item.state != 1}}"></i>

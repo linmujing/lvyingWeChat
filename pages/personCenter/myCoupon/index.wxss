@@ -10,6 +10,7 @@
   height: 180rpx;
   margin: 30rpx 3% 0 3%;
   background: #f5f5f5;
+  overflow: hidden;
 }
 .coupon_items .item_left {
     width: 30%;
@@ -22,7 +23,8 @@
 }
 .coupon_items .item_right{
   padding: 0 10rpx;
-  width: 70%;
+  width:70%;
+  box-sizing: border-box;
 }
 .table_block{
    display: table;
