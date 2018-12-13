@@ -292,33 +292,42 @@ Page({
   // 获取用户信息
   getCustomerInfo() {
 
-    // 先判断用户是否登录
-    if (app.GO.recommend_customer_id == "" || app.GO.recommend_customer_id == null || app.GO.recommend_customer_id == 'null'){
+    // 判断是否已经登录
+    if (app.GO.recommend_customer_phone == ""){
+      this.setData({
+        bindShow: true
+      })
       return;
     }
+
+    // 判断手机号是否已被注册
     // 接口参数
     let url = app.GO.api + 'customer/info/getCustomerInfo';
-    let param = { 'ciCode': app.GO.recommend_customer_id };
-    // 发送绑定验证短信
+    let param = {
+      ciCode: app.GO.recommend_customer_id, //获取用户code
+    };
+
     app.appRequest('post', url, param, {}, (res) => {
+        console.log(res)
+        if (res.code == 200) {
 
-      console.log(res)
+          // 判断是否有电话号码
+          if (res.content.ciPhone != "" && res.content.ciPhone != null) {
+            app.GO.recommend_customer_phone = res.content.ciPhone ;
+            wx.setStorageSync("recommend_customer_phone", res.content.ciPhone);
+            this.setData({
+              bindShow: false
+            })
+          }
 
-      if (res.code == 200) {
-
-        // 判断是否有电话号码
-        if (res.content.ciPhone != "" && res.content.ciPhone != null) {
-          app.GO.recommend_customer_phone = res.content.ciPhone;
-          localStorage.setItem("recommend_customer_id", res.content.ciPhone);
         }else{
-          this.setData({
-            bindShow: true
+          //用户失效时，需要进入授权
+          wx.navigateTo({
+            url: '../../author/author'
           })
         }
 
-      }
-
-    })
+      })
 
   },
   /**
@@ -337,7 +346,9 @@ Page({
     
     wx.showLoading({ title: '加载中' })
     setTimeout(()=>{
-      wx.hideLoading()
+      wx.hideLoading();
+      this.getCustomerInfo();   
+      // 判断是否登录
       if (!app.GO.isLogin) {
         wx.navigateTo({
           url: '../../author/author'

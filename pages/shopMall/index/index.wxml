@@ -13,7 +13,7 @@
   </scroll-view>
 </view>
 <!-- 内容 -->
-<view class='mt40'>
+<view class='mt40 pb100'>
   <!-- 轮播 -->
   <view class='bg_white'>
     <swiper indicator-dots="{{indicatorDots}}"

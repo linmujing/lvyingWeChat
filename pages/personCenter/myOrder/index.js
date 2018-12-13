@@ -362,8 +362,10 @@ Page({
         if (orderList.length >= pageData.total) {
 
           pageData.finished = true;
-          wx.showToast({ title: '没有更多了！', icon: 'none' })
-
+          if (pageData.current != 2){
+            wx.showToast({ title: '没有更多了！', icon: 'none' })
+          }
+          
         }
 
         this.setData({
@@ -371,7 +373,7 @@ Page({
           pageData: pageData
         })
         console.log(this.data.orderList)
-
+ 
       } else {
 
         wx.showToast({ title: res.message })
