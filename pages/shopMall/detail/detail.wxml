@@ -184,7 +184,7 @@
                   </view>
                 </view>
               </view>
-            <view class='color_88'>{{item.createDate}}</view>
+            <view class='color_88'>{{item.commetTime}}</view>
             </view>
             <view class='mt20'>{{item.commentDesc}}</view>
             <view wx:if="{{!item.commentPicUrl == ''}}" class='mt20'>

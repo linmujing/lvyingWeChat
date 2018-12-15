@@ -11,12 +11,12 @@ App({
       debug: {   /* 测试环境配置 */
           api:'http://flgk.yohez.com/law-web-api/',
           app_id:'wx3c04fa1bed4f0353'
-      }
+      },
   },
   
   //全局可用变量
-  GO : {
-    app_id: '', 
+  GO :{
+    app_id: '', /* appid */
     mch_id: '',  /* 微信支付商户号 */
     scene: '',             /* 场景值 */
     api:'',                /* 当前使用api接口地址 */
@@ -43,6 +43,7 @@ App({
     if(common.defaultBranch() == 'master'){
       this.GO.api = this.config.master.api;
       this.GO.app_id = this.config.master.app_id;
+
     }else{
       this.GO.api = this.config.debug.api;
       this.GO.app_id = this.config.debug.app_id;
