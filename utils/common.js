@@ -7,8 +7,8 @@
  */
 function defaultBranch()
 {
-  // return 'master' //正式版
-  return 'debug' //测试版
+  return 'master' //正式版
+  // return 'debug' //测试版
 }
 
 /*

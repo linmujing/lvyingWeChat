@@ -52,8 +52,7 @@ Component({
       })
 
     },
-
-    // 绑定手机号
+    // 发送短信
     bingPhone() {
 
       let reg1 = new RegExp(/^1(3|4|5|7|8)\d{9}$/);
@@ -211,30 +210,6 @@ Component({
 
       }, 1000)
 
-    },
-    
-    // 验证手机号是否已经注册 *暂时不用*
-    isRegister(){
-      // 判断手机号是否已被注册
-      app.appRequest('post', url, param, {}, (res) => {
-
-        console.log(res)
-
-        if (res.code == 500) {
-
-          this.setData({
-            passwordShow: true
-          })
-
-        } else if (res.code == 200) {
-
-          this.setData({
-            passwordShow: false
-          })
-
-        }
-
-      })
     },
 
     // 关闭绑定框
