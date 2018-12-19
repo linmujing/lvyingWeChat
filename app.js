@@ -5,17 +5,17 @@ App({
   
   config : {
       master: {  /* 正式环境配置 */
-        api: 'https://flgk.exqoo.com/law-web-api/', 
-        app_id: 'wx23f86c338cd84ea1', 
+        api: 'https://flgk.exqoo.com/law-web-api/',
+        app_id: 'wx23f86c338cd84ea1'
       },
       debug: {   /* 测试环境配置 */
-        api:'http://flgk.yohez.com/law-web-api/',
-        app_id: 'wx3c04fa1bed4f0353',
-      }
+          api:'http://flgk.yohez.com/law-web-api/',
+          app_id:'wx3c04fa1bed4f0353'
+      },
   },
   
   //全局可用变量
-  GO : {
+  GO :{
     app_id: '', /* appid */
     mch_id: '',  /* 微信支付商户号 */
     scene: '',             /* 场景值 */
