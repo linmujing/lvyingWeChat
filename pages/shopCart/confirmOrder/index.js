@@ -19,6 +19,13 @@ Page({
     // 优惠价格
     discount:'',
 
+    // 组合包商品
+    combinationObj: {},
+    // 是否存在组合包
+    isCombination: false,
+    // 组合包显示隐藏
+    showCombination: false,
+
     // 订单编号
     orderCode: '',
 
@@ -42,6 +49,22 @@ Page({
 
     // 获取订单详情商品数据
     this.getOrderProduct();
+  },
+  /**  功能块 **/
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code
+    })
+  },
+  // 组合包的展示与显示
+  isShowCombination() {
+    console.log(this.data.cartList)
+    this.setData({
+      showCombination: !this.data.showCombination
+    })
   },
 
   /*订单数据计算*/
@@ -184,6 +207,22 @@ Page({
               imgSrc: data[i].productInfo.productProfileUrl
             })
 
+          }
+
+          // 添加组合包商品
+          if (data[0].combineProductInfo != null) {
+            let combinationObj = {
+              productProfileUrl: data[0].combineProductInfo.productProfileUrl,
+              productCode: data[0].combineProductInfo.productCode,
+              productTitle: data[0].combineProductInfo.productTitle,
+              productPrice: data[0].combineProductInfo.productPrice,
+              productProperty: data[0].combineProductInfo.productProperty,
+            }
+
+            this.setData({
+              combinationObj: combinationObj,
+              isCombination: true,
+            })
           }
 
         }

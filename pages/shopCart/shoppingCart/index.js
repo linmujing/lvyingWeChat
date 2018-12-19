@@ -1,4 +1,4 @@
-// pages/shopCart/shoppingCart/index.js
+  // pages/shopCart/shoppingCart/index.js
 var app = getApp();
 Page({
 
@@ -8,7 +8,7 @@ Page({
   data: {
 
     //  可用屏幕高度
-    windowHeight: app.GO.windowHeight - 194 * app.GO.rpxValue,
+    windowHeight: app.GO.windowHeight - 294 * app.GO.rpxValue,
 
     /*购物车数据*/
     // 全部列表状态
@@ -46,6 +46,27 @@ Page({
   /**
   * 功能函数 *
   */
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code 
+    })
+  },
+  // 组合包的展示与显示
+  showCombination(e){
+
+    let index = e.currentTarget.dataset.index1;
+    let cartList = this.data.cartList;
+
+    cartList[index].itemsShow = !cartList[index].itemsShow;
+
+    this.setData({
+      cartList: cartList
+    })
+
+  },
   // 去结算页面
   goBuy() {
 
@@ -266,20 +287,7 @@ Page({
         cartList[x].itemTotal = 0;
 
         if (cartList[x].itemState) {
-
-          for (let i = 0; i < n; i++) {
-
-            let item = cartList[x].items[i];
-
-            for (let child of item.items) {
-
-              cartList[x].itemTotal += child.num * (child.price * 10000);
-
-            }
-
-          }
-
-          cartList[x].itemTotal = (cartList[x].itemTotal / 10000).toFixed(2);
+          cartList[x].itemTotal = (cartList[x].price).toFixed(2);
         }
 
       }
@@ -470,6 +478,9 @@ Page({
               itemType: data[i].productInfo.productType,
               itemState: false,
               itemTitle: data[i].productInfo.productTitle,
+              price: data[i].productInfo.productPrice,
+              imgSrc: data[i].productInfo.productProfileUrl,
+              itemsShow: false,
               itemTotal: 0.00,
               productCode: data[i].productCode,
               num: 1,
@@ -643,14 +654,6 @@ Page({
     this.setData({
       cartState: cartState
     })  
-
-
-    // 登录判断
-    if (!app.GO.isLogin) {
-      wx.navigateTo({
-        url: '../../author/author'
-      })
-    }
 
 
   },

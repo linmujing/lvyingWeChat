@@ -177,7 +177,7 @@ Page({
   },
   // 跳转到购物车
   goAddcart(){
-    wx.switchTab({
+    wx.navigateTo({
       url: '../../shopCart/shoppingCart/index'
     })
   },

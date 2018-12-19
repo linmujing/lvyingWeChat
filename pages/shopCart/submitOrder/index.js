@@ -59,6 +59,27 @@ Page({
   /** 
   * 功能函数 *
   */
+    // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code 
+    })
+  },
+  // 组合包的展示与显示
+  showCombination(e){
+
+    let index = e.currentTarget.dataset.index1;
+    let cartList = this.data.cartList;
+
+    cartList[index].itemsShow = !cartList[index].itemsShow;
+
+    this.setData({
+      cartList: cartList
+    })
+
+  },
   // 跳转到地址页面
   goAddress(){
     wx.navigateTo({
@@ -115,19 +136,11 @@ Page({
       // 组合包
       for (let i = 0; i < m; i++) {
 
-        for (let x = 0; x < cartList[i].items.length; x++ ) {
-
-          for (let y = 0; y < cartList[i].items[x].items.length; y++ ) {
-
-            cartList[i].itemTotal += cartList[i].items[x].items[y].num * (cartList[i].items[x].items[y].price * 10000);
-          }
-
-        }
-        cartList[i].itemTotal = (cartList[i].itemTotal / 10000).toFixed(2);
+        cartList[i].itemTotal = (cartList[i].price ).toFixed(2);
 
       }
 
-      listTotal = listTotal.toFixed(2);
+      listTotal = cartList[0].itemTotal;
     }
 
 
@@ -230,7 +243,7 @@ Page({
           url: '../confirmOrder/index?orderCode=' + res.content 
         })
       } else {
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
       }
       wx.hideLoading()
     }, (err) => {
@@ -244,7 +257,7 @@ Page({
     let productCodeAndCount = '';
     let cartList = this.data.cartList ;
 
-    if (!this.isGroup) {
+    if (!this.data.isGroup) {
 
       for (let lists of cartList) {
 
@@ -257,7 +270,7 @@ Page({
       }
     } else {
 
-      productCodeAndCount = cartList[0].productCode + '-' + cartList[0].num;
+      productCodeAndCount = cartList[0].productCode + '-1';
 
     }
 
@@ -350,6 +363,9 @@ Page({
             itemType: data.productType,
             itemState: false,
             itemTitle: data.productTitle,
+            price: data.productPrice,
+            imgSrc: data.productProfileUrl,
+            itemsShow: false,
             itemTotal: 0.00,
             productCode: data.productCode,
             num: parseFloat(cartNun),
@@ -379,7 +395,7 @@ Page({
       } else {
 
         wx.hideLoading()
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
 
       }
       console.log(this.data.cartList)
@@ -477,7 +493,7 @@ Page({
 
       } else {
 
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.message, icon: 'none'});
 
       }
 
@@ -576,7 +592,7 @@ Page({
           } else {
 
             wx.hideLoading()
-            wx.showToast({title: res.data.message, icon: 'none'});
+            wx.showToast({title: res.message, icon: 'none'});
 
           }
 

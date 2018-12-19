@@ -6,7 +6,7 @@ App({
   config : {
       master: {  /* 正式环境配置 */
         api: 'https://flgk.exqoo.com/law-web-api/', 
-        app_id:'wx23f86c338cd84ea1',
+        app_id: 'wx23f86c338cd84ea1', 
       },
       debug: {   /* 测试环境配置 */
         api:'http://flgk.yohez.com/law-web-api/',
