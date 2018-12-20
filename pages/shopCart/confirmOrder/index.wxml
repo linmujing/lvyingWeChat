@@ -18,7 +18,7 @@
            wx:for="{{items.items}}" wx:for-index="index2"  wx:key="index2" wx:for-item="item">
             <view  style="width:160rpx;height:220rpx;position:relative;">
               <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
-                <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{item.imgSrc}}"></image>
+                <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{item.imgSrc}}" data-code="{{item.productCode}}" bindtap="toDetail"></image>
               </view>
             </view>
             <view class="child_content"  style="width:480rpx;">
@@ -50,7 +50,7 @@
             <view class="child_list jub_jub pr20 ml20 border_bottom_1">
               <view  style="width:160rpx;height:220rpx;position:relative;margin-left:10rpx;">
                 <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
-                  <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{combinationObj.productProfileUrl }}"></image>
+                  <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{combinationObj.productProfileUrl }}" data-code="{{combinationObj.productCode}}" bindtap="toDetail"></image>
                 </view>
               </view>
               <view class="child_content"  style="width:520rpx;">
@@ -72,7 +72,7 @@
             <view class="child_list jub_jub pr20 ml20 border_bottom_1" >
               <view  style="width:160rpx;height:220rpx;position:relative;margin-left:10rpx;">
                 <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
-                  <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{list.imgSrc}}"></image>
+                  <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{list.imgSrc}}" data-code="{{list.productCode}}" bindtap="toDetail"></image>
                 </view>
               </view>
               <view class="child_content"  style="width:520rpx;">

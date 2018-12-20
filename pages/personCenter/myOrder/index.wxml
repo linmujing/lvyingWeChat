@@ -24,7 +24,8 @@
         <view class="line_height60 pr20 pl20 border_bottom_1" wx:if="{{items.isCombination != 0}}">组合包</view>
 
         <!-- 商家商品列表 -->
-        <view class="item_list" wx:for="{{items.orderItem}}" wx:for-index="index2"  wx:key="index2" wx:for-item="item">
+        <!-- 普通商品 -->
+        <view class="item_list" wx:for="{{items.orderItem}}" wx:for-index="index2"  wx:key="index2" wx:for-item="item" wx:if="{{item.combinationProduct == undefined}}">
           <view class="jub_jub line_height60 pr20 pl20 border_bottom_1">
             <view><text>子订单号：</text><text>{{ item.itemCode }}</text></view>
             <view><text class="color_999 ft22">{{ item.itemName }}</text></view>
@@ -35,7 +36,7 @@
            wx:for="{{item.childItem}}" wx:for-index="index3"  wx:key="index3" wx:for-item="child">
             <view  style="width:160rpx;height:220rpx;position:relative;">
               <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
-                <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}"></image>
+                <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}" data-code="{{child.productCode}}" bindtap="toDetail"></image>
               </view>
             </view>
             <view class="child_content"  style="width:520rpx;">
@@ -48,6 +49,55 @@
           </view>
 
         </view>
+
+        <!-- 组合包商品 -->
+        <view>
+          <!-- 组合包自己 -->
+          <view class="child_list jub_jub pr20 ml20 border_bottom_1" >
+            <view  style="width:160rpx;height:220rpx;position:relative;">
+              <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
+                <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{items.orderItem[0].combinationProduct.productProfileUrl}}" data-code="{{items.orderItem[0].combinationProduct.productCode}}" bindtap="toDetail"></image>
+              </view>
+            </view>
+            <view class="child_content"  style="width:520rpx;">
+              <view class="pt30" style="height:130rpx;"> {{items.orderItem[0].combinationProduct.productTitle}}</view>
+              <view class="jub_jub">
+                <text class="color_red">￥ {{items.orderItem[0].combinationProduct.productPrice}}</text>
+                <text class="color_999">X 1</text>
+              </view>
+            </view>
+          </view>
+          <!-- 组合包子商品列表 -->
+          <view class="ml20 line_height80 border_bottom_1px"  wx:if="{{items.orderItem[0].combinationShow}}">组合包详情</view>
+          <view class="item_list" wx:for="{{items.orderItem}}" wx:for-index="index2"  wx:key="index2" wx:for-item="item" wx:if="{{item.combinationProduct != undefined}}">
+            <view class="jub_jub line_height60 pr20 pl20 border_bottom_1"  wx:if="{{items.orderItem[0].combinationShow}}">
+              <view><text>子订单号：</text><text>{{ item.itemCode }}</text></view>
+              <view><text class="color_999 ft22">{{ item.itemName }}</text></view>
+            </view>
+
+            <view class="child_list jub_jub pr20 ml20 border_bottom_1" wx:if="{{items.orderItem[0].combinationShow}}"
+            wx:for="{{item.childItem}}" wx:for-index="index3"  wx:key="index3" wx:for-item="child">
+              <view  style="width:160rpx;height:220rpx;position:relative;">
+                <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
+                  <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}" data-code="{{child.productCode}}" bindtap="toDetail"></image>
+                </view>
+              </view>
+              <view class="child_content"  style="width:520rpx;">
+                <view class="pt30" style="height:130rpx;"> {{child.name}}</view>
+                <view class="jub_jub">
+                  <text class="color_red">￥  {{ child.price }}</text>
+                  <text class="color_999">X {{child.num}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class="text-center line_height60 border_bottom_1 color_aaa"  data-index1="{{index}}" bindtap='showCombination'>
+            <text wx:if="{{!items.orderItem[0].combinationShow}}">展开</text>  
+            <text wx:if="{{items.orderItem[0].combinationShow}}">收起</text>  
+          </view>
+        </view>
+
 
         <!-- 金额 -->
         <view class="jub_jub line_height80 pr20 pl20 border_bottom_1">
@@ -110,7 +160,7 @@
         <view class="child_list jub_jub pr20 ml20 border_bottom_1" >
           <view  style="width:160rpx;height:220rpx;position:relative;">
             <view class='block_middle_center img_middle_center border_1' style="width:160rpx;height:160rpx;overflow:hidden;">
-              <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}"></image>
+              <image mode='widthFix' class="" style="width:160rpx;height:160rpx;" src="{{child.productProfileUrl}}" data-code="child.productCode" bindtap="toDetail"></image>
             </view>
           </view>
           <view class="child_content"  style="width:520rpx;">

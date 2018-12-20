@@ -66,6 +66,27 @@ Page({
   /**
   * 功能函数
   */
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code
+    })
+  },
+  // 组合包的展示与显示
+  showCombination(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index1;
+    let orderList = this.data.orderList;
+
+    orderList[index].orderItem[0].combinationShow = !orderList[index].orderItem[0].combinationShow;
+
+    this.setData({
+      orderList: orderList
+    })
+
+  },
   // 切换选项
   changeNav: function (e) {
 
@@ -155,7 +176,7 @@ Page({
       case 'a':
         // 组合包评论只能针对某一个组合包评论  
         // isCombination (string, optional): 是否是组合包 0- 不是 1-是 
-        if ( orderList[index].isCombination == 0) {
+        if (orderList[index].orderItem[0].combinationShow == undefined) {
           for (let item of  orderList[index].orderItem) {
             for (let child of item.childItem) {
               // if( child.commetStatus == '0' ){
@@ -164,11 +185,13 @@ Page({
             }
           }
         } else {
+          console.log(orderList[index])
           // 组合包评价
           wx.navigateTo({
-            url: '../../personCenter/goComment/index?orderCode=' + orderList[index].orderCode + '&productCode=' + orderList[index].orderItem[0].childItem[0].productcode
+            url: '../../personCenter/goComment/index?orderCode=' + orderList[index].orderCode + '&productCode=' + orderList[index].orderItem[0].combinationProduct.productCode
           })
-          this.goComment(orderCode,  orderList[index].orderItem[0].childItem.productCode)
+          return;
+          
         }
 
         break;
@@ -291,22 +314,36 @@ Page({
             orderItem: []
           })
 
-
-
           // 子订单
           for (let x = 0; x < lists.orderMerchantList.length; x++) {
 
             let childItem = [];
             let items = lists.orderMerchantList[x];
+            let itemName = items.orderProductList.length > 0 ? items.orderProductList[0].merchantInfo.merchantNm : '';
 
-            orderItem.push({
-              itemTime: items.createDate,
-              itemCode: items.orderMerchantCode,
-              itemAmount: items.orderAmount,
-              itemName: items.orderProductList[0].merchantInfo.merchantNm,
-              itemTrackNo: items.trackNo,
-              childItem: []
-            })
+            // 判断是否存在组合包商品
+            if (lists.orderMerchantList[0].combinationProduct.productType == '2') {
+
+              orderItem.push({
+                itemTime: items.createDate,
+                itemCode: items.orderMerchantCode,
+                itemAmount: items.orderAmount,
+                itemName: itemName,
+                itemTrackNo: items.trackNo,
+                combinationProduct: lists.orderMerchantList[0].combinationProduct,
+                combinationShow: false,
+                childItem: []
+              })
+            } else {
+              orderItem.push({
+                itemTime: items.createDate,
+                itemCode: items.orderMerchantCode,
+                itemAmount: items.orderAmount,
+                itemName: itemName,
+                itemTrackNo: items.trackNo,
+                childItem: []
+              })
+            }
 
             // 子订单商品
             for (let z = 0; z < items.orderProductList.length; z++) {

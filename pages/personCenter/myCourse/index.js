@@ -37,6 +37,14 @@ Page({
   /**
    * 普通事件
   */
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code
+    })
+  },
   // 页面跳转
   jump: function (e) {
 

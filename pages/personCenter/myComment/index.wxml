@@ -29,7 +29,7 @@
                 <view class="item table_block" style="height:220rpx;">
                     <view class="td_block" style="width:30%;">
                         <view class="border_1 img_middle_center" style="display:inline-block;width: 160rpx;height: 160rpx;overflow:hidden;" >
-                            <image  src="{{items.productWxProfileUrl}}" style="width: 160rpx;"  mode='widthFix'></image>
+                            <image  src="{{items.productWxProfileUrl}}" style="width: 160rpx;"  mode='widthFix' data-code="{{items.productCode}}" bindtap="toDetail"></image>
                         </view>
                     </view>
                     <view class="td_block pl30">

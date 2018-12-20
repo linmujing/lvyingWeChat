@@ -25,6 +25,14 @@ Page({
     lookimg: null,
 
   },
+  // 跳转到详情
+  toDetail(e) {
+    // console.log(e)
+    var code = e.currentTarget.dataset.code;
+    wx.navigateTo({
+      url: '../../shopMall/detail/detail?code=' + code
+    })
+  },
   // 查看图片
   clickImg(e){
     console.log(e)

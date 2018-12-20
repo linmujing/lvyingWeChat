@@ -28,7 +28,7 @@
                       <view class="td_block">
                           <view class="img_middle_center border_1" style="display:inline-block;width: 160rpx;height: 160rpx;overflow:hidden;">
                               <image style="display:inline-block;width: 160rpx;height: 160rpx;" mode='widthFix'
-                             src="{{items.productWxProfileUrl}}" alt=""></image>
+                             src="{{items.productWxProfileUrl}}" alt="" data-code="{{items.productCode}}" bindtap="toDetail"></image>
                           </view>
                       </view>
                       <view class="td_block pl30">
